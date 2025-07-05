@@ -6,7 +6,8 @@ import {
   executeCommand,
   generateTsAbi,
   handleSolcError,
-  generateContractAddress
+  generateContractAddress,
+  extractDeployedAddress
 } from "./utils";
 
 export default async function deployStylusContract() {
@@ -14,9 +15,10 @@ export default async function deployStylusContract() {
 
   const config = getDeploymentConfig();
 
-  // Generate contract address
-  config.contractAddress = generateContractAddress();
-  console.log(`📋 Generated contract address: ${config.contractAddress}`);
+  // Generate contract address as fallback
+  const fallbackAddress = generateContractAddress();
+  config.contractAddress = fallbackAddress;
+  console.log(`📋 Generated fallback contract address: ${config.contractAddress}`);
 
   console.log(`📡 Using endpoint: ${config.endpoint}`);
   console.log(`🔑 Using private key: ${config.privateKey.substring(0, 10)}...`);
@@ -28,14 +30,22 @@ export default async function deployStylusContract() {
     ensureDeploymentDirectory(config.deploymentDir);
 
     // Step 1: Deploy the contract using cargo stylus with contract address
-    const deployCommand = `cargo stylus deploy --endpoint='${config.endpoint}' --private-key='${config.privateKey}' --contract-address='${config.contractAddress}' --no-verify`;
-    await executeCommand(
+    // --contract-address='${config.contractAddress}' deactivated for now as it's not working. Issue https://github.com/OffchainLabs/cargo-stylus/issues/171
+    const deployCommand = `cargo stylus deploy --endpoint='${config.endpoint}' --private-key='${config.privateKey}' --no-verify`;
+    const deployOutput = await executeCommand(
       deployCommand,
       path.resolve(__dirname, ".."),
       "Deploying contract with cargo stylus",
     );
 
-    console.log(`📋 Contract deployed at address: ${config.contractAddress}`);
+    // Extract the actual deployed address from the output
+    const deployedAddress = extractDeployedAddress(deployOutput);
+    if (deployedAddress) {
+      config.contractAddress = deployedAddress;
+      console.log(`📋 Contract deployed at address: ${config.contractAddress}`);
+    } else {
+      console.log(`📋 Using fallback address: ${config.contractAddress}`);
+    }
 
     // Step 2: Export ABI
     try {

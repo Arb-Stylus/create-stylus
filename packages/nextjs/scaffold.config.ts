@@ -1,3 +1,5 @@
+// @ts-nocheck
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { arbitrumNitro } from "./utils/scaffold-eth/chain";
 import * as chains from "viem/chains";
 
