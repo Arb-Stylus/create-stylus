@@ -5,6 +5,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { ethers } from "ethers";
 import { arbitrumNitro } from "../../nextjs/utils/scaffold-eth/chain";
+import scaffoldConfig from "../../nextjs/scaffold.config";
 
 // Load environment variables from .env file
 const envPath = path.resolve(__dirname, "../.env");
@@ -46,7 +47,7 @@ export function getExportConfig(): ExportConfig {
   return {
     contractName: process.env["CONTRACT_NAME"] || "stylus-hello-world",
     deploymentDir: process.env["DEPLOYMENT_DIR"] || "./deployments",
-    contractAddress: process.env["CONTRACT_ADDRESS"],
+    contractAddress: process.env["STYLUS_CONTRACT_ADDRESS"],
   };
 }
 
@@ -160,7 +161,7 @@ export async function generateTsAbi(abiFilePath: string, contractName: string, c
   const lines = abiTxt.split('\n');
   const extractedAbi = lines.slice(3).join('\n');
 
-  const fileContent = `${arbitrumNitro.id}:{"${contractName}":{address:"${contractAddress}",abi:${extractedAbi}}}`;
+  const fileContent = `${scaffoldConfig.targetNetworks[0]?.id || arbitrumNitro.id}:{"${contractName}":{address:"${contractAddress}",abi:${extractedAbi}}}`;
 
   if (!fs.existsSync(TARGET_DIR)) {
     fs.mkdirSync(TARGET_DIR);
@@ -205,4 +206,19 @@ export function generateContractAddress(): string {
   // Generate a random private key and derive the address
   const wallet = ethers.Wallet.createRandom();
   return wallet.address;
+}
+
+export function extractDeployedAddress(output: string): string | null {
+  // Look for the line containing "deployed code at address:"
+  const lines = output.split('\n');
+  for (const line of lines) {
+    if (line.includes('deployed code at address:')) {
+      // Simple approach: just extract the hex address directly
+      const hexMatch = line.match(/(0x[a-fA-F0-9]{40})/);
+      if (hexMatch && hexMatch[1]) {
+        return hexMatch[1];
+      }
+    }
+  }
+  return null;
 } 

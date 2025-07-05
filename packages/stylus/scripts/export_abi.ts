@@ -14,8 +14,8 @@ export default async function exportStylusAbi() {
   const config = getExportConfig();
 
   if (!config.contractAddress) {
-    console.error("❌ CONTRACT_ADDRESS environment variable is required for ABI export");
-    console.error("💡 Please set CONTRACT_ADDRESS in your .env file or as an environment variable");
+    console.error("❌ STYLUS_CONTRACT_ADDRESS environment variable is required for ABI export");
+    console.error("💡 Please set STYLUS_CONTRACT_ADDRESS in your .env file or as an environment variable");
     process.exit(1);
   }
 
