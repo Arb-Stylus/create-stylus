@@ -13,6 +13,7 @@
     "chain": "yarn workspace @se-2/stylus chain",
     "fork": "yarn workspace @se-2/stylus fork",
     "deploy": "yarn workspace @se-2/stylus deploy",
+    "export-abi": "yarn workspace @se-2/stylus export-abi",
     "verify": "yarn workspace @se-2/stylus verify",
     "stylus-verify": "yarn workspace @se-2/stylus stylus-verify",
     "compile": "yarn workspace @se-2/stylus compile",
