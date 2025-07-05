@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { isAddress, isHex } from "viem";
-import { hardhat } from "viem/chains";
 import { usePublicClient } from "wagmi";
+import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
 
 export const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
   const router = useRouter();
 
-  const client = usePublicClient({ chainId: hardhat.id });
+  const client = usePublicClient({ chainId: arbitrumNitro.id });
 
   const handleSearch = async (event: React.FormEvent) => {
     event.preventDefault();

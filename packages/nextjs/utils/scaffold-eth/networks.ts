@@ -1,5 +1,6 @@
 import * as chains from "viem/chains";
 import scaffoldConfig from "~~/scaffold.config";
+import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
 
 type ChainAttributes = {
   // color | [lightThemeColor, darkThemeColor]
@@ -87,7 +88,7 @@ export function getBlockExplorerTxLink(chainId: number, txnHash: string) {
  */
 export function getBlockExplorerAddressLink(network: chains.Chain, address: string) {
   const blockExplorerBaseURL = network.blockExplorers?.default?.url;
-  if (network.id === chains.hardhat.id) {
+  if (network.id === arbitrumNitro.id) {
     return `/blockexplorer/address/${address}`;
   }
 

@@ -24,7 +24,7 @@
     "stylus:format": "yarn workspace @se-2/stylus format",
     "stylus:test": "yarn workspace @se-2/stylus test",
     "test": "yarn stylus:test",
-    "format": "yarn next:format && yarn stylus:format",
+    "format": "yarn next:format",
     "start": "yarn workspace @se-2/nextjs dev",
     "next:lint": "yarn workspace @se-2/nextjs lint",
     "next:format": "yarn workspace @se-2/nextjs format",
