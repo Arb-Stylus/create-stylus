@@ -102,28 +102,40 @@ export function executeCommand(command: string, cwd: string, description: string
     childProcess.on('close', (code: number | null) => {
       if (code === 0) {
         console.log(`\n✅ ${description} completed successfully!`);
-        // Print output starting from "project metadata hash computed on deployment"
+        // Print output starting from "project metadata hash computed on deployment" or all logs if not found
         if (outputLines.length > 0) {
           const startIndex = outputLines.findIndex(line => 
             line.includes("project metadata hash computed on deployment")
           );
-          const linesToPrint = startIndex >= 0 ? outputLines.slice(startIndex) : outputLines;
-          linesToPrint.forEach(line => {
-            if (line.trim()) console.log(line);
-          });
+          if (startIndex >= 0) {
+            const linesToPrint = outputLines.slice(startIndex);
+            linesToPrint.forEach(line => {
+              if (line.trim()) console.log(line);
+            });
+          } else {
+            outputLines.forEach(line => {
+              if (line.trim()) console.log(line);
+            });
+          }
         }
         resolve(output);
       } else {
         console.error(`\n❌ ${description} failed with exit code ${code}`);
-        // Print output starting from "project metadata hash computed on deployment" in case of error
-        if (outputLines.length > 0) {
-          const startIndex = outputLines.findIndex(line => 
+        // Print error output starting from "project metadata hash computed on deployment" or all logs if not found
+        if (errorLines.length > 0) {
+          const startIndex = errorLines.findIndex(line => 
             line.includes("project metadata hash computed on deployment")
           );
-          const linesToPrint = startIndex >= 0 ? outputLines.slice(startIndex) : outputLines;
-          linesToPrint.forEach(line => {
-            if (line.trim()) console.error(line);
-          });
+          if (startIndex >= 0) {
+            const linesToPrint = errorLines.slice(startIndex);
+            linesToPrint.forEach(line => {
+              if (line.trim()) console.error(line);
+            });
+          } else {
+            errorLines.forEach(line => {
+              if (line.trim()) console.error(line);
+            });
+          }
         }
         if (errorOutput) {
           console.error(errorOutput);
