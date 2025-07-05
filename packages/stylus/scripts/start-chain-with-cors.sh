@@ -25,6 +25,13 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+# Check if nitro-devnode exists, if not initialize the submodule
+if [ ! -d "./nitro-devnode" ]; then
+  echo "nitro-devnode directory not found. Initializing nitro-devnode submodule..."
+  # Run git submodule from the root directory where .gitmodules is located
+  cd "$(git rev-parse --show-toplevel)" && git submodule update --init packages/stylus/nitro-devnode && cd packages/stylus
+fi
+
 if [[ "$STYLUS_MODE" == "true" ]]; then
   echo "Building Nitro node with Stylus dev dependencies..."
   # Build using the specific version
@@ -77,7 +84,7 @@ cast send -r $RPC --private-key $PRIVATE_KEY 0x000000000000000000000000000000000
 echo "Deploying the CREATE2 factory"
 cast send --rpc-url $RPC --private-key $PRIVATE_KEY --value "1 ether" 0x3fab184622dc19b6109349b94811493bf2a45362
 cast publish --rpc-url $RPC 0xf8a58085174876e800830186a08080b853604580600e600039806000f350fe7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf31ba02222222222222222222222222222222222222222222222222222222222222222a02222222222222222222222222222222222222222222222222222222222222222
-if [ "$(cast code -r $RPC $CREATE2_FACTORY)" == "0x" ]; then
+if [ "$(cast code -r $RPC $CREATE2_FACTORY 2>/dev/null)" == "0x" ]; then
   echo "Failed to deploy CREATE2 factory"
   exit 1
 fi
@@ -117,10 +124,10 @@ echo "Cache Manager deployed and registered successfully"
 
 # Deploy StylusDeployer
 deployer_code=$(cat ./nitro-devnode/stylus-deployer-bytecode.txt)
-deployer_address=$(cast create2 --salt $SALT --init-code $deployer_code)
+deployer_address=$(cast create2 --init-code $deployer_code 2>/dev/null)
 cast send --private-key $PRIVATE_KEY --rpc-url $RPC \
     $CREATE2_FACTORY "$SALT$deployer_code"
-if [ "$(cast code -r $RPC $deployer_address)" == "0x" ]; then
+if [ "$(cast code -r $RPC $deployer_address 2>/dev/null)" == "0x" ]; then
   echo "Failed to deploy StylusDeployer"
   exit 1
 fi
