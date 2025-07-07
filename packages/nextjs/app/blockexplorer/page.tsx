@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PaginationButton, SearchBar, TransactionsTable } from "./_components";
+import { PaginationButton, TransactionsTable } from "./_components";
 import type { NextPage } from "next";
-import { hardhat } from "viem/chains";
 import { useFetchBlocks } from "~~/hooks/scaffold-eth";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { notification } from "~~/utils/scaffold-eth";
+import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
 
 const BlockExplorer: NextPage = () => {
   const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage, error } = useFetchBlocks();
@@ -15,13 +15,13 @@ const BlockExplorer: NextPage = () => {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    if (targetNetwork.id !== hardhat.id) {
+    if (targetNetwork.id !== arbitrumNitro.id) {
       setIsLocalNetwork(false);
     }
   }, [targetNetwork.id]);
 
   useEffect(() => {
-    if (targetNetwork.id === hardhat.id && error) {
+    if (targetNetwork.id === arbitrumNitro.id && error) {
       setHasError(true);
     }
   }, [targetNetwork.id, error]);
@@ -73,7 +73,7 @@ const BlockExplorer: NextPage = () => {
 
   return (
     <div className="container mx-auto my-10">
-      <SearchBar />
+      {/* <SearchBar /> */}
       <TransactionsTable blocks={blocks} transactionReceipts={transactionReceipts} />
       <PaginationButton currentPage={currentPage} totalItems={Number(totalBlocks)} setCurrentPage={setCurrentPage} />
     </div>

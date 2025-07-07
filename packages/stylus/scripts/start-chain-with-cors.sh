@@ -42,9 +42,9 @@ if [[ "$STYLUS_MODE" == "true" ]]; then
   TARGET_IMAGE="nitro-node-stylus-dev"
 fi
 
-# Start Nitro dev node in the background with CORS settings
-echo "Starting Nitro dev node with CORS enabled..."
-docker run --rm --name nitro-dev -p 8547:8547 "${TARGET_IMAGE}" --dev --http.addr 0.0.0.0 --http.api=net,web3,eth,debug --http.corsdomain="*" --http.vhosts="*" &
+# Start Nitro dev node in the background with CORS settings and WebSocket enabled
+echo "Starting Nitro dev node with CORS and WebSocket enabled..."
+docker run --rm --name nitro-dev -p 8547:8547 "${TARGET_IMAGE}" --dev --http.addr 0.0.0.0 --http.api=net,web3,eth,debug --http.corsdomain="*" --http.vhosts="*" --ws.addr 0.0.0.0 --ws.port 8547 --ws.api=net,web3,eth,debug --ws.origins="*" &
 
 # Kill background processes when exiting
 trap 'kill $(jobs -p) 2>/dev/null' EXIT
@@ -64,7 +64,9 @@ curl_output=$(curl -s -X POST -H "Content-Type: application/json" \
   $RPC)
 
 if [[ "$curl_output" == *"result"* ]]; then
-  echo "Nitro node is running with CORS enabled!"
+  echo "Nitro node is running with CORS and WebSocket enabled!"
+  echo "HTTP RPC: http://127.0.0.1:8547"
+  echo "WebSocket: ws://127.0.0.1:8547"
 else
   echo "Failed to start Nitro node."
   exit 1
@@ -134,5 +136,7 @@ fi
 echo "StylusDeployer deployed at address: $deployer_address"
 
 # If no errors, print success message
-echo "Nitro node is running with CORS enabled..."
+echo "Nitro node is running with CORS and WebSocket enabled..."
+echo "HTTP RPC: http://127.0.0.1:8547"
+echo "WebSocket: ws://127.0.0.1:8547"
 wait  # Keep the script alive and the node running 

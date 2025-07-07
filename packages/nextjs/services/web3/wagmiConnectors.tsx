@@ -15,6 +15,7 @@ import { publicProvider } from "wagmi/providers/public";
 import scaffoldConfig from "~~/scaffold.config";
 import { burnerWalletConfig } from "~~/services/web3/wagmi-burner/burnerWalletConfig";
 import { getTargetNetworks } from "~~/utils/scaffold-eth";
+import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
 
 const targetNetworks = getTargetNetworks();
 const { onlyLocalBurnerWallet } = scaffoldConfig;
@@ -39,7 +40,7 @@ export const appChains = configureChains(
     // We might not need this checkout https://github.com/scaffold-eth/scaffold-eth-2/pull/45#discussion_r1024496359, will test and remove this before merging
     stallTimeout: 3_000,
     // Sets pollingInterval if using chains other than local hardhat chain
-    ...(targetNetworks.find(network => network.id !== chains.hardhat.id)
+    ...(targetNetworks.find(network => network.id !== arbitrumNitro.id)
       ? {
           pollingInterval: scaffoldConfig.pollingInterval,
         }
@@ -53,9 +54,9 @@ const wallets = [
   walletConnectWallet(walletsOptions),
   ledgerWallet(walletsOptions),
   braveWallet(walletsOptions),
-  coinbaseWallet({ ...walletsOptions, appName: "scaffold-eth-2" }),
+  coinbaseWallet({ ...walletsOptions, appName: "scaffold-stylus" }),
   rainbowWallet(walletsOptions),
-  ...(!targetNetworks.some(network => network.id !== chains.hardhat.id) || !onlyLocalBurnerWallet
+  ...(!targetNetworks.some(network => network.id !== arbitrumNitro.id) || !onlyLocalBurnerWallet
     ? [
         burnerWalletConfig({
           chains: appChains.chains.filter(chain => targetNetworks.map(({ id }) => id).includes(chain.id)),

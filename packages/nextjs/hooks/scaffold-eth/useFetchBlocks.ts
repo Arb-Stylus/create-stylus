@@ -9,15 +9,15 @@ import {
   walletActions,
   webSocket,
 } from "viem";
-import { hardhat } from "viem/chains";
 import { decodeTransactionData } from "~~/utils/scaffold-eth";
+import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
 
 const BLOCKS_PER_PAGE = 20;
 
 export const testClient = createTestClient({
-  chain: hardhat,
+  chain: arbitrumNitro,
   mode: "hardhat",
-  transport: webSocket("ws://127.0.0.1:8545"),
+  transport: webSocket("ws://127.0.0.1:8547"),
 })
   .extend(publicActions)
   .extend(walletActions);

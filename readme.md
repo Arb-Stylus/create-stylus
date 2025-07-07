@@ -72,6 +72,38 @@ Run smart contract test with `yarn stylus:test`
 - Edit your frontend in `packages/nextjs/pages`
 - Edit your deployment scripts in `packages/stylus/scripts`
 
+## Deploying to Other Chains
+
+To deploy your contracts to a different network (other than the default local Nitro dev node), you need to update a few configuration options:
+
+1. **Set the RPC URL**
+   - Specify the target network's RPC endpoint in the `RPC_URL` environment variable. You can do this in your shell or by creating a `.env` file (see `.env.example` for reference).
+   - Example:
+     ```env
+     RPC_URL=https://your-network-rpc-url
+     ```
+
+2. **Set the Private Key**
+   - If you want to deploy using your own wallet, set the `PRIVATE_KEY` environment variable to your wallet's private key. By default, a development key is used when running the Nitro dev node locally, but for real deployments you must provide your own.
+   - Example:
+     ```env
+     PRIVATE_KEY=your_private_key_here
+     ```
+
+3. **Update the Target Chain in the Frontend**
+   - Open `packages/nextjs/scaffold.config.ts` and change the `targetNetworks` array to include the correct chain for your deployment. This ensures the frontend connects to the right network and that the ABI is generated correctly in `deployedContracts.ts`.
+   - Example:
+     ```ts
+     import { mainnet } from "viem/chains";
+     // ...
+     targetNetworks: [mainnet],
+     ```
+
+**Note:**
+- The values in `.env.example` provide a template for the required environment variables.
+- The chain specified in `scaffold.config.ts` is used to generate the ABI and populate `deployedContracts.ts` for your frontend.
+- Always keep your private key secure and never commit it to version control.
+
 ## Documentation
 
 Visit our [docs](#) to learn how to start building with create-stylus-dapp.

@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { NextPage } from "next";
 import { Hash, Transaction, TransactionReceipt, formatEther, formatUnits } from "viem";
-import { hardhat } from "viem/chains";
 import { usePublicClient } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { decodeTransactionData, getFunctionDetails } from "~~/utils/scaffold-eth";
+import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
 import { replacer } from "~~/utils/scaffold-eth/common";
 
 type PageProps = {
   params: { txHash?: Hash };
 };
 const TransactionPage: NextPage<PageProps> = ({ params }: PageProps) => {
-  const client = usePublicClient({ chainId: hardhat.id });
+  const client = usePublicClient({ chainId: arbitrumNitro.id });
   const txHash = params?.txHash as Hash;
   const router = useRouter();
   const [transaction, setTransaction] = useState<Transaction>();
@@ -69,7 +69,7 @@ const TransactionPage: NextPage<PageProps> = ({ params }: PageProps) => {
                   <strong>From:</strong>
                 </td>
                 <td>
-                  <Address address={transaction.from} format="long" />
+                  <Address address={transaction.from} format="long" disableAddressLink />
                 </td>
               </tr>
               <tr>
@@ -78,11 +78,11 @@ const TransactionPage: NextPage<PageProps> = ({ params }: PageProps) => {
                 </td>
                 <td>
                   {!receipt?.contractAddress ? (
-                    transaction.to && <Address address={transaction.to} format="long" />
+                    transaction.to && <Address address={transaction.to} format="long" disableAddressLink />
                   ) : (
                     <span>
                       Contract Creation:
-                      <Address address={receipt.contractAddress} format="long" />
+                      <Address address={receipt.contractAddress} format="long" disableAddressLink />
                     </span>
                   )}
                 </td>

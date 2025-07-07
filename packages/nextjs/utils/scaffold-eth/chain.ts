@@ -17,4 +17,10 @@ export const arbitrumNitro = defineChain({
       http: ["http://localhost:8547"],
     },
   },
+  accounts: [
+    {
+      privateKey: "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659",
+      address: "0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E",
+    },
+  ],
 });
