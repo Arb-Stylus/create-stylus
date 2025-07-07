@@ -3,7 +3,7 @@ import { Pair, Route } from "@uniswap/v2-sdk";
 import { Address, createPublicClient, http, parseAbi } from "viem";
 import { mainnet } from "wagmi";
 import scaffoldConfig from "~~/scaffold.config";
-import { ChainWithAttributes } from "~~/utils/scaffold-eth";
+import { ChainWithAttributes } from "~~/utils/scaffold-stylus";
 
 const publicClient = createPublicClient({
   chain: mainnet,

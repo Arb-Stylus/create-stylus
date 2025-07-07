@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTargetNetwork } from "./useTargetNetwork";
 import { useInterval } from "usehooks-ts";
 import scaffoldConfig from "~~/scaffold.config";
-import { fetchPriceFromUniswap } from "~~/utils/scaffold-eth";
+import { fetchPriceFromUniswap } from "~~/utils/scaffold-stylus";
 
 const enablePolling = false;
 

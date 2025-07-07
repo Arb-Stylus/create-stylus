@@ -4,7 +4,7 @@ import prettier from "prettier";
 import * as path from "path";
 import * as fs from "fs";
 import { ethers } from "ethers";
-import { arbitrumNitro } from "../../nextjs/utils/scaffold-eth/chain";
+import { arbitrumNitro } from "../../nextjs/utils/scaffold-stylus/chain";
 import scaffoldConfig from "../../nextjs/scaffold.config";
 
 // Load environment variables from .env file
@@ -170,7 +170,7 @@ export async function generateTsAbi(abiFilePath: string, contractName: string, c
   fs.writeFileSync(
     `${TARGET_DIR}deployedContracts.ts`,
     await prettier.format(
-      `${generatedContractComment} import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract"; \n\n
+      `${generatedContractComment} import { GenericContractsDeclaration } from "~~/utils/scaffold-stylus/contract"; \n\n
  const deployedContracts = {${fileContent}} as const; \n\n export default deployedContracts satisfies GenericContractsDeclaration`,
       {
         parser: "typescript",

@@ -6,9 +6,9 @@ import { ContractReadMethods } from "./ContractReadMethods";
 import { ContractVariables } from "./ContractVariables";
 import { ContractWriteMethods } from "./ContractWriteMethods";
 import { Address, Balance } from "~~/components/scaffold-eth";
-import { useDeployedContractInfo, useNetworkColor } from "~~/hooks/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { ContractName } from "~~/utils/scaffold-eth/contract";
+import { useDeployedContractInfo, useNetworkColor } from "~~/hooks/scaffold-stylus";
+import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
+import { ContractName } from "~~/utils/scaffold-stylus/contract";
 
 type ContractUIProps = {
   contractName: ContractName;

@@ -10,11 +10,11 @@ import { WrongNetworkDropdown } from "./WrongNetworkDropdown";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Address } from "viem";
 import { useConnect } from "wagmi";
-import { useAutoConnect, useNetworkColor } from "~~/hooks/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
+import { useAutoConnect, useNetworkColor } from "~~/hooks/scaffold-stylus";
+import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
 import { burnerWalletConfig } from "~~/services/web3/wagmi-burner/burnerWalletConfig";
-import { getBlockExplorerAddressLink } from "~~/utils/scaffold-eth";
-import { getTargetNetworks } from "~~/utils/scaffold-eth";
+import { getBlockExplorerAddressLink } from "~~/utils/scaffold-stylus";
+import { getTargetNetworks } from "~~/utils/scaffold-stylus";
 
 /**
  * Custom Wagmi Connect Button (watch balance + custom design)

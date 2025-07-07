@@ -6,8 +6,8 @@ import { privateKeyToAccount } from "viem/accounts";
 import { useAccount, useNetwork } from "wagmi";
 import { useBalance } from "wagmi";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
-import { useTransactor } from "~~/hooks/scaffold-eth";
-import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
+import { useTransactor } from "~~/hooks/scaffold-stylus";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 // Number of ETH faucet sends to an address
 const NUM_OF_ETH = "1";

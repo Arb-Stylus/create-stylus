@@ -6,10 +6,10 @@ import type { NextPage } from "next";
 import { Hash, Transaction, TransactionReceipt, formatEther, formatUnits } from "viem";
 import { usePublicClient } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { decodeTransactionData, getFunctionDetails } from "~~/utils/scaffold-eth";
-import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
-import { replacer } from "~~/utils/scaffold-eth/common";
+import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
+import { decodeTransactionData, getFunctionDetails } from "~~/utils/scaffold-stylus";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
+import { replacer } from "~~/utils/scaffold-stylus/common";
 
 type PageProps = {
   params: { txHash?: Hash };

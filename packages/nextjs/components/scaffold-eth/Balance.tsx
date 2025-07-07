@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Address } from "viem";
 import { useBalance } from "wagmi";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
+import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
 import { useGlobalState } from "~~/services/store/store";
 
 type BalanceProps = {
