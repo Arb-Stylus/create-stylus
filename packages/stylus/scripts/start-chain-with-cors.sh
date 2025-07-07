@@ -135,6 +135,14 @@ if [ "$(cast code -r $RPC $deployer_address 2>/dev/null)" == "0x" ]; then
 fi
 echo "StylusDeployer deployed at address: $deployer_address"
 
+# Fund accounts with 1 ETH each
+echo "Funding accounts with 1 ETH each..."
+cast send --private-key $PRIVATE_KEY --rpc-url $RPC --value "1 ether" 0xDD09b55496EaA3cFAe23137ABDeA52a9a979B70e
+cast send --private-key $PRIVATE_KEY --rpc-url $RPC --value "1 ether" 0xE9cB1563bE49002383D08386ee287aF7BAD08c3b
+cast send --private-key $PRIVATE_KEY --rpc-url $RPC --value "1 ether" 0x838d568Ffb16BC74083e88fd769df85E8d3afcE6
+cast send --private-key $PRIVATE_KEY --rpc-url $RPC --value "1 ether" 0xA491d1134388c78AeEDf6b1Ca3F21657015Ff8E1
+echo "All accounts funded with 1 ETH each"
+
 # If no errors, print success message
 echo "Nitro node is running with CORS and WebSocket enabled..."
 echo "HTTP RPC: http://127.0.0.1:8547"

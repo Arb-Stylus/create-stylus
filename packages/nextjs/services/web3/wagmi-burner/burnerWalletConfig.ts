@@ -9,6 +9,7 @@ const targetNetworks = getTargetNetworks();
 
 export type BurnerWalletOptions = {
   chains: Chain[];
+  privateKey?: string;
 };
 
 const burnerWalletIconBase64 =
@@ -17,7 +18,7 @@ const burnerWalletIconBase64 =
 /**
  * Wagmi config for burner wallet
  */
-export const burnerWalletConfig = ({ chains }: BurnerWalletOptions): Wallet => ({
+export const burnerWalletConfig = ({ chains, privateKey }: BurnerWalletOptions): Wallet => ({
   id: burnerWalletId,
   name: burnerWalletName,
   iconUrl: burnerWalletIconBase64,
@@ -30,7 +31,13 @@ export const burnerWalletConfig = ({ chains }: BurnerWalletOptions): Wallet => (
     return false;
   },
   createConnector: () => {
-    const connector = new BurnerConnector({ chains, options: { defaultChainId: targetNetworks[0].id } });
+    const connector = new BurnerConnector({
+      chains,
+      options: {
+        defaultChainId: targetNetworks[0].id,
+        privateKey: privateKey,
+      },
+    });
 
     return {
       connector,
