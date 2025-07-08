@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useTargetNetwork } from "./useTargetNetwork";
 import { Abi, ExtractAbiFunctionNames } from "abitype";
 import { useContractWrite, useNetwork } from "wagmi";
-import { useDeployedContractInfo, useTransactor } from "~~/hooks/scaffold-eth";
-import { notification } from "~~/utils/scaffold-eth";
-import { ContractAbi, ContractName, UseScaffoldWriteConfig } from "~~/utils/scaffold-eth/contract";
+import { useDeployedContractInfo, useTransactor } from "~~/hooks/scaffold-stylus";
+import { notification } from "~~/utils/scaffold-stylus";
+import { ContractAbi, ContractName, UseScaffoldWriteConfig } from "~~/utils/scaffold-stylus/contract";
 
 type UpdatedArgs = Parameters<ReturnType<typeof useContractWrite<Abi, string, undefined>>["writeAsync"]>[0];
 

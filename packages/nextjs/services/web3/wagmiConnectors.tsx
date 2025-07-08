@@ -13,12 +13,10 @@ import { configureChains } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import scaffoldConfig from "~~/scaffold.config";
-import { burnerWalletConfig } from "~~/services/web3/wagmi-burner/burnerWalletConfig";
-import { getTargetNetworks } from "~~/utils/scaffold-eth";
-import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
+import { getTargetNetworks } from "~~/utils/scaffold-stylus";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 const targetNetworks = getTargetNetworks();
-const { onlyLocalBurnerWallet } = scaffoldConfig;
 
 // We always want to have mainnet enabled (ENS resolution, ETH price, etc). But only once.
 const enabledChains = targetNetworks.find(network => network.id === 1)
@@ -56,13 +54,6 @@ const wallets = [
   braveWallet(walletsOptions),
   coinbaseWallet({ ...walletsOptions, appName: "scaffold-stylus" }),
   rainbowWallet(walletsOptions),
-  ...(!targetNetworks.some(network => network.id !== arbitrumNitro.id) || !onlyLocalBurnerWallet
-    ? [
-        burnerWalletConfig({
-          chains: appChains.chains.filter(chain => targetNetworks.map(({ id }) => id).includes(chain.id)),
-        }),
-      ]
-    : []),
   safeWallet({ ...walletsOptions }),
 ];
 

@@ -1,3 +1,0 @@
-[submodule "packages/stylus/nitro-devnode"]
-	path = packages/stylus/nitro-devnode
-	url = https://github.com/OffchainLabs/nitro-devnode.git

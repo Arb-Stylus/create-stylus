@@ -2,7 +2,7 @@ import { StaticJsonRpcProvider } from "@ethersproject/providers";
 import { Address, Chain, HttpTransport, PrivateKeyAccount, WalletClient, createWalletClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { Connector } from "wagmi";
-import { loadBurnerSK } from "~~/hooks/scaffold-eth";
+import { loadBurnerSK } from "~~/hooks/scaffold-stylus";
 import { BurnerConnectorError, BurnerConnectorErrorList } from "~~/services/web3/wagmi-burner/BurnerConnectorErrors";
 import { BurnerConnectorData, BurnerConnectorOptions } from "~~/services/web3/wagmi-burner/BurnerConnectorTypes";
 
@@ -38,7 +38,9 @@ export class BurnerConnector extends Connector<StaticJsonRpcProvider, BurnerConn
   async getWalletClient(config?: { chainId?: number | undefined } | undefined) {
     const chain = this.getChainFromId(config?.chainId);
     if (!this.burnerWallet) {
-      const burnerAccount = privateKeyToAccount(loadBurnerSK());
+      // Use provided private key if available, otherwise fall back to localStorage
+      const privateKey = (this.options.privateKey || loadBurnerSK()) as `0x${string}`;
+      const burnerAccount = privateKeyToAccount(privateKey);
 
       const client = createWalletClient({
         chain: chain,
@@ -91,8 +93,9 @@ export class BurnerConnector extends Connector<StaticJsonRpcProvider, BurnerConn
   }
 
   async getAccount(): Promise<Address> {
-    const bunerAccount = privateKeyToAccount(loadBurnerSK());
-    return bunerAccount.address as Address;
+    const privateKey = (this.options.privateKey || loadBurnerSK()) as `0x${string}`;
+    const burnerAccount = privateKeyToAccount(privateKey);
+    return burnerAccount.address as Address;
   }
 
   async getChainId(): Promise<number> {
@@ -117,11 +120,12 @@ export class BurnerConnector extends Connector<StaticJsonRpcProvider, BurnerConn
   protected async onAccountsChanged() {
     const chainId = await this.getChainId();
     const chain = this.getChainFromId(chainId);
-    const bunerAccount = privateKeyToAccount(loadBurnerSK());
+    const privateKey = (this.options.privateKey || loadBurnerSK()) as `0x${string}`;
+    const burnerAccount = privateKeyToAccount(privateKey);
 
     const client = createWalletClient({
       chain: chain,
-      account: bunerAccount,
+      account: burnerAccount,
       transport: http(),
     });
     this.burnerWallet = client;
@@ -138,11 +142,12 @@ export class BurnerConnector extends Connector<StaticJsonRpcProvider, BurnerConn
   protected async onChainChanged() {
     const chainId = await this.getChainId();
     const chain = this.getChainFromId(chainId);
-    const bunerAccount = privateKeyToAccount(loadBurnerSK());
+    const privateKey = (this.options.privateKey || loadBurnerSK()) as `0x${string}`;
+    const burnerAccount = privateKeyToAccount(privateKey);
 
     const client = createWalletClient({
       chain: chain,
-      account: bunerAccount,
+      account: burnerAccount,
       transport: http(),
     });
     this.burnerWallet = client;

@@ -1,8 +1,8 @@
 import { Account, Address, Chain, Transport, getContract } from "viem";
 import { PublicClient, usePublicClient } from "wagmi";
 import { GetWalletClientResult } from "wagmi/actions";
-import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
-import { Contract, ContractName } from "~~/utils/scaffold-eth/contract";
+import { useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
+import { Contract, ContractName } from "~~/utils/scaffold-stylus/contract";
 
 /**
  * Gets a viem instance of the contract present in deployedContracts.ts or externalContracts.ts corresponding to

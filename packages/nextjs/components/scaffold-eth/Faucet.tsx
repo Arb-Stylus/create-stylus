@@ -6,8 +6,8 @@ import { privateKeyToAccount } from "viem/accounts";
 import { useNetwork } from "wagmi";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
 import { Address, AddressInput, Balance, EtherInput } from "~~/components/scaffold-eth";
-import { useTransactor } from "~~/hooks/scaffold-eth";
-import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
+import { useTransactor } from "~~/hooks/scaffold-stylus";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 const localWalletClient = createWalletClient({
   account: privateKeyToAccount(arbitrumNitro.accounts[0].privateKey),
