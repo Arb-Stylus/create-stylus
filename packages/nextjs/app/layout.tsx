@@ -1,8 +1,14 @@
+import { DM_Sans } from "next/font/google";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Metadata } from "next";
 import { ScaffoldEthAppWithProviders } from "~~/components/ScaffoldEthAppWithProviders";
 import { ThemeProvider } from "~~/components/ThemeProvider";
 import "~~/styles/globals.css";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+});
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -11,7 +17,7 @@ const imageUrl = `${baseUrl}/thumbnail.jpg`;
 
 const title = "Create Stylus Dapp";
 const titleTemplate = "%s | Create Stylus Dapp";
-const description = "Built with 🏗 Scaffold-ETH 2";
+const description = "Built with 🏗 create-stylus";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -49,8 +55,8 @@ export const metadata: Metadata = {
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   return (
     <html suppressHydrationWarning>
-      <body>
-        <ThemeProvider enableSystem>
+      <body className={`${dmSans.variable} font-sans`}>
+        <ThemeProvider>
           <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
         </ThemeProvider>
       </body>

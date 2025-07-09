@@ -13,8 +13,8 @@ import { configureChains } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import scaffoldConfig from "~~/scaffold.config";
-import { getTargetNetworks } from "~~/utils/scaffold-stylus";
-import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
+import { getTargetNetworks } from "~~/utils/create-stylus";
+import { arbitrumNitro } from "~~/utils/create-stylus/chain";
 
 const targetNetworks = getTargetNetworks();
 
@@ -35,7 +35,7 @@ export const appChains = configureChains(
     publicProvider(),
   ],
   {
-    // We might not need this checkout https://github.com/scaffold-eth/scaffold-eth-2/pull/45#discussion_r1024496359, will test and remove this before merging
+    // We might not need this checkout https://github.com/create-stylus/create-stylus-2/pull/45#discussion_r1024496359, will test and remove this before merging
     stallTimeout: 3_000,
     // Sets pollingInterval if using chains other than local hardhat chain
     ...(targetNetworks.find(network => network.id !== arbitrumNitro.id)
@@ -52,7 +52,7 @@ const wallets = [
   walletConnectWallet(walletsOptions),
   ledgerWallet(walletsOptions),
   braveWallet(walletsOptions),
-  coinbaseWallet({ ...walletsOptions, appName: "scaffold-stylus" }),
+  coinbaseWallet({ ...walletsOptions, appName: "create-stylus" }),
   rainbowWallet(walletsOptions),
   safeWallet({ ...walletsOptions }),
 ];

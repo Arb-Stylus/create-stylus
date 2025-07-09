@@ -151,6 +151,62 @@ Confirmed tx 0x0bdb…3307, gas used 14044638
 
 Once both steps are successful, you can interact with your program as you would with any Ethereum smart contract.
 
+## Network Configuration
+
+This template includes enhanced deployment scripts that support automatic RPC URL resolution from viem's chain definitions. You can now specify a network name instead of manually providing RPC URLs.
+
+### Using Network Names
+
+Instead of setting `RPC_URL` in your environment, you can use the `NETWORK` environment variable:
+
+```bash
+# Deploy to Ethereum mainnet
+NETWORK=mainnet yarn deploy
+
+# Deploy to Sepolia testnet  
+NETWORK=sepolia yarn deploy
+
+# Deploy to Arbitrum One
+NETWORK=arbitrum yarn deploy
+
+# Deploy to Polygon
+NETWORK=polygon yarn deploy
+
+# Deploy to Base
+NETWORK=base yarn deploy
+```
+
+### Available Networks
+
+You can test which networks are available and their RPC URLs:
+
+```bash
+yarn test:networks
+```
+
+This will show you all supported networks and their corresponding RPC endpoints.
+
+### Fallback Behavior
+
+If a network name is not found in viem's chain definitions, the system will:
+1. Show a warning message indicating the network wasn't found
+2. Fall back to the `RPC_URL` environment variable (or default to `http://localhost:8547`)
+3. Continue with deployment using the fallback endpoint
+
+### Environment Variables
+
+You can still use the traditional approach with `RPC_URL`:
+
+```bash
+RPC_URL=https://your-custom-rpc.com yarn deploy
+```
+
+Or combine both (network takes precedence):
+
+```bash
+NETWORK=mainnet RPC_URL=https://fallback-rpc.com yarn deploy
+```
+
 ## Calling Your Program
 
 This template includes an example of how to call and transact with your program in Rust using [ethers-rs](https://github.com/gakonst/ethers-rs) under the `examples/counter.rs`. However, your programs are also Ethereum ABI equivalent if using the Stylus SDK. **They can be called and transacted with using any other Ethereum tooling.**

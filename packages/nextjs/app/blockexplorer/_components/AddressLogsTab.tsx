@@ -1,6 +1,6 @@
 import { Address } from "viem";
-import { useContractLogs } from "~~/hooks/scaffold-stylus";
-import { replacer } from "~~/utils/scaffold-stylus/common";
+import { useContractLogs } from "~~/hooks/create-stylus";
+import { replacer } from "~~/utils/create-stylus/common";
 
 export const AddressLogsTab = ({ address }: { address: Address }) => {
   const contractLogs = useContractLogs(address);

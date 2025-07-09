@@ -1,6 +1,6 @@
 import { Abi, AbiFunction } from "abitype";
 import { ReadOnlyFunctionForm } from "~~/app/debug/_components/contract";
-import { Contract, ContractName, GenericContract, InheritedFunctions } from "~~/utils/scaffold-stylus/contract";
+import { Contract, ContractName, GenericContract, InheritedFunctions } from "~~/utils/create-stylus/contract";
 
 export const ContractReadMethods = ({ deployedContractData }: { deployedContractData: Contract<ContractName> }) => {
   if (!deployedContractData) {
@@ -24,7 +24,7 @@ export const ContractReadMethods = ({ deployedContractData }: { deployedContract
     .sort((a, b) => (b.inheritedFrom ? b.inheritedFrom.localeCompare(a.inheritedFrom) : 1));
 
   if (!functionsToDisplay.length) {
-    return <>No read methods</>;
+    return <div className="py-[2px]">No read methods</div>;
   }
 
   return (

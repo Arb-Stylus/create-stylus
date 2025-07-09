@@ -1,6 +1,6 @@
 import { BackButton } from "./BackButton";
 import { ContractTabs } from "./ContractTabs";
-import { Address, Balance } from "~~/components/scaffold-eth";
+import { Address, Balance } from "~~/components/create-stylus";
 
 export const AddressComponent = ({
   address,

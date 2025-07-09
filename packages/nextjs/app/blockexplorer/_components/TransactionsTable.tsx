@@ -1,9 +1,9 @@
 import { TransactionHash } from "./TransactionHash";
 import { formatEther } from "viem";
-import { Address } from "~~/components/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
-import { TransactionWithFunction } from "~~/utils/scaffold-stylus";
-import { TransactionsTableProps } from "~~/utils/scaffold-stylus";
+import { Address } from "~~/components/create-stylus";
+import { useTargetNetwork } from "~~/hooks/create-stylus/useTargetNetwork";
+import { TransactionWithFunction } from "~~/utils/create-stylus";
+import { TransactionsTableProps } from "~~/utils/create-stylus";
 
 export const TransactionsTable = ({ blocks, transactionReceipts }: TransactionsTableProps) => {
   const { targetNetwork } = useTargetNetwork();

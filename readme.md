@@ -15,7 +15,7 @@
 - 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
 - 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Arbitrum network.
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+![Debug Contracts tab](https://github.com/create-stylus/create-stylus-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
 
 ## Requirements
 

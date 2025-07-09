@@ -13,7 +13,7 @@ import {
   getParsedContractFunctionArgs,
   transformAbiFunction,
 } from "~~/app/debug/_components/contract";
-import { getParsedError, notification } from "~~/utils/scaffold-stylus";
+import { getParsedError, notification } from "~~/utils/create-stylus";
 
 type ReadOnlyFunctionFormProps = {
   contractAddress: Address;

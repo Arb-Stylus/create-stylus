@@ -2,7 +2,7 @@
 module.exports = {
   content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./utils/**/*.{js,ts,jsx,tsx}"],
   plugins: [require("daisyui")],
-  darkTheme: "dark",
+  darkMode: "class",
   // DaisyUI theme colors
   daisyui: {
     themes: [
@@ -25,7 +25,10 @@ module.exports = {
           warning: "#FFCF72",
           error: "#FF8863",
 
+          "--round-color": "#000",
           "--rounded-btn": "9999rem",
+          "--gradient-start": "#3283EB",
+          "--gradient-end": "#E3066E",
 
           ".tooltip": {
             "--tooltip-tail": "6px",
@@ -48,7 +51,7 @@ module.exports = {
           "accent-content": "#F9FBFF",
           neutral: "#F9FBFF",
           "neutral-content": "#385183",
-          "base-100": "#385183",
+          "base-100": "#000",
           "base-200": "#2A3655",
           "base-300": "#212638",
           "base-content": "#F9FBFF",
@@ -57,7 +60,10 @@ module.exports = {
           warning: "#FFCF72",
           error: "#FF8863",
 
+          "--round-color": "#E3066E",
           "--rounded-btn": "9999rem",
+          "--gradient-start": "#3283EB",
+          "--gradient-end": "#E3066E",
 
           ".tooltip": {
             "--tooltip-tail": "6px",
@@ -75,6 +81,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
+      },
       boxShadow: {
         center: "0 0 12px -2px rgb(0 0 0 / 0.05)",
       },

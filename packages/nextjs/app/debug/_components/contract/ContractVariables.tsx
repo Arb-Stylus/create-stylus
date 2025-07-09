@@ -1,6 +1,6 @@
 import { DisplayVariable } from "./DisplayVariable";
 import { Abi, AbiFunction } from "abitype";
-import { Contract, ContractName, GenericContract, InheritedFunctions } from "~~/utils/scaffold-stylus/contract";
+import { Contract, ContractName, GenericContract, InheritedFunctions } from "~~/utils/create-stylus/contract";
 
 export const ContractVariables = ({
   refreshDisplayVariables,

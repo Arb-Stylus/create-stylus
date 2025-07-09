@@ -414,7 +414,7 @@ async function createFirstGitCommit(targetDir, options) {
             await checkoutLatestTag(path.resolve(foundryWorkSpacePath, "lib", "openzeppelin-contracts"));
         }
         await execa("git", ["add", "-A"], { cwd: targetDir });
-        await execa("git", ["commit", "-m", "Initial commit with 🏗️ Scaffold-ETH 2", "--no-verify"], { cwd: targetDir });
+        await execa("git", ["commit", "-m", "Initial commit with 🏗️ create-stylus", "--no-verify"], { cwd: targetDir });
         // Update the submodule, since we have checked out the latest tag in the previous step of foundry
         if (options.extensions?.includes("foundry")) {
             await execa("git", ["submodule", "update", "--init", "--recursive"], {
@@ -480,7 +480,7 @@ async function renderOutroMessage(options) {
   \t${chalk.dim("yarn")} start
   `;
     message += `
-  ${chalk.bold.green("Thanks for using Scaffold-ETH 2 🙏, Happy Building!")}
+  ${chalk.bold.green("Thanks for using create-stylus 🙏, Happy Building!")}
   `;
     console.log(message);
 }
@@ -496,7 +496,7 @@ async function createProject(options) {
             task: () => createProjectDirectory(options.project),
         },
         {
-            title: `🚀 Creating a new Scaffold-ETH 2 app in ${chalk.green.bold(options.project)}`,
+            title: `🚀 Creating a new create-stylus app in ${chalk.green.bold(options.project)}`,
             task: () => copyTemplateFiles(options, templateDirectory, targetDirectory),
         },
         {
@@ -665,7 +665,7 @@ async function promptForMissingOptions(options) {
 
 const TITLE_TEXT = `
  ${chalk.bold.blue("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")}
- ${chalk.bold.blue("| Create Scaffold-ETH 2 app |")}
+ ${chalk.bold.blue("| Create create-stylus app |")}
  ${chalk.bold.blue("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")}
 `;
 function renderIntroMessage() {

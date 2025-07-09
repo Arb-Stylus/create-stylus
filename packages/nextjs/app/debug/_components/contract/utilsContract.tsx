@@ -1,5 +1,5 @@
 import { AbiFunction, AbiParameter } from "abitype";
-import { AbiParameterTuple } from "~~/utils/scaffold-stylus/contract";
+import { AbiParameterTuple } from "~~/utils/create-stylus/contract";
 
 /**
  * Generates a key based on function metadata

@@ -13,9 +13,9 @@ import {
   getParsedContractFunctionArgs,
   transformAbiFunction,
 } from "~~/app/debug/_components/contract";
-import { IntegerInput } from "~~/components/scaffold-eth";
-import { useTransactor } from "~~/hooks/scaffold-stylus";
-import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
+import { IntegerInput } from "~~/components/create-stylus";
+import { useTransactor } from "~~/hooks/create-stylus";
+import { useTargetNetwork } from "~~/hooks/create-stylus/useTargetNetwork";
 
 type WriteOnlyFunctionFormProps = {
   abi: Abi;
@@ -126,7 +126,11 @@ export const WriteOnlyFunctionForm = ({
             }`}
             data-tip={`${writeDisabled && "Wallet not connected or in the wrong network"}`}
           >
-            <button className="btn btn-secondary btn-sm" disabled={writeDisabled || isLoading} onClick={handleWrite}>
+            <button
+              className="btn btn-secondary btn-sm bg-secondary"
+              disabled={writeDisabled || isLoading}
+              onClick={handleWrite}
+            >
               {isLoading && <span className="loading loading-spinner loading-xs"></span>}
               Send 💸
             </button>

@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 import type { NextPage } from "next";
 import { Hash, Transaction, TransactionReceipt, formatEther, formatUnits } from "viem";
 import { usePublicClient } from "wagmi";
-import { Address } from "~~/components/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
-import { decodeTransactionData, getFunctionDetails } from "~~/utils/scaffold-stylus";
-import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
-import { replacer } from "~~/utils/scaffold-stylus/common";
+import { Address } from "~~/components/create-stylus";
+import { useTargetNetwork } from "~~/hooks/create-stylus/useTargetNetwork";
+import { decodeTransactionData, getFunctionDetails } from "~~/utils/create-stylus";
+import { arbitrumNitro } from "~~/utils/create-stylus/chain";
+import { replacer } from "~~/utils/create-stylus/common";
 
 type PageProps = {
   params: { txHash?: Hash };
