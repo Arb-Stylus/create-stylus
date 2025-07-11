@@ -4,10 +4,10 @@ import { CurrencyDollarIcon, MagnifyingGlassIcon } from "@heroicons/react/24/out
 //import { HeartIcon } from "@heroicons/react/24/outline";
 import { SwitchTheme } from "~~/components/SwitchTheme";
 //import { BuidlGuidlLogo } from "~~/components/assets/BuidlGuidlLogo";
-import { Faucet } from "~~/components/create-stylus";
-import { useTargetNetwork } from "~~/hooks/create-stylus/useTargetNetwork";
+import { Faucet } from "~~/components/scaffold-stylus";
+import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
 import { useGlobalState } from "~~/services/store/store";
-import { arbitrumNitro } from "~~/utils/create-stylus/chain";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 /**
  * Site footer
@@ -52,7 +52,7 @@ export const Footer = () => {
           <div className="flex justify-center items-center gap-2 text-sm w-full">
             <div className="text-center">
               <a
-                href="https://github.com/Quantum3-Labs/create-stylus"
+                href="https://github.com/Quantum3-Labs/scaffold-stylus"
                 target="_blank"
                 rel="noreferrer"
                 className="link"

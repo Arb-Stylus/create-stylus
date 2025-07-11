@@ -2,8 +2,8 @@ import { useTargetNetwork } from "./useTargetNetwork";
 import { Abi, ExtractAbiEventNames } from "abitype";
 import { Log } from "viem";
 import { useContractEvent } from "wagmi";
-import { addIndexedArgsToEvent, useDeployedContractInfo } from "~~/hooks/create-stylus";
-import { ContractAbi, ContractName, UseStylusEventConfig } from "~~/utils/create-stylus/contract";
+import { addIndexedArgsToEvent, useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
+import { ContractAbi, ContractName, UseScaffoldEventConfig } from "~~/utils/scaffold-stylus/contract";
 
 /**
  * Wrapper around wagmi's useEventSubscriber hook which automatically loads (by name) the contract ABI and
@@ -13,14 +13,14 @@ import { ContractAbi, ContractName, UseStylusEventConfig } from "~~/utils/create
  * @param config.eventName - name of the event to listen for
  * @param config.listener - the callback that receives events. If only interested in 1 event, call `unwatch` inside of the listener
  */
-export const useStylusEventSubscriber = <
+export const useScaffoldEventSubscriber = <
   TContractName extends ContractName,
   TEventName extends ExtractAbiEventNames<ContractAbi<TContractName>>,
 >({
   contractName,
   eventName,
   listener,
-}: UseStylusEventConfig<TContractName, TEventName>) => {
+}: UseScaffoldEventConfig<TContractName, TEventName>) => {
   const { data: deployedContractData } = useDeployedContractInfo(contractName);
   const { targetNetwork } = useTargetNetwork();
 

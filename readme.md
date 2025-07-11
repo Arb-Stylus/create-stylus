@@ -1,4 +1,4 @@
-# 🏗 create-stylus-dapp
+# 🏗 scaffold-stylus-dapp
 
 <h4 align="center">
   <a href="https://docs.scaffoldeth.io">Documentation</a> |
@@ -15,7 +15,7 @@
 - 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
 - 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Arbitrum network.
 
-![Debug Contracts tab](https://github.com/create-stylus/create-stylus-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+![Debug Contracts tab](https://github.com/scaffold-stylus/scaffold-stylus-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
 
 ## Requirements
 
@@ -30,13 +30,13 @@ Before you begin, you need to install the following tools:
 
 ## Quickstart
 
-To get started with create-stylus-dapp, follow the steps below:
+To get started with scaffold-stylus-dapp, follow the steps below:
 
 1. Clone this repo & install dependencies
 
 ```
-git clone https://github.com/Quantum3-Labs/create-stylus-dapp.git
-cd create-stylus-dapp
+git clone https://github.com/Quantum3-Labs/scaffold-stylus-dapp.git
+cd scaffold-stylus-dapp
 yarn install
 # Initialize submodules (required for Nitro dev node)
 git submodule update --init --recursive
@@ -106,12 +106,13 @@ To deploy your contracts to a different network (other than the default local Ni
 
 ## Documentation
 
-Visit our [docs](#) to learn how to start building with create-stylus-dapp.
+Visit our [docs](#) to learn how to start building with scaffold-stylus-dapp.
 
 To know more about its features, check out our [website](https://scaffoldstylus.io).
 
-## Contributing to create-stylus-dapp
+## Contributing to scaffold-stylus-dappscaffold-stylus
 
-We welcome contributions to create-stylus-dapp!
+We welcome contributions to scaffold-stylus-dapp!
 
-Please see [CONTRIBUTING.MD](https://github.com/Quantum3-Labs/create-stylus-dapp/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to create-stylus-dapp.
+Please see [CONTRIBscaffold-stylusps://github.com/Quantum3-Labs/scaffold-stylus-dapp/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to scaffold-stylus-dapp.
+scaffold-stylusscaffold-stylusscaffold-stylus

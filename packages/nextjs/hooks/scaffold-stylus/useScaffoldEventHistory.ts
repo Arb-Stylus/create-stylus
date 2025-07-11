@@ -4,16 +4,16 @@ import { Abi, AbiEvent, ExtractAbiEventNames } from "abitype";
 import { useInterval } from "usehooks-ts";
 import { Hash } from "viem";
 import { usePublicClient } from "wagmi";
-import { useDeployedContractInfo } from "~~/hooks/create-stylus";
+import { useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
 import scaffoldConfig from "~~/scaffold.config";
-import { arbitrumNitro } from "~~/utils/create-stylus/chain";
-import { replacer } from "~~/utils/create-stylus/common";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
+import { replacer } from "~~/utils/scaffold-stylus/common";
 import {
   ContractAbi,
   ContractName,
-  UseStylusEventHistoryConfig,
-  UseStylusEventHistoryData,
-} from "~~/utils/create-stylus/contract";
+  UseScaffoldEventHistoryConfig,
+  UseScaffoldEventHistoryData,
+} from "~~/utils/scaffold-stylus/contract";
 
 /**
  * Reads events from a deployed contract
@@ -28,7 +28,7 @@ import {
  * @param config.watch - if set to true, the events will be updated every pollingInterval milliseconds set at scaffoldConfig (default: false)
  * @param config.enabled - set this to false to disable the hook from running (default: true)
  */
-export const useStylusEventHistory = <
+export const useScaffoldEventHistory = <
   TContractName extends ContractName,
   TEventName extends ExtractAbiEventNames<ContractAbi<TContractName>>,
   TBlockData extends boolean = false,
@@ -44,7 +44,7 @@ export const useStylusEventHistory = <
   receiptData,
   watch,
   enabled = true,
-}: UseStylusEventHistoryConfig<TContractName, TEventName, TBlockData, TTransactionData, TReceiptData>) => {
+}: UseScaffoldEventHistoryConfig<TContractName, TEventName, TBlockData, TTransactionData, TReceiptData>) => {
   const [events, setEvents] = useState<any[]>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>();
@@ -158,7 +158,7 @@ export const useStylusEventHistory = <
 
   const eventHistoryData = useMemo(
     () =>
-      events?.map(addIndexedArgsToEvent) as UseStylusEventHistoryData<
+      events?.map(addIndexedArgsToEvent) as UseScaffoldEventHistoryData<
         TContractName,
         TEventName,
         TBlockData,

@@ -1,4 +1,4 @@
-import { GenericContractsDeclaration } from "~~/utils/create-stylus/contract";
+import { GenericContractsDeclaration } from "~~/utils/scaffold-stylus/contract";
 
 /**
  * @example

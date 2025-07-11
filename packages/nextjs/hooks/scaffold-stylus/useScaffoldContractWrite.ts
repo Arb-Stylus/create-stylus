@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useTargetNetwork } from "./useTargetNetwork";
 import { Abi, ExtractAbiFunctionNames } from "abitype";
 import { useContractWrite, useNetwork } from "wagmi";
-import { useDeployedContractInfo, useTransactor } from "~~/hooks/create-stylus";
-import { notification } from "~~/utils/create-stylus";
-import { ContractAbi, ContractName, UseStylusWriteConfig } from "~~/utils/create-stylus/contract";
+import { useDeployedContractInfo, useTransactor } from "~~/hooks/scaffold-stylus";
+import { notification } from "~~/utils/scaffold-stylus";
+import { ContractAbi, ContractName, UseScaffoldWriteConfig } from "~~/utils/scaffold-stylus/contract";
 
 type UpdatedArgs = Parameters<ReturnType<typeof useContractWrite<Abi, string, undefined>>["writeAsync"]>[0];
 
@@ -19,7 +19,7 @@ type UpdatedArgs = Parameters<ReturnType<typeof useContractWrite<Abi, string, un
  * @param config.blockConfirmations - number of block confirmations to wait for (default: 1)
  * @param config.onBlockConfirmation - callback that will be called after blockConfirmations.
  */
-export const useStylusContractWrite = <
+export const useScaffoldContractWrite = <
   TContractName extends ContractName,
   TFunctionName extends ExtractAbiFunctionNames<ContractAbi<TContractName>, "nonpayable" | "payable">,
 >({
@@ -30,7 +30,7 @@ export const useStylusContractWrite = <
   onBlockConfirmation,
   blockConfirmations,
   ...writeConfig
-}: UseStylusWriteConfig<TContractName, TFunctionName>) => {
+}: UseScaffoldWriteConfig<TContractName, TFunctionName>) => {
   const { data: deployedContractData } = useDeployedContractInfo(contractName);
   const { chain } = useNetwork();
   const writeTx = useTransactor();
@@ -52,8 +52,8 @@ export const useStylusContractWrite = <
     value: newValue,
     ...otherConfig
   }: {
-    args?: UseStylusWriteConfig<TContractName, TFunctionName>["args"];
-    value?: UseStylusWriteConfig<TContractName, TFunctionName>["value"];
+    args?: UseScaffoldWriteConfig<TContractName, TFunctionName>["args"];
+    value?: UseScaffoldWriteConfig<TContractName, TFunctionName>["value"];
   } & UpdatedArgs = {}) => {
     if (!deployedContractData) {
       notification.error("Target Contract is not deployed, did you forget to run `yarn deploy`?");

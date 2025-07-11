@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import scaffoldConfig from "~~/scaffold.config";
-import { ChainWithAttributes } from "~~/utils/create-stylus";
+import { ChainWithAttributes } from "~~/utils/scaffold-stylus";
 
 /**
  * Zustand Store

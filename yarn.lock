@@ -2335,6 +2335,7 @@ __metadata:
     ts-jest: ^29.0.0
     ts-node: ^10.9.2
     typescript: ^5.3.0
+    viem: ^1.19.9
     wagmi: ^2.15.6
   languageName: unknown
   linkType: soft
@@ -13482,7 +13483,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"viem@npm:^1.0.0":
+"viem@npm:^1.0.0, viem@npm:^1.19.9":
   version: 1.21.4
   resolution: "viem@npm:1.21.4"
   dependencies:

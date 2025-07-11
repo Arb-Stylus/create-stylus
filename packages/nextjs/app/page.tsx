@@ -5,7 +5,7 @@ import type { NextPage } from "next";
 import { useTheme } from "next-themes";
 import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Address } from "~~/components/create-stylus";
+import { Address } from "~~/components/scaffold-stylus";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         <div className="px-5">
           <h1 className="text-center">
             <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Create-Stylus</span>
+            <span className="block text-4xl font-bold">Scaffold-Stylus</span>
           </h1>
           <div className="flex justify-center items-center space-x-2">
             <p className="my-2 font-medium">Connected Address:</p>

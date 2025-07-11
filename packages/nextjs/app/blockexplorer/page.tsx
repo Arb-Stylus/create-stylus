@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { PaginationButton, TransactionsTable } from "./_components";
 import type { NextPage } from "next";
-import { useFetchBlocks } from "~~/hooks/create-stylus";
-import { useTargetNetwork } from "~~/hooks/create-stylus/useTargetNetwork";
-import { notification } from "~~/utils/create-stylus";
-import { arbitrumNitro } from "~~/utils/create-stylus/chain";
+import { useFetchBlocks } from "~~/hooks/scaffold-stylus";
+import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
+import { notification } from "~~/utils/scaffold-stylus";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 const BlockExplorer: NextPage = () => {
   const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage, error } = useFetchBlocks();

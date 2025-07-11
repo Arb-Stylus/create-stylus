@@ -1,8 +1,8 @@
 import { Account, Address, Chain, Transport, getContract } from "viem";
 import { PublicClient, usePublicClient } from "wagmi";
 import { GetWalletClientResult } from "wagmi/actions";
-import { useDeployedContractInfo } from "~~/hooks/create-stylus";
-import { Contract, ContractName } from "~~/utils/create-stylus/contract";
+import { useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
+import { Contract, ContractName } from "~~/utils/scaffold-stylus/contract";
 
 /**
  * Gets a viem instance of the contract present in deployedContracts.ts or externalContracts.ts corresponding to
@@ -11,7 +11,7 @@ import { Contract, ContractName } from "~~/utils/create-stylus/contract";
  * @param config.contractName - deployed contract name
  * @param config.walletClient - optional walletClient from wagmi useWalletClient hook can be passed for doing write transactions
  */
-export const useStylusContract = <
+export const useScaffoldContract = <
   TContractName extends ContractName,
   TWalletClient extends Exclude<GetWalletClientResult, null> | undefined,
 >({

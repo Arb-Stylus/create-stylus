@@ -13,9 +13,9 @@ import {
   getParsedContractFunctionArgs,
   transformAbiFunction,
 } from "~~/app/debug/_components/contract";
-import { IntegerInput } from "~~/components/create-stylus";
-import { useTransactor } from "~~/hooks/create-stylus";
-import { useTargetNetwork } from "~~/hooks/create-stylus/useTargetNetwork";
+import { IntegerInput } from "~~/components/scaffold-stylus";
+import { useTransactor } from "~~/hooks/scaffold-stylus";
+import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
 
 type WriteOnlyFunctionFormProps = {
   abi: Abi;

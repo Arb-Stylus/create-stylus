@@ -1,6 +1,6 @@
 import { Abi, AbiFunction } from "abitype";
 import { WriteOnlyFunctionForm } from "~~/app/debug/_components/contract";
-import { Contract, ContractName, GenericContract, InheritedFunctions } from "~~/utils/create-stylus/contract";
+import { Contract, ContractName, GenericContract, InheritedFunctions } from "~~/utils/scaffold-stylus/contract";
 
 export const ContractWriteMethods = ({
   onChange,

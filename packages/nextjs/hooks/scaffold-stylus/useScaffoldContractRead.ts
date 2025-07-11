@@ -1,8 +1,13 @@
 import { useTargetNetwork } from "./useTargetNetwork";
 import type { ExtractAbiFunctionNames } from "abitype";
 import { useContractRead } from "wagmi";
-import { useDeployedContractInfo } from "~~/hooks/create-stylus";
-import { AbiFunctionReturnType, ContractAbi, ContractName, UseStylusReadConfig } from "~~/utils/create-stylus/contract";
+import { useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
+import {
+  AbiFunctionReturnType,
+  ContractAbi,
+  ContractName,
+  UseScaffoldReadConfig,
+} from "~~/utils/scaffold-stylus/contract";
 
 /**
  * Wrapper around wagmi's useContractRead hook which automatically loads (by name) the contract ABI and address from
@@ -12,7 +17,7 @@ import { AbiFunctionReturnType, ContractAbi, ContractName, UseStylusReadConfig }
  * @param config.functionName - name of the function to be called
  * @param config.args - args to be passed to the function call
  */
-export const useStylusContractRead = <
+export const useScaffoldContractRead = <
   TContractName extends ContractName,
   TFunctionName extends ExtractAbiFunctionNames<ContractAbi<TContractName>, "pure" | "view">,
 >({
@@ -20,7 +25,7 @@ export const useStylusContractRead = <
   functionName,
   args,
   ...readConfig
-}: UseStylusReadConfig<TContractName, TFunctionName>) => {
+}: UseScaffoldReadConfig<TContractName, TFunctionName>) => {
   const { data: deployedContract } = useDeployedContractInfo(contractName);
   const { targetNetwork } = useTargetNetwork();
 

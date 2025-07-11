@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
-import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/create-stylus";
-import { useOutsideClick } from "~~/hooks/create-stylus";
+import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-stylus";
+import { useOutsideClick } from "~~/hooks/scaffold-stylus";
 
 type HeaderMenuLink = {
   label: string;
@@ -93,7 +93,7 @@ export const Header = () => {
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Create Stylus</span>
+            <span className="font-bold leading-tight">Scaffold Stylus</span>
             <span className="text-xs">Rust dev stack</span>
           </div>
         </Link>

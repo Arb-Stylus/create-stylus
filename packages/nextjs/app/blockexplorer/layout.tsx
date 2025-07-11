@@ -1,8 +1,8 @@
-import { getMetadata } from "~~/utils/create-stylus/getMetadata";
+import { getMetadata } from "~~/utils/scaffold-stylus/getMetadata";
 
 export const metadata = getMetadata({
   title: "Block Explorer",
-  description: "Block Explorer created with 🏗 create-stylus",
+  description: "Block Explorer created with 🏗 scaffold-stylus",
 });
 
 const BlockExplorerLayout = ({ children }: { children: React.ReactNode }) => {

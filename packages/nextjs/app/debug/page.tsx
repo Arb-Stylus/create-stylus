@@ -1,10 +1,10 @@
 import { DebugContracts } from "./_components/DebugContracts";
 import type { NextPage } from "next";
-import { getMetadata } from "~~/utils/create-stylus/getMetadata";
+import { getMetadata } from "~~/utils/scaffold-stylus/getMetadata";
 
 export const metadata = getMetadata({
   title: "Debug Contracts",
-  description: "Debug your deployed 🏗 create-stylus contracts in an easy way",
+  description: "Debug your deployed 🏗 scaffold-stylus contracts in an easy way",
 });
 
 const Debug: NextPage = () => {

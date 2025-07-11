@@ -5,10 +5,10 @@ import { useReducer } from "react";
 import { ContractReadMethods } from "./ContractReadMethods";
 import { ContractVariables } from "./ContractVariables";
 import { ContractWriteMethods } from "./ContractWriteMethods";
-import { Address, Balance } from "~~/components/create-stylus";
-import { useDeployedContractInfo, useNetworkColor } from "~~/hooks/create-stylus";
-import { useTargetNetwork } from "~~/hooks/create-stylus/useTargetNetwork";
-import { ContractName } from "~~/utils/create-stylus/contract";
+import { Address, Balance } from "~~/components/scaffold-stylus";
+import { useDeployedContractInfo, useNetworkColor } from "~~/hooks/scaffold-stylus";
+import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
+import { ContractName } from "~~/utils/scaffold-stylus/contract";
 
 type ContractUIProps = {
   contractName: ContractName;
