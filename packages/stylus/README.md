@@ -160,25 +160,18 @@ This template includes enhanced deployment scripts that support automatic RPC UR
 Instead of setting `RPC_URL` in your environment, you can use the `NETWORK` environment variable:
 
 ```bash
-# Deploy to Ethereum mainnet
-NETWORK=mainnet yarn deploy
-
-# Deploy to Sepolia testnet  
-NETWORK=sepolia yarn deploy
-
-# Deploy to Arbitrum One
+# Deploy to Arbitrum One (mainnet)
 NETWORK=arbitrum yarn deploy
+NETWORK=mainnet yarn deploy  # alias for arbitrum
 
-# Deploy to Polygon
-NETWORK=polygon yarn deploy
-
-# Deploy to Base
-NETWORK=base yarn deploy
+# Deploy to Arbitrum Sepolia testnet  
+NETWORK=arbitrumSepolia yarn deploy
+NETWORK=testnet yarn deploy  # alias for arbitrumSepolia
 ```
 
 ### Available Networks
 
-You can test which networks are available and their RPC URLs:
+This template supports Arbitrum networks only. You can test which networks are available and their RPC URLs:
 
 ```bash
 yarn test:networks
@@ -188,8 +181,8 @@ This will show you all supported networks and their corresponding RPC endpoints.
 
 ### Fallback Behavior
 
-If a network name is not found in viem's chain definitions, the system will:
-1. Show a warning message indicating the network wasn't found
+If a network name is not supported (only `arbitrum`, `arbitrumSepolia`, `mainnet`, and `testnet` are supported), the system will:
+1. Show a warning message indicating the network isn't supported
 2. Fall back to the `RPC_URL` environment variable (or default to `http://localhost:8547`)
 3. Continue with deployment using the fallback endpoint
 

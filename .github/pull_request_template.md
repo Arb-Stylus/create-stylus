@@ -4,8 +4,8 @@ _Concise description of proposed changes, We recommend using screenshots and vid
 
 ## Additional Information
 
-- [ ] I have read the [contributing docs](/Quantum3-Labs/scaffold-stylus/blob/main/CONTRIBUTING.md) (if this is your first contribution)
-- [ ] This is not a duplicate of any [existing pull request](https://github.com/Quantum3-Labs/scaffold-stylus/pulls)
+- [ ] I have read the [contributing docs](/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) (if this is your first contribution)
+- [ ] This is not a duplicate of any [existing pull request](https://github.com/Arb-Stylus/scaffold-stylus/pulls)
 
 ## Related Issues
 

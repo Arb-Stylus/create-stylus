@@ -12,7 +12,7 @@ body:
       label: Is there an existing issue for this?
       description: Please search to see if an issue already exists for the bug you encountered.
       options:
-        - label: I have looked through the [existing issues](https://github.com/Quantum3-Labs/scaffold-stylus/issues)
+        - label: I have looked through the [existing issues](https://github.com/Arb-Stylus/scaffold-stylus/issues)
           required: true
 
   - type: dropdown

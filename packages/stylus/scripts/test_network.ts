@@ -4,16 +4,10 @@ function testNetworkFunctionality() {
   console.log("🧪 Testing network functionality...\n");
   
   const testNetworks = [
-    "mainnet",
-    "sepolia", 
     "arbitrum",
     "arbitrumSepolia",
-    "polygon",
-    "polygonMumbai",
-    "base",
-    "baseSepolia",
-    "optimism",
-    "optimismSepolia",
+    "mainnet",  // alias for arbitrum
+    "testnet",  // alias for arbitrumSepolia
     "invalid-network"
   ];
   
@@ -27,8 +21,10 @@ function testNetworkFunctionality() {
   });
   
   console.log("\n📝 Usage examples:");
-  console.log("  NETWORK=polygon yarn deploy  # Deploy to Polygon");
-  console.log("  NETWORK=base yarn deploy     # Deploy to Base");
+  console.log("  NETWORK=arbitrum yarn deploy        # Deploy to Arbitrum One");
+  console.log("  NETWORK=arbitrumSepolia yarn deploy # Deploy to Arbitrum Sepolia");
+  console.log("  NETWORK=mainnet yarn deploy         # Deploy to Arbitrum One (alias)");
+  console.log("  NETWORK=testnet yarn deploy         # Deploy to Arbitrum Sepolia (alias)");
 }
 
 if (require.main === module) {
