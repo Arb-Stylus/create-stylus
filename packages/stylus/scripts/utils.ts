@@ -122,11 +122,22 @@ export function executeCommand(command: string, cwd: string, description: string
     childProcess.on('close', (code: number | null) => {
       if (code === 0) {
         console.log(`\n✅ ${description} completed successfully!`);
-        // Print output starting from "project metadata hash computed on deployment" or all logs if not found
+        // Print output starting from "project metadata hash computed on deployment" or error patterns, or all logs if not found
         if (outputLines.length > 0) {
-          const startIndex = outputLines.findIndex(line => 
+          const metadataIndex = outputLines.findIndex(line => 
             line.includes("project metadata hash computed on deployment")
           );
+          const errorIndex = outputLines.findIndex(line => 
+            line.includes("error[")
+          );
+          
+          let startIndex = -1;
+          if (metadataIndex >= 0) {
+            startIndex = metadataIndex;
+          } else if (errorIndex >= 0) {
+            startIndex = errorIndex;
+          }
+          
           if (startIndex >= 0) {
             const linesToPrint = outputLines.slice(startIndex);
             linesToPrint.forEach(line => {
@@ -141,11 +152,22 @@ export function executeCommand(command: string, cwd: string, description: string
         resolve(output);
       } else {
         console.error(`\n❌ ${description} failed with exit code ${code}`);
-        // Print error output starting from "project metadata hash computed on deployment" or all logs if not found
+        // Print error output starting from "project metadata hash computed on deployment" or error patterns, or all logs if not found
         if (errorLines.length > 0) {
-          const startIndex = errorLines.findIndex(line => 
+          const metadataIndex = errorLines.findIndex(line => 
             line.includes("project metadata hash computed on deployment")
           );
+          const errorIndex = errorLines.findIndex(line => 
+            line.includes("error[")
+          );
+          
+          let startIndex = -1;
+          if (metadataIndex >= 0) {
+            startIndex = metadataIndex;
+          } else if (errorIndex >= 0) {
+            startIndex = errorIndex;
+          }
+          
           if (startIndex >= 0) {
             const linesToPrint = errorLines.slice(startIndex);
             linesToPrint.forEach(line => {
@@ -244,8 +266,27 @@ export function extractDeployedAddress(output: string): string | null {
 
 export function getRpcUrlFromViemChain(networkName: string): string | null {
   try {
-    // Convert network name to camelCase for viem chain property names
-    const chainPropertyName = networkName.toLowerCase().replace(/[^a-z0-9]/g, '');
+    // Normalize network name and handle aliases
+    const normalizedName = networkName.toLowerCase();
+    
+    // Map aliases to actual network names
+    const networkAliases: Record<string, string> = {
+      'mainnet': 'arbitrum',
+      'testnet': 'arbitrumSepolia'
+    };
+    
+    // Use alias if it exists, otherwise use the original name
+    const actualNetworkName = networkAliases[normalizedName] || networkName;
+    
+    // Only support Arbitrum networks (case-insensitive)
+    const supportedNetworks = ['arbitrum', 'arbitrumSepolia'];
+    const isSupported = supportedNetworks.some(
+      n => n.toLowerCase() === actualNetworkName.toLowerCase()
+    );
+    if (!isSupported) {
+      console.warn(`⚠️  Network '${networkName}' is not supported. Supported networks: ${supportedNetworks.join(', ')}`);
+      return null;
+    }
     
     // Get all chain properties from viem
     const chainEntries = Object.entries(viemChains);
@@ -254,10 +295,11 @@ export function getRpcUrlFromViemChain(networkName: string): string | null {
     const chainEntry = chainEntries.find(([key, chain]) => {
       const chainKey = key.toLowerCase();
       const chainName = chain.name.toLowerCase();
-      return chainKey === chainPropertyName || chainName === networkName.toLowerCase();
+      return chainKey === actualNetworkName.toLowerCase() || chainName === actualNetworkName.toLowerCase();
     });
     
     if (!chainEntry) {
+      console.warn(`⚠️  Could not find chain configuration for '${actualNetworkName}' in viem chains`);
       return null;
     }
     
@@ -273,6 +315,7 @@ export function getRpcUrlFromViemChain(networkName: string): string | null {
       return chain.rpcUrls.public.http[0];
     }
     
+    console.warn(`⚠️  No RPC URLs found for chain '${actualNetworkName}'`);
     return null;
   } catch (error) {
     console.error(`Error getting RPC URL for network ${networkName}:`, error);
