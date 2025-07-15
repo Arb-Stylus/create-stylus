@@ -35,7 +35,7 @@ To get started with create-stylus-dapp, follow the steps below:
 1. Clone this repo & install dependencies
 
 ```
-git clone https://github.com/Quantum3-Labs/create-stylus-dapp.git
+git clone https://github.com/Arb-Stylus/scaffold-stylus.git
 cd create-stylus-dapp
 yarn install
 # Initialize submodules (required for Nitro dev node)
@@ -112,10 +112,10 @@ To deploy your contracts to a different network (other than the default local Ni
 
 Visit our [docs](#) to learn how to start building with create-stylus-dapp.
 
-To know more about its features, check out our [website](https://scaffoldstylus.io).
+To know more about its features, check out our [website](https://drone-cure-43592424.figma.site).
 
 ## Contributing to create-stylus-dapp
 
 We welcome contributions to create-stylus-dapp!
 
-Please see [CONTRIBUTING.MD](https://github.com/Quantum3-Labs/create-stylus-dapp/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to create-stylus-dapp.
+Please see [CONTRIBUTING.MD](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to create-stylus-dapp.
