@@ -5,9 +5,9 @@
 import { GenericContractsDeclaration } from "~~/utils/scaffold-stylus/contract";
 
 const deployedContracts = {
-  421_614: {
+  412346: {
     "stylus-hello-world": {
-      address: "0xd89551a8e72abb494094edbbc8f380b0136174f5",
+      address: "0xf5ffd11a55afd39377411ab9856474d2a7cb697e",
       abi: [
         {
           inputs: [],
