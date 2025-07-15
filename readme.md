@@ -1,4 +1,4 @@
-# 🏗 create-stylus-dapp
+# 🏗 scaffold-stylus
 
 <h4 align="center">
   <a href="https://docs.scaffoldeth.io">Documentation</a> |
@@ -30,13 +30,15 @@ Before you begin, you need to install the following tools:
 
 ## Quickstart
 
-To get started with create-stylus-dapp, follow the steps below:
+[Video Demo](https://app.screencastify.com/watch/9GYnnO0Fqq9QOjYRjQg0)
+
+To get started with scaffold-stylus, follow the steps below:
 
 1. Clone this repo & install dependencies
 
 ```
 git clone https://github.com/Arb-Stylus/scaffold-stylus.git
-cd create-stylus-dapp
+cd scaffold-stylus
 yarn install
 # Initialize submodules (required for Nitro dev node)
 git submodule update --init --recursive
@@ -110,12 +112,12 @@ To deploy your contracts to a different network (other than the default local Ni
 
 ## Documentation
 
-Visit our [docs](#) to learn how to start building with create-stylus-dapp.
+Visit our [docs](#) to learn how to start building with scaffold-stylus.
 
 To know more about its features, check out our [website](https://drone-cure-43592424.figma.site).
 
-## Contributing to create-stylus-dapp
+## Contributing to scaffold-stylus
 
-We welcome contributions to create-stylus-dapp!
+We welcome contributions to scaffold-stylus!
 
-Please see [CONTRIBUTING.MD](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to create-stylus-dapp.
+Please see [CONTRIBUTING.MD](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to scaffold-stylus.
