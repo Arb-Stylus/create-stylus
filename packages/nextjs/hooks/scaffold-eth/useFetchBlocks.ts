@@ -9,8 +9,8 @@ import {
   walletActions,
   webSocket,
 } from "viem";
-import { decodeTransactionData } from "~~/utils/scaffold-stylus";
-import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
+import { decodeTransactionData } from "~~/utils/scaffold-eth";
+import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
 
 const BLOCKS_PER_PAGE = 20;
 

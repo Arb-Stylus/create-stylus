@@ -7,7 +7,7 @@ import {
   ContractAbi,
   ContractName,
   UseScaffoldReadConfig,
-} from "~~/utils/scaffold-stylus/contract";
+} from "~~/utils/scaffold-eth/contract";
 
 /**
  * Wrapper around wagmi's useContractRead hook which automatically loads (by name) the contract ABI and address from

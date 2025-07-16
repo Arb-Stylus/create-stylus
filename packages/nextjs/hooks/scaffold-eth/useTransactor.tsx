@@ -1,7 +1,7 @@
 import { WriteContractResult, getPublicClient } from "@wagmi/core";
 import { Hash, SendTransactionParameters, TransactionReceipt, WalletClient } from "viem";
 import { useWalletClient } from "wagmi";
-import { getBlockExplorerTxLink, getParsedError, notification } from "~~/utils/scaffold-stylus";
+import { getBlockExplorerTxLink, getParsedError, notification } from "~~/utils/scaffold-eth";
 
 type TransactionFunc = (
   tx: (() => Promise<WriteContractResult>) | (() => Promise<Hash>) | SendTransactionParameters,

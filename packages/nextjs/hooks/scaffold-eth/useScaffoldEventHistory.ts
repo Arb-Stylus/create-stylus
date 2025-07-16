@@ -6,14 +6,14 @@ import { Hash } from "viem";
 import { usePublicClient } from "wagmi";
 import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 import scaffoldConfig from "~~/scaffold.config";
-import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
-import { replacer } from "~~/utils/scaffold-stylus/common";
+import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
+import { replacer } from "~~/utils/scaffold-eth/common";
 import {
   ContractAbi,
   ContractName,
   UseScaffoldEventHistoryConfig,
   UseScaffoldEventHistoryData,
-} from "~~/utils/scaffold-stylus/contract";
+} from "~~/utils/scaffold-eth/contract";
 
 /**
  * Reads events from a deployed contract

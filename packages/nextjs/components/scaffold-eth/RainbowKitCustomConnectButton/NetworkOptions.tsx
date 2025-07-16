@@ -2,7 +2,7 @@ import { useTheme } from "next-themes";
 import { useNetwork, useSwitchNetwork } from "wagmi";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/solid";
 import { getNetworkColor } from "~~/hooks/scaffold-eth";
-import { getTargetNetworks } from "~~/utils/scaffold-stylus";
+import { getTargetNetworks } from "~~/utils/scaffold-eth";
 
 const allowedNetworks = getTargetNetworks();
 
