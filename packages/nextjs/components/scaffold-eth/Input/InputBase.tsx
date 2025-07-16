@@ -1,5 +1,5 @@
 import { ChangeEvent, FocusEvent, ReactNode, useCallback, useEffect, useRef } from "react";
-import { CommonInputProps } from "~~/components/scaffold-stylus";
+import { CommonInputProps } from "~~/components/scaffold-eth";
 
 type InputBaseProps<T> = CommonInputProps<T> & {
   error?: boolean;

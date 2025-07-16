@@ -5,7 +5,7 @@ import { Address as AddressType, createWalletClient, http, parseEther } from "vi
 import { privateKeyToAccount } from "viem/accounts";
 import { useNetwork } from "wagmi";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
-import { Address, AddressInput, Balance, EtherInput } from "~~/components/scaffold-stylus";
+import { Address, AddressInput, Balance, EtherInput } from "~~/components/scaffold-eth";
 import { useTransactor } from "~~/hooks/scaffold-eth";
 import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
