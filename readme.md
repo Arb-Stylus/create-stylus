@@ -15,7 +15,7 @@
 - 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
 - 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Arbitrum network.
 
-![Debug Contracts tab](https://github.com/scaffold-stylus/scaffold-stylus-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+![Debug Contracts tab](./packages/nextjs/public/debug-image.png)
 
 ## Requirements
 
@@ -35,7 +35,7 @@ To get started with scaffold-stylus-dapp, follow the steps below:
 1. Clone this repo & install dependencies
 
 ```
-git clone https://github.com/Quantum3-Labs/scaffold-stylus-dapp.git
+git clone https://github.com/Arb-Stylus/scaffold-stylus.git
 cd scaffold-stylus-dapp
 yarn install
 # Initialize submodules (required for Nitro dev node)
@@ -77,6 +77,7 @@ Run smart contract test with `yarn stylus:test`
 To deploy your contracts to a different network (other than the default local Nitro dev node), you need to update a few configuration options:
 
 1. **Set the RPC URL**
+
    - Specify the target network's RPC endpoint in the `RPC_URL` environment variable. You can do this in your shell or by creating a `.env` file (see `.env.example` for reference).
    - Example:
      ```env
@@ -84,6 +85,7 @@ To deploy your contracts to a different network (other than the default local Ni
      ```
 
 2. **Set the Private Key**
+
    - If you want to deploy using your own wallet, set the `PRIVATE_KEY` environment variable to your wallet's private key. By default, a development key is used when running the Nitro dev node locally, but for real deployments you must provide your own.
    - Example:
      ```env
@@ -100,6 +102,7 @@ To deploy your contracts to a different network (other than the default local Ni
      ```
 
 **Note:**
+
 - The values in `.env.example` provide a template for the required environment variables.
 - The chain specified in `scaffold.config.ts` is used to generate the ABI and populate `deployedContracts.ts` for your frontend.
 - Always keep your private key secure and never commit it to version control.
@@ -114,5 +117,5 @@ To know more about its features, check out our [website](https://scaffoldstylus.
 
 We welcome contributions to scaffold-stylus-dapp!
 
-Please see [CONTRIBscaffold-stylusps://github.com/Quantum3-Labs/scaffold-stylus-dapp/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to scaffold-stylus-dapp.
+Please see [CONTRIBUTING.md](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to scaffold-stylus-dapp.
 scaffold-stylusscaffold-stylusscaffold-stylus

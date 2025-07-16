@@ -35,7 +35,7 @@ export const appChains = configureChains(
     publicProvider(),
   ],
   {
-    // We might not need this checkout https://github.com/scaffold-stylus/scaffold-stylus-2/pull/45#discussion_r1024496359, will test and remove this before merging
+    // We might not need this checkout https://github.com/scaffold-eth/scaffold-eth-2/pull/45#discussion_r1024496359, will test and remove this before merging
     stallTimeout: 3_000,
     // Sets pollingInterval if using chains other than local hardhat chain
     ...(targetNetworks.find(network => network.id !== arbitrumNitro.id)
