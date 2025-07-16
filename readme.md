@@ -2,7 +2,7 @@
 
 <h4 align="center">
   <a href="">Documentation</a> |
-  <a href="">Website</a>
+  <a href="https://drone-cure-43592424.figma.site/">Website</a>
 </h4>
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Arbitrum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
@@ -97,6 +97,7 @@ To deploy your contracts to a different network (other than the default local Ni
      ```
 
 3. **Update the Target Chain in the Frontend**
+
    - Open `packages/nextjs/scaffold.config.ts` and change the `targetNetworks` array to include the correct chain for your deployment. This ensures the frontend connects to the right network and that the ABI is generated correctly in `deployedContracts.ts`.
    - Example:
 
@@ -118,7 +119,7 @@ Visit our [docs](#) to learn how to start building with scaffold-stylus.
 
 To know more about its features, check out our [website](https://drone-cure-43592424.figma.site).
 
-## Contributing to scaffold-stylus-dapps
+## Contributing to scaffold-stylus
 
 We welcome contributions to scaffold-stylus!
 
