@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useTargetNetwork } from "../scaffold-stylus/useTargetNetwork";
+import { useTargetNetwork } from "./useTargetNetwork";
 import { useInterval } from "usehooks-ts";
 import scaffoldConfig from "~~/scaffold.config";
 import { fetchPriceFromUniswap } from "~~/utils/scaffold-stylus";

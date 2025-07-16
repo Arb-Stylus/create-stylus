@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTargetNetwork } from "./useTargetNetwork";
 import { Abi, ExtractAbiFunctionNames } from "abitype";
 import { useContractWrite, useNetwork } from "wagmi";
-import { useDeployedContractInfo, useTransactor } from "~~/hooks/scaffold-stylus";
+import { useDeployedContractInfo, useTransactor } from "~~/hooks/scaffold-eth";
 import { notification } from "~~/utils/scaffold-stylus";
 import { ContractAbi, ContractName, UseScaffoldWriteConfig } from "~~/utils/scaffold-stylus/contract";
 

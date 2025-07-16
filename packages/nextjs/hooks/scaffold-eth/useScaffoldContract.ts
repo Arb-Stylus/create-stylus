@@ -1,7 +1,7 @@
 import { Account, Address, Chain, Transport, getContract } from "viem";
 import { PublicClient, usePublicClient } from "wagmi";
 import { GetWalletClientResult } from "wagmi/actions";
-import { useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
+import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 import { Contract, ContractName } from "~~/utils/scaffold-stylus/contract";
 
 /**

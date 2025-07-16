@@ -5,7 +5,7 @@ import { CurrencyDollarIcon, MagnifyingGlassIcon } from "@heroicons/react/24/out
 import { SwitchTheme } from "~~/components/SwitchTheme";
 //import { BuidlGuidlLogo } from "~~/components/assets/BuidlGuidlLogo";
 import { Faucet } from "~~/components/scaffold-stylus";
-import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
+import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { useGlobalState } from "~~/services/store/store";
 import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 

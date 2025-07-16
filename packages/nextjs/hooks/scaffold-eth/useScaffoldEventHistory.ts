@@ -4,7 +4,7 @@ import { Abi, AbiEvent, ExtractAbiEventNames } from "abitype";
 import { useInterval } from "usehooks-ts";
 import { Hash } from "viem";
 import { usePublicClient } from "wagmi";
-import { useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
+import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 import scaffoldConfig from "~~/scaffold.config";
 import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 import { replacer } from "~~/utils/scaffold-stylus/common";

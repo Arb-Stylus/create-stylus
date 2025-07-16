@@ -13,7 +13,7 @@ import {
   QrCodeIcon,
 } from "@heroicons/react/24/outline";
 import { isENS } from "~~/components/scaffold-stylus";
-import { useOutsideClick } from "~~/hooks/scaffold-stylus";
+import { useOutsideClick } from "~~/hooks/scaffold-eth";
 import { getTargetNetworks } from "~~/utils/scaffold-stylus";
 
 const allowedNetworks = getTargetNetworks();

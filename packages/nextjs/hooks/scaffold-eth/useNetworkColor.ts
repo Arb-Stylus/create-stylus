@@ -1,4 +1,4 @@
-import { useTargetNetwork } from "../scaffold-stylus/useTargetNetwork";
+import { useTargetNetwork } from "./useTargetNetwork";
 import { useTheme } from "next-themes";
 import { ChainWithAttributes } from "~~/utils/scaffold-stylus";
 

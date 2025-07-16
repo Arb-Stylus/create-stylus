@@ -6,7 +6,7 @@ import type { NextPage } from "next";
 import { Hash, Transaction, TransactionReceipt, formatEther, formatUnits } from "viem";
 import { usePublicClient } from "wagmi";
 import { Address } from "~~/components/scaffold-stylus";
-import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
+import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { decodeTransactionData, getFunctionDetails } from "~~/utils/scaffold-stylus";
 import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 import { replacer } from "~~/utils/scaffold-stylus/common";

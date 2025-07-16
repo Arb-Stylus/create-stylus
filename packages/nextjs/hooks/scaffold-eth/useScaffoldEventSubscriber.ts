@@ -2,7 +2,7 @@ import { useTargetNetwork } from "./useTargetNetwork";
 import { Abi, ExtractAbiEventNames } from "abitype";
 import { Log } from "viem";
 import { useContractEvent } from "wagmi";
-import { addIndexedArgsToEvent, useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
+import { addIndexedArgsToEvent, useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 import { ContractAbi, ContractName, UseScaffoldEventConfig } from "~~/utils/scaffold-stylus/contract";
 
 /**
