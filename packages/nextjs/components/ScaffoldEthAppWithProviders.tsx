@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { BackGround } from "./Background";
 import { RainbowKitProvider, darkTheme, lightTheme } from "@rainbow-me/rainbowkit";
 import { useTheme } from "next-themes";
 import { Toaster } from "react-hot-toast";
@@ -45,6 +46,10 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
     setMounted(true);
   }, []);
 
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <WagmiConfig config={wagmiConfig}>
       <ProgressBar />
@@ -53,7 +58,10 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
         avatar={BlockieAvatar}
         theme={mounted ? (isDarkMode ? darkTheme() : lightTheme()) : lightTheme()}
       >
-        <ScaffoldEthApp>{children}</ScaffoldEthApp>
+        <ScaffoldEthApp>
+          <BackGround />
+          {children}
+        </ScaffoldEthApp>
       </RainbowKitProvider>
     </WagmiConfig>
   );
