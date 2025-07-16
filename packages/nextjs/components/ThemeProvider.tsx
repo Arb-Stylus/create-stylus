@@ -6,7 +6,7 @@ import { type ThemeProviderProps } from "next-themes/dist/types";
 
 export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   return (
-    <NextThemesProvider attribute="data-theme" defaultTheme="light" enableSystem disableTransitionOnChange {...props}>
+    <NextThemesProvider attribute="data-theme" defaultTheme="dark" enableSystem disableTransitionOnChange {...props}>
       {children}
     </NextThemesProvider>
   );
