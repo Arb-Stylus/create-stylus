@@ -12,9 +12,9 @@ import {
   DocumentDuplicateIcon,
   QrCodeIcon,
 } from "@heroicons/react/24/outline";
-import { BlockieAvatar, isENS } from "~~/components/scaffold-eth";
-import { useOutsideClick } from "~~/hooks/scaffold-stylus";
-import { getTargetNetworks } from "~~/utils/scaffold-stylus";
+import { isENS } from "~~/components/scaffold-eth";
+import { useOutsideClick } from "~~/hooks/scaffold-eth";
+import { getTargetNetworks } from "~~/utils/scaffold-eth";
 
 const allowedNetworks = getTargetNetworks();
 
@@ -27,7 +27,7 @@ type AddressInfoDropdownProps = {
 
 export const AddressInfoDropdown = ({
   address,
-  ensAvatar,
+  // ensAvatar,
   displayName,
   blockExplorerAddressLink,
 }: AddressInfoDropdownProps) => {
@@ -46,17 +46,23 @@ export const AddressInfoDropdown = ({
 
   return (
     <>
-      <details ref={dropdownRef} className="dropdown dropdown-end leading-3">
-        <summary tabIndex={0} className="btn btn-secondary btn-sm pl-0 pr-2 shadow-md dropdown-toggle gap-0 !h-auto">
-          <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
-          <span className="ml-2 mr-1">
+      <details
+        ref={dropdownRef}
+        className="bg-gradient-to-r from-[#203147] to-[#E3066E] dark:from-[#FFFFFF] dark:to-[#E3066E] p-[2px] rounded-full inline-block dropdown dropdown-end leading-3"
+      >
+        <summary
+          tabIndex={0}
+          className="bg-base-100 rounded-full flex items-center px-4 py-2 shadow-md dropdown-toggle gap-0 !h-auto"
+        >
+          {/* <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} /> */}
+          <span className="ml-2 mr-1 font-bold">
             {isENS(displayName) ? displayName : checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)}
           </span>
           <ChevronDownIcon className="h-6 w-4 ml-2 sm:ml-0" />
         </summary>
         <ul
           tabIndex={0}
-          className="dropdown-content menu z-[2] p-2 mt-2 shadow-center shadow-accent bg-base-200 rounded-box gap-1"
+          className="dropdown-content menu z-[2] p-2 mt-2 shadow-center shadow-accent bg-base-100 rounded-box gap-1"
         >
           <NetworkOptions hidden={!selectingNetwork} />
           <li className={selectingNetwork ? "hidden" : ""}>
@@ -122,7 +128,7 @@ export const AddressInfoDropdown = ({
           ) : null}
           <li className={selectingNetwork ? "hidden" : ""}>
             <button
-              className="menu-item text-error btn-sm !rounded-xl flex gap-3 py-3"
+              className="menu-item text-[#E3066E] font-bold btn-sm !rounded-xl flex gap-3 py-3"
               type="button"
               onClick={() => disconnect()}
             >

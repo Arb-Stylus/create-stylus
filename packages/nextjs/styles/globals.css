@@ -30,3 +30,33 @@ p {
 .btn.btn-ghost {
   @apply shadow-none;
 }
+
+.bg-secondary {
+  background-image: linear-gradient(90deg, #e3066e 0%, #203147 100%) !important;
+  color: #fff;
+}
+
+.bg-secondary:hover,
+.hover\:bg-secondary:hover {
+  background-image: linear-gradient(90deg, #ff4fa3 0%, #425b8c 100%) !important;
+  color: #fff;
+}
+
+.border-round-color {
+  border-color: var(--round-color);
+}
+
+.gradient-border {
+  background: linear-gradient(transparent, transparent) padding-box,
+    linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%) border-box;
+}
+
+.gradient-border-light {
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%) border-box;
+}
+
+.gradient-border-dark {
+  border-color: #e3066e;
+  background: linear-gradient(180deg, #e3066e 10%, #3f021e75 100%) border-box;
+}

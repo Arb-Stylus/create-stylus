@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
+import { arbitrumNitro } from "~~/utils/chain";
 
 interface BurnerWalletModalProps {
   isOpen: boolean;

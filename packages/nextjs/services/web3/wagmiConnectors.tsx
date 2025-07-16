@@ -13,8 +13,8 @@ import { configureChains } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import scaffoldConfig from "~~/scaffold.config";
-import { getTargetNetworks } from "~~/utils/scaffold-stylus";
-import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
+import { arbitrumNitro } from "~~/utils/chain";
+import { getTargetNetworks } from "~~/utils/scaffold-eth";
 
 const targetNetworks = getTargetNetworks();
 

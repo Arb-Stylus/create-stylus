@@ -2,20 +2,23 @@
 
 import Link from "next/link";
 import type { NextPage } from "next";
+import { useTheme } from "next-themes";
 import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
+  const { resolvedTheme } = useTheme();
+  const isDarkMode = resolvedTheme === "dark";
 
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-10">
+      <div className="flex items-center flex-col flex-grow pt-10 bg-base-100">
         <div className="px-5">
           <h1 className="text-center">
             <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Create Stylus Dapp</span>
+            <span className="block text-4xl font-bold">Scaffold-Stylus</span>
           </h1>
           <div className="flex justify-center items-center space-x-2">
             <p className="my-2 font-medium">Connected Address:</p>
@@ -39,23 +42,43 @@ const Home: NextPage = () => {
           </p>
         </div>
 
-        <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
+        <div className="flex-grow bg-base-100 w-full mt-16 px-8 py-12">
           <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
+            {/* Debug Contracts Card */}
+            <div
+              className={`relative flex-1 bg-base-100 rounded-[40px] border-2 border-transparent p-4 text-center items-center flex flex-col max-w-md mx-auto ${
+                isDarkMode ? "gradient-border-dark" : "gradient-border-light"
+              }`}
+              style={{
+                boxShadow: "0 0 0 3px transparent",
+              }}
+            >
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-28 h-3 bg-gradient-to-r from-[#3283EB] to-[#E3066E] rounded-t-[20px]" />
+              <BugAntIcon className="h-14 w-14 mb-4 fill-[#E3066E] dark:fill-white" />
+              <p className="text-base font-medium">
+                Tinker with your smart contract using the
+                <br />
+                <Link href="/debug" passHref className="underline underline-offset-4 font-semibold text-lg">
                   Debug Contracts
                 </Link>{" "}
                 tab.
               </p>
             </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
+            {/* Block Explorer Card */}
+            <div
+              className={`relative flex-1 bg-base-100 rounded-[40px] border-2 border-transparent p-4 text-center items-center flex flex-col max-w-md mx-auto ${
+                isDarkMode ? "gradient-border-dark" : "gradient-border-light"
+              }`}
+              style={{
+                boxShadow: "0 0 0 3px transparent",
+              }}
+            >
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-28 h-3 bg-gradient-to-r from-[#3283EB] to-[#E3066E] rounded-t-[20px]" />
+              <MagnifyingGlassIcon className="h-14 w-14 mb-4 fill-[#E3066E] dark:fill-white" />
+              <p className="text-base font-medium">
+                Explore your local transactions with the
+                <br />
+                <Link href="/blockexplorer" passHref className="underline underline-offset-4 font-semibold text-lg">
                   Block Explorer
                 </Link>{" "}
                 tab.

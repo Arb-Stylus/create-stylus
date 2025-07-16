@@ -6,9 +6,9 @@ import { ContractReadMethods } from "./ContractReadMethods";
 import { ContractVariables } from "./ContractVariables";
 import { ContractWriteMethods } from "./ContractWriteMethods";
 import { Address, Balance } from "~~/components/scaffold-eth";
-import { useDeployedContractInfo, useNetworkColor } from "~~/hooks/scaffold-stylus";
-import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
-import { ContractName } from "~~/utils/scaffold-stylus/contract";
+import { useDeployedContractInfo, useNetworkColor } from "~~/hooks/scaffold-eth";
+import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
+import { ContractName } from "~~/utils/scaffold-eth/contract";
 
 type ContractUIProps = {
   contractName: ContractName;
@@ -71,29 +71,105 @@ export const ContractUI = ({ contractName, className = "" }: ContractUIProps) =>
         </div>
         <div className="col-span-1 lg:col-span-2 flex flex-col gap-6">
           <div className="z-10">
-            <div className="bg-base-100 rounded-3xl shadow-md shadow-secondary border border-base-300 flex flex-col mt-10 relative">
-              <div className="h-[5rem] w-[5.5rem] bg-base-300 absolute self-start rounded-[22px] -top-[38px] -left-[1px] -z-10 py-[0.65rem] shadow-lg shadow-base-300">
-                <div className="flex items-center justify-center space-x-2">
-                  <p className="my-0 text-sm">Read</p>
+            <div
+              className="flex flex-col"
+              //className="relative mt-10"
+            >
+              {/* Read Tab */}
+              {/*<div className="absolute -top-8 left-0 flex items-center z-20">*/}
+              <div className="relative inline-block w-[23%]">
+                {/* Botón con clip-path */}
+                <div
+                  className="text-white px-8 py-2 text-xl font-medium border-2 relative z-10"
+                  style={{
+                    backgroundColor: "#630c3a",
+                    borderColor: "#E3066E",
+                    clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%)",
+                  }}
+                >
+                  Read
                 </div>
+
+                {/* Línea diagonal del corte */}
+                <div
+                  className="absolute z-20"
+                  style={{
+                    top: "20px", // deja espacio para el border superior
+                    right: "-1px", // deja espacio para el border derecho
+                    width: "28.28px", // 20 * sqrt(2)
+                    height: "2px", // igual al grosor del borde
+                    backgroundColor: "#E3066E",
+                    transform: "rotate(45deg)",
+                    transformOrigin: "top right",
+                  }}
+                />
               </div>
-              <div className="p-5 divide-y divide-base-300">
-                <ContractReadMethods deployedContractData={deployedContractData} />
+
+              {/*</div> */}
+              {/* Gradient Container */}
+              <div
+                className="rounded-lg bg-gradient-to-r from-[#3283EB] to-[#E3066E] min-h-[80px] flex items-center px-[0.1rem] shadow-xl"
+                style={{ marginTop: "8.5px" }}
+              >
+                <div
+                  className="w-full h-full rounded-lg bg-gradient-to-r from-[#090909] to-[#272727] flex items-center px-6 py-6"
+                  style={{ color: "white" }}
+                >
+                  <ContractReadMethods deployedContractData={deployedContractData} />
+                </div>
               </div>
             </div>
           </div>
           <div className="z-10">
-            <div className="bg-base-100 rounded-3xl shadow-md shadow-secondary border border-base-300 flex flex-col mt-10 relative">
-              <div className="h-[5rem] w-[5.5rem] bg-base-300 absolute self-start rounded-[22px] -top-[38px] -left-[1px] -z-10 py-[0.65rem] shadow-lg shadow-base-300">
-                <div className="flex items-center justify-center space-x-2">
-                  <p className="my-0 text-sm">Write</p>
+            <div
+              className="flex flex-col"
+              //className="relative mt-10"
+            >
+              {/* Read Tab */}
+              {/*<div className="absolute -top-8 left-0 flex items-center z-20">*/}
+              <div className="relative inline-block w-[23%]">
+                {/* Botón con clip-path */}
+                <div
+                  className="text-white px-8 py-2 text-xl font-medium border-2 relative z-10"
+                  style={{
+                    backgroundColor: "#630c3a",
+                    borderColor: "#E3066E",
+                    clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%)",
+                  }}
+                >
+                  Write
                 </div>
-              </div>
-              <div className="p-5 divide-y divide-base-300">
-                <ContractWriteMethods
-                  deployedContractData={deployedContractData}
-                  onChange={triggerRefreshDisplayVariables}
+
+                {/* Línea diagonal del corte */}
+                <div
+                  className="absolute z-20"
+                  style={{
+                    top: "20px", // deja espacio para el border superior
+                    right: "-1px", // deja espacio para el border derecho
+                    width: "28.28px", // 20 * sqrt(2)
+                    height: "2px", // igual al grosor del borde
+                    backgroundColor: "#E3066E",
+                    transform: "rotate(45deg)",
+                    transformOrigin: "top right",
+                  }}
                 />
+              </div>
+
+              {/*</div> */}
+              {/* Gradient Container */}
+              <div
+                className="rounded-lg bg-gradient-to-r from-[#3283EB] to-[#E3066E] min-h-[80px] flex items-center px-[0.1rem] shadow-xl py-[2px]"
+                style={{ marginTop: "8.5px" }}
+              >
+                <div
+                  className="w-full h-full rounded-lg bg-gradient-to-r from-[#090909] to-[#272727] px-6 py-6 flex flex-col"
+                  style={{ color: "white" }}
+                >
+                  <ContractWriteMethods
+                    deployedContractData={deployedContractData}
+                    onChange={triggerRefreshDisplayVariables}
+                  />
+                </div>
               </div>
             </div>
           </div>

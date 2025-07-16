@@ -1,5 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
+import { ethers } from "ethers";
 import {
   getDeploymentConfig,
   ensureDeploymentDirectory,
@@ -21,6 +22,9 @@ export default async function deployStylusContract() {
   console.log(`📋 Generated fallback contract address: ${config.contractAddress}`);
 
   console.log(`📡 Using endpoint: ${config.endpoint}`);
+  if (config.network) {
+    console.log(`🌐 Network specified: ${config.network}`);
+  }
   console.log(`🔑 Using private key: ${config.privateKey.substring(0, 10)}...`);
   console.log(`📄 Contract name: ${config.contractName}`);
   console.log(`📁 Deployment directory: ${config.deploymentDir}`);
@@ -28,10 +32,11 @@ export default async function deployStylusContract() {
   try {
     // Ensure deployment directory exists
     ensureDeploymentDirectory(config.deploymentDir);
+    const owner = new ethers.Wallet(config.privateKey);
 
     // Step 1: Deploy the contract using cargo stylus with contract address
     // --contract-address='${config.contractAddress}' deactivated for now as it's not working. Issue https://github.com/OffchainLabs/cargo-stylus/issues/171
-    const deployCommand = `cargo stylus deploy --endpoint='${config.endpoint}' --private-key='${config.privateKey}' --no-verify`;
+    const deployCommand = `cargo stylus deploy --endpoint='${config.endpoint}' --private-key='${config.privateKey}' --constructor-args ${owner.address} --no-verify`;
     const deployOutput = await executeCommand(
       deployCommand,
       path.resolve(__dirname, ".."),

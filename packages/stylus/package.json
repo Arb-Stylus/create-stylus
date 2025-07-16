@@ -10,6 +10,7 @@
     "start": "node dist/index.js",
     "chain": "./scripts/start-chain-with-cors.sh",
     "deploy": "ts-node scripts/deploy_contract.ts",
+    "test:networks": "ts-node scripts/test_network.ts",
     "export-abi": "ts-node scripts/export_abi.ts",
     "clean": "rm -rf dist",
     "test": "cargo test",
@@ -40,6 +41,7 @@
     "ethers": "^6.15.0",
     "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
+    "viem": "^1.19.9",
     "wagmi": "^2.15.6"
   }
 }

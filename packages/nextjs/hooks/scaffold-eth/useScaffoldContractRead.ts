@@ -1,13 +1,13 @@
 import { useTargetNetwork } from "./useTargetNetwork";
 import type { ExtractAbiFunctionNames } from "abitype";
 import { useContractRead } from "wagmi";
-import { useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
+import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 import {
   AbiFunctionReturnType,
   ContractAbi,
   ContractName,
   UseScaffoldReadConfig,
-} from "~~/utils/scaffold-stylus/contract";
+} from "~~/utils/scaffold-eth/contract";
 
 /**
  * Wrapper around wagmi's useContractRead hook which automatically loads (by name) the contract ABI and address from

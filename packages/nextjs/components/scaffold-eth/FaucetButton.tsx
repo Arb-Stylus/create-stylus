@@ -6,8 +6,8 @@ import { privateKeyToAccount } from "viem/accounts";
 import { useAccount, useNetwork } from "wagmi";
 import { useBalance } from "wagmi";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
-import { useTransactor } from "~~/hooks/scaffold-stylus";
-import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
+import { useTransactor } from "~~/hooks/scaffold-eth";
+import { arbitrumNitro } from "~~/utils/chain";
 
 // Number of ETH faucet sends to an address
 const NUM_OF_ETH = "1";
@@ -66,7 +66,7 @@ export const FaucetButton = () => {
       }
       data-tip="Grab funds from faucet"
     >
-      <button className="btn btn-secondary btn-sm px-2 rounded-full" onClick={sendETH} disabled={loading}>
+      <button className="btn bg-secondary btn-sm px-2 rounded-full" onClick={sendETH} disabled={loading}>
         {!loading ? (
           <BanknotesIcon className="h-4 w-4" />
         ) : (
