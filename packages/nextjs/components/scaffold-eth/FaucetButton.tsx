@@ -7,7 +7,7 @@ import { useAccount, useNetwork } from "wagmi";
 import { useBalance } from "wagmi";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
 import { useTransactor } from "~~/hooks/scaffold-eth";
-import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
+import { arbitrumNitro } from "~~/utils/chain";
 
 // Number of ETH faucet sends to an address
 const NUM_OF_ETH = "1";

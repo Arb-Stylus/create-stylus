@@ -6,7 +6,7 @@ import { Hash } from "viem";
 import { usePublicClient } from "wagmi";
 import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 import scaffoldConfig from "~~/scaffold.config";
-import { arbitrumNitro } from "~~/utils/scaffold-eth/chain";
+import { arbitrumNitro } from "~~/utils/chain";
 import { replacer } from "~~/utils/scaffold-eth/common";
 import {
   ContractAbi,
