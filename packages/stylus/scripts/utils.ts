@@ -5,7 +5,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { ethers } from "ethers";
 import * as viemChains from "viem/chains";
-import { arbitrumNitro } from "../../nextjs/utils/scaffold-eth/chain";
+import { arbitrumNitro } from "../../nextjs/utils/chain";
 import scaffoldConfig from "../../nextjs/scaffold.config";
 
 // Load environment variables from .env file

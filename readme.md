@@ -32,7 +32,7 @@ Before you begin, you need to install the following tools:
 
 [Video Demo](https://app.screencastify.com/watch/9GYnnO0Fqq9QOjYRjQg0)
 
-To get started with scaffold-stylus, follow the steps below:
+To get started with Scaffold-Stylus, follow the steps below:
 
 1. Clone this repo & install dependencies
 
@@ -115,12 +115,12 @@ To deploy your contracts to a different network (other than the default local Ni
 
 ## Documentation
 
-Visit our [docs](#) to learn how to start building with scaffold-stylus.
+Visit our [docs](#) to learn how to start building with Scaffold-Stylus.
 
 To know more about its features, check out our [website](https://drone-cure-43592424.figma.site).
 
-## Contributing to scaffold-stylus
+## Contributing to Scaffold-Stylus
 
-We welcome contributions to scaffold-stylus!
+We welcome contributions to Scaffold-Stylus!
 
-Please see [CONTRIBUTING.md](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to scaffold-stylus.
+Please see [CONTRIBUTING.md](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-Stylus.

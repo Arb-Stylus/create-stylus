@@ -1,6 +1,6 @@
 name: Bug Report
 description: File a bug/issue
-title: 'bug: <title>'
+title: "bug: <title>"
 body:
   - type: markdown
     attributes:
@@ -17,12 +17,12 @@ body:
 
   - type: dropdown
     attributes:
-      label: Which method was used to setup scaffold-stylus ?
+      label: Which method was used to setup Scaffold-Stylus ?
       description: You may select both, if the bug is present in both the methods.
       multiple: true
       options:
         - git clone
-        - npx create-eth@latest
+        - npx create-stylus@latest
     validations:
       required: true
 

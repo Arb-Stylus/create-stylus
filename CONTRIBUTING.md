@@ -1,18 +1,18 @@
-# Welcome to scaffold-stylus-dapp Contributing Guide
+# Welcome to Scaffold-Stylus Contributing Guide
 
-Thank you for investing your time in contributing to scaffold-stylus-dapp!
+Thank you for investing your time in contributing to Scaffold-Stylus!
 
 This guide aims to provide an overview of the contribution workflow to help us make the contribution process effective for everyone involved.
 
 ## About the Project
 
-scaffold-stylus-dapp is a minimal and forkable repo providing builders with a starter kit to build decentralized applications on Ethereum.
+Scaffold-Stylus is a minimal and forkable repo providing builders with a starter kit to build decentralized applications on Ethereum.
 
 Read the [README](README.md) to get an overview of the project.
 
 ### Vision
 
-The goal of scaffold-stylus-dapp is to provide the primary building blocks for a decentralized application.
+The goal of Scaffold-Stylus is to provide the primary building blocks for a decentralized application.
 
 The repo can be forked to include integrations and more features, but we want to keep the master branch simple and minimal.
 

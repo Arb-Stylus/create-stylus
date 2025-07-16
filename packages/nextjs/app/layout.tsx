@@ -17,7 +17,7 @@ const imageUrl = `${baseUrl}/thumbnail.jpg`;
 
 const title = "Create Stylus Dapp";
 const titleTemplate = "%s | Create Stylus Dapp";
-const description = "Built with 🏗 scaffold-stylus";
+const description = "Built with 🏗 Scaffold-Stylus";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
