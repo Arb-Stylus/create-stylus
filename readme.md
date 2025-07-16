@@ -1,8 +1,8 @@
-# 🏗 scaffold-stylus-dapp
+# 🏗 scaffold-stylus
 
 <h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
+  <a href="">Documentation</a> |
+  <a href="">Website</a>
 </h4>
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Arbitrum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
@@ -10,8 +10,8 @@
 ⚙️ Built using NextJS, RainbowKit, Stylus, Wagmi, Viem, and Typescript.
 
 - ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
+- 🪝 **[Custom hooks]()**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
+- 🧱 [**Components**](): Collection of common web3 components to quickly build your frontend.
 - 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
 - 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Arbitrum network.
 
@@ -30,13 +30,15 @@ Before you begin, you need to install the following tools:
 
 ## Quickstart
 
-To get started with scaffold-stylus-dapp, follow the steps below:
+[Video Demo](https://app.screencastify.com/watch/9GYnnO0Fqq9QOjYRjQg0)
+
+To get started with scaffold-stylus, follow the steps below:
 
 1. Clone this repo & install dependencies
 
 ```
 git clone https://github.com/Arb-Stylus/scaffold-stylus.git
-cd scaffold-stylus-dapp
+cd scaffold-stylus
 yarn install
 # Initialize submodules (required for Nitro dev node)
 git submodule update --init --recursive
@@ -80,6 +82,7 @@ To deploy your contracts to a different network (other than the default local Ni
 
    - Specify the target network's RPC endpoint in the `RPC_URL` environment variable. You can do this in your shell or by creating a `.env` file (see `.env.example` for reference).
    - Example:
+
      ```env
      RPC_URL=https://your-network-rpc-url
      ```
@@ -88,6 +91,7 @@ To deploy your contracts to a different network (other than the default local Ni
 
    - If you want to deploy using your own wallet, set the `PRIVATE_KEY` environment variable to your wallet's private key. By default, a development key is used when running the Nitro dev node locally, but for real deployments you must provide your own.
    - Example:
+
      ```env
      PRIVATE_KEY=your_private_key_here
      ```
@@ -95,6 +99,7 @@ To deploy your contracts to a different network (other than the default local Ni
 3. **Update the Target Chain in the Frontend**
    - Open `packages/nextjs/scaffold.config.ts` and change the `targetNetworks` array to include the correct chain for your deployment. This ensures the frontend connects to the right network and that the ABI is generated correctly in `deployedContracts.ts`.
    - Example:
+
      ```ts
      import { mainnet } from "viem/chains";
      // ...
@@ -109,13 +114,12 @@ To deploy your contracts to a different network (other than the default local Ni
 
 ## Documentation
 
-Visit our [docs](#) to learn how to start building with scaffold-stylus-dapp.
+Visit our [docs](#) to learn how to start building with scaffold-stylus.
 
-To know more about its features, check out our [website](https://scaffoldstylus.io).
+To know more about its features, check out our [website](https://drone-cure-43592424.figma.site).
 
-## Contributing to scaffold-stylus-dappscaffold-stylus
+## Contributing to scaffold-stylus-dapps
 
-We welcome contributions to scaffold-stylus-dapp!
+We welcome contributions to scaffold-stylus!
 
-Please see [CONTRIBUTING.md](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to scaffold-stylus-dapp.
-scaffold-stylusscaffold-stylusscaffold-stylus
+Please see [CONTRIBUTING.md](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to scaffold-stylus.
