@@ -25,6 +25,7 @@ module.exports = {
           warning: "#FFCF72",
           error: "#FF8863",
 
+          "--bg-border": "#ffffff",
           "--round-color": "#000",
           "--rounded-btn": "9999rem",
           "--gradient-start": "#3283EB",
@@ -60,6 +61,7 @@ module.exports = {
           warning: "#FFCF72",
           error: "#FF8863",
 
+          "--bg-border": "#000000",
           "--round-color": "#E3066E",
           "--rounded-btn": "9999rem",
           "--gradient-start": "#3283EB",

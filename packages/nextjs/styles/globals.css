@@ -47,16 +47,29 @@ p {
 }
 
 .gradient-border {
-  background: linear-gradient(transparent, transparent) padding-box,
+  border: 1px solid transparent;
+  background: linear-gradient(var(--bg-border), var(--bg-border)) padding-box,
     linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%) border-box;
 }
 
 .gradient-border-light {
+  border: 1px solid transparent;
   background: linear-gradient(white, white) padding-box,
     linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%) border-box;
 }
 
-.gradient-border-dark {
+.gradient-border-red {
+  border: 1px solid transparent;
   background: linear-gradient(180deg, #911048 0.23%, rgba(63, 2, 30, 0.46) 99.77%) padding-box,
     linear-gradient(180deg, #e9257b 0%, #4a172e 100%) border-box;
+}
+
+.gradient-border-light-hover {
+  border: 1px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%) border-box;
+}
+.gradient-border-light-hover:hover {
+  background: linear-gradient(270deg, #e3066e 0%, #203147 108.63%) padding-box,
+    linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%) border-box;
 }

@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   412346: {
     "stylus-hello-world": {
-      address: "0x2d798bd81e9BD485350CfE495678A087823697A3",
+      address: "0x3df948c956e14175f43670407d5796b95bb219d8",
       abi: [
         {
           inputs: [],

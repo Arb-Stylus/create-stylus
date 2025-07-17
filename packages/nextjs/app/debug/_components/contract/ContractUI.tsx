@@ -44,7 +44,7 @@ export const ContractUI = ({ contractName, className = "" }: ContractUIProps) =>
     <div className={`grid grid-cols-1 lg:grid-cols-6 px-6 lg:px-10 lg:gap-12 w-full max-w-7xl my-0 ${className}`}>
       <div className="col-span-5 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
         <div className="col-span-1 flex flex-col">
-          <div className="bg-base-100 border-base-300 border shadow-md shadow-secondary rounded-3xl px-6 lg:px-8 mb-6 space-y-1 py-4">
+          <div className="gradient-border shadow-md shadow-secondary rounded-xl px-6 lg:px-8 mb-6 space-y-1 py-4">
             <div className="flex">
               <div className="flex flex-col gap-1">
                 <span className="font-bold">{contractName}</span>
@@ -62,7 +62,7 @@ export const ContractUI = ({ contractName, className = "" }: ContractUIProps) =>
               </p>
             )}
           </div>
-          <div className="bg-base-300 rounded-3xl px-6 lg:px-8 py-4 shadow-lg shadow-base-300">
+          <div className="gradient-border rounded-xl px-6 lg:px-8 py-4 shadow-lg shadow-base-300">
             <ContractVariables
               refreshDisplayVariables={refreshDisplayVariables}
               deployedContractData={deployedContractData}
@@ -72,7 +72,7 @@ export const ContractUI = ({ contractName, className = "" }: ContractUIProps) =>
         <div className="col-span-1 lg:col-span-2 flex flex-col gap-6">
           <div className="z-10">
             <div
-              className="flex flex-col"
+              className="flex flex-col gap-4"
               //className="relative mt-10"
             >
               {/* Read Tab */}
@@ -107,22 +107,14 @@ export const ContractUI = ({ contractName, className = "" }: ContractUIProps) =>
 
               {/*</div> */}
               {/* Gradient Container */}
-              <div
-                className="rounded-lg bg-gradient-to-r from-[#3283EB] to-[#E3066E] min-h-[80px] flex items-center px-[0.1rem] shadow-xl"
-                style={{ marginTop: "8.5px" }}
-              >
-                <div
-                  className="w-full h-full rounded-lg bg-gradient-to-r from-[#090909] to-[#272727] flex items-center px-6 py-6"
-                  style={{ color: "white" }}
-                >
-                  <ContractReadMethods deployedContractData={deployedContractData} />
-                </div>
+              <div className="rounded-lg gradient-border min-h-[80px] flex items-center px-4 py-8 shadow-xl">
+                <ContractReadMethods deployedContractData={deployedContractData} />
               </div>
             </div>
           </div>
           <div className="z-10">
             <div
-              className="flex flex-col"
+              className="flex flex-col gap-4"
               //className="relative mt-10"
             >
               {/* Read Tab */}
@@ -157,19 +149,11 @@ export const ContractUI = ({ contractName, className = "" }: ContractUIProps) =>
 
               {/*</div> */}
               {/* Gradient Container */}
-              <div
-                className="rounded-lg bg-gradient-to-r from-[#3283EB] to-[#E3066E] min-h-[80px] flex items-center px-[0.1rem] shadow-xl py-[2px]"
-                style={{ marginTop: "8.5px" }}
-              >
-                <div
-                  className="w-full h-full rounded-lg bg-gradient-to-r from-[#090909] to-[#272727] px-6 py-6 flex flex-col"
-                  style={{ color: "white" }}
-                >
-                  <ContractWriteMethods
-                    deployedContractData={deployedContractData}
-                    onChange={triggerRefreshDisplayVariables}
-                  />
-                </div>
+              <div className="gradient-border rounded-lg min-h-[80px] flex flex-col px-6 py-6 shadow-xl">
+                <ContractWriteMethods
+                  deployedContractData={deployedContractData}
+                  onChange={triggerRefreshDisplayVariables}
+                />
               </div>
             </div>
           </div>

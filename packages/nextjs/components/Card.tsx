@@ -13,7 +13,7 @@ export const Card: React.FC<CardProps> = ({ icon, description, linkHref, linkTex
   return (
     <div
       className={`relative h-full rounded-3xl border-2 border-transparent p-4 text-center flex flex-col items-center justify-evenly max-w-md ${
-        isDarkMode ? "gradient-border-dark" : "gradient-border-light"
+        isDarkMode ? "gradient-border-red" : "gradient-border-light"
       }`}
       style={{
         boxShadow: "0 0 0 3px transparent",
