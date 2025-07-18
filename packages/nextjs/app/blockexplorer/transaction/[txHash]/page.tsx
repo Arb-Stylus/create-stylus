@@ -7,9 +7,9 @@ import { Hash, Transaction, TransactionReceipt, formatEther, formatUnits } from 
 import { usePublicClient } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { arbitrumNitro } from "~~/utils/chain";
 import { decodeTransactionData, getFunctionDetails } from "~~/utils/scaffold-eth";
 import { replacer } from "~~/utils/scaffold-eth/common";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 type PageProps = {
   params: { txHash?: Hash };

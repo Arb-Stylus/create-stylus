@@ -9,7 +9,7 @@ import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { arbitrumNitro } from "~~/utils/chain";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 type HeaderMenuLink = {
   label: string;
