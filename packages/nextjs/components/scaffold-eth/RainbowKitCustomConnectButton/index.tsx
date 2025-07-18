@@ -15,7 +15,6 @@ import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import scaffoldConfig from "~~/scaffold.config";
 import { burnerWalletConfig } from "~~/services/web3/wagmi-burner/burnerWalletConfig";
 import { arbitrumNitro } from "~~/utils/chain";
-import { getBlockExplorerAddressLink } from "~~/utils/scaffold-eth";
 import { getTargetNetworks } from "~~/utils/scaffold-eth";
 
 /**
@@ -48,9 +47,6 @@ export const RainbowKitCustomConnectButton = () => {
       <ConnectButton.Custom>
         {({ account, chain, openConnectModal, mounted }) => {
           const connected = mounted && account && chain;
-          const blockExplorerAddressLink = account
-            ? getBlockExplorerAddressLink(targetNetwork, account.address)
-            : undefined;
 
           return (
             <>
@@ -90,7 +86,7 @@ export const RainbowKitCustomConnectButton = () => {
                       address={account.address as Address}
                       displayName={account.displayName}
                       ensAvatar={account.ensAvatar}
-                      blockExplorerAddressLink={blockExplorerAddressLink}
+                      onSwitchAccount={() => setIsBurnerModalOpen(true)}
                     />
                     <AddressQRCodeModal address={account.address as Address} modalId="qrcode-modal" />
                   </>
