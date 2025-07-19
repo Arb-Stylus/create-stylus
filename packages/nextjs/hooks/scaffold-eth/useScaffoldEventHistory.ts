@@ -4,16 +4,16 @@ import { Abi, AbiEvent, ExtractAbiEventNames } from "abitype";
 import { useInterval } from "usehooks-ts";
 import { Hash } from "viem";
 import { usePublicClient } from "wagmi";
-import { useDeployedContractInfo } from "~~/hooks/scaffold-stylus";
+import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 import scaffoldConfig from "~~/scaffold.config";
-import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
-import { replacer } from "~~/utils/scaffold-stylus/common";
+import { replacer } from "~~/utils/scaffold-eth/common";
 import {
   ContractAbi,
   ContractName,
   UseScaffoldEventHistoryConfig,
   UseScaffoldEventHistoryData,
-} from "~~/utils/scaffold-stylus/contract";
+} from "~~/utils/scaffold-eth/contract";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 /**
  * Reads events from a deployed contract

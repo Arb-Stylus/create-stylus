@@ -6,7 +6,7 @@ import { privateKeyToAccount } from "viem/accounts";
 import { useNetwork } from "wagmi";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
 import { Address, AddressInput, Balance, EtherInput } from "~~/components/scaffold-eth";
-import { useTransactor } from "~~/hooks/scaffold-stylus";
+import { useTransactor } from "~~/hooks/scaffold-eth";
 import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 const localWalletClient = createWalletClient({
@@ -55,8 +55,8 @@ export const Faucet = () => {
 
   return (
     <div>
-      <label htmlFor="faucet-modal" className="btn btn-primary btn-sm font-normal gap-1">
-        <BanknotesIcon className="h-4 w-4" />
+      <label htmlFor="faucet-modal" className="btn btn-sm font-normal gap-1 border-round-color bg-base-100">
+        <BanknotesIcon className="h-4 w-4 stroke-[#E3066E]" />
         <span>Faucet</span>
       </label>
       <input type="checkbox" id="faucet-modal" className="modal-toggle" />

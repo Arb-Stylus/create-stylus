@@ -1,13 +1,13 @@
 # 🏗 scaffold-stylus
 
 <h4 align="center">
-  <a href="">Documentation</a> |
-  <a href="">Website</a>
+  <a href="https://arb-stylus.github.io/scaffold-stylus-docs/">Documentation</a> |
+  <a href="https://www.scaffoldstylus.com/">Website</a>
 </h4>
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Arbitrum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
 
-⚙️ Built using NextJS, RainbowKit, Stylus, Wagmi, Viem, and Typescript.
+⚙️ Built using Rust, NextJS, RainbowKit, Stylus, Wagmi, Viem, and Typescript.
 
 - ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
 - 🪝 **[Custom hooks]()**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
@@ -15,7 +15,7 @@
 - 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
 - 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Arbitrum network.
 
-![Debug Contracts tab](image.png)
+![Debug Contracts tab](./packages/nextjs/public/debug-image.png)
 
 ## Requirements
 
@@ -32,7 +32,7 @@ Before you begin, you need to install the following tools:
 
 [Video Demo](https://app.screencastify.com/watch/9GYnnO0Fqq9QOjYRjQg0)
 
-To get started with scaffold-stylus, follow the steps below:
+To get started with Scaffold-Stylus, follow the steps below:
 
 1. Clone this repo & install dependencies
 
@@ -79,6 +79,7 @@ Run smart contract test with `yarn stylus:test`
 To deploy your contracts to a different network (other than the default local Nitro dev node), you need to update a few configuration options:
 
 1. **Set the RPC URL**
+
    - Specify the target network's RPC endpoint in the `RPC_URL` environment variable. You can do this in your shell or by creating a `.env` file (see `.env.example` for reference).
    - Example:
 
@@ -87,6 +88,7 @@ To deploy your contracts to a different network (other than the default local Ni
      ```
 
 2. **Set the Private Key**
+
    - If you want to deploy using your own wallet, set the `PRIVATE_KEY` environment variable to your wallet's private key. By default, a development key is used when running the Nitro dev node locally, but for real deployments you must provide your own.
    - Example:
 
@@ -95,13 +97,14 @@ To deploy your contracts to a different network (other than the default local Ni
      ```
 
 3. **Update the Target Chain in the Frontend**
+
    - Open `packages/nextjs/scaffold.config.ts` and change the `targetNetworks` array to include the correct chain for your deployment. This ensures the frontend connects to the right network and that the ABI is generated correctly in `deployedContracts.ts`.
    - Example:
 
      ```ts
-     import { mainnet } from "viem/chains";
+     import * as chains from "viem/chains";
      // ...
-     targetNetworks: [mainnet],
+     targetNetworks: [chains.arbitrumSepolia],
      ```
 
 **Note:**
@@ -112,12 +115,12 @@ To deploy your contracts to a different network (other than the default local Ni
 
 ## Documentation
 
-Visit our [docs](#) to learn how to start building with scaffold-stylus.
+Visit our [docs](https://arb-stylus.github.io/scaffold-stylus-docs/) to learn how to start building with Scaffold-Stylus.
 
-To know more about its features, check out our [website](https://drone-cure-43592424.figma.site).
+To know more about its features, check out our [website](https://www.scaffoldstylus.com/).
 
-## Contributing to scaffold-stylus
+## Contributing to Scaffold-Stylus
 
-We welcome contributions to scaffold-stylus!
+We welcome contributions to Scaffold-Stylus!
 
-Please see [CONTRIBUTING.MD](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to scaffold-stylus.
+Please see [CONTRIBUTING.md](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-Stylus.

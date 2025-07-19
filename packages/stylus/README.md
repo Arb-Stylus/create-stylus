@@ -151,6 +151,55 @@ Confirmed tx 0x0bdb…3307, gas used 14044638
 
 Once both steps are successful, you can interact with your program as you would with any Ethereum smart contract.
 
+## Network Configuration
+
+This template includes enhanced deployment scripts that support automatic RPC URL resolution from viem's chain definitions. You can now specify a network name instead of manually providing RPC URLs.
+
+### Using Network Names
+
+Instead of setting `RPC_URL` in your environment, you can use the `NETWORK` environment variable:
+
+```bash
+# Deploy to Arbitrum One (mainnet)
+NETWORK=arbitrum yarn deploy
+NETWORK=mainnet yarn deploy  # alias for arbitrum
+
+# Deploy to Arbitrum Sepolia testnet  
+NETWORK=arbitrumSepolia yarn deploy
+NETWORK=testnet yarn deploy  # alias for arbitrumSepolia
+```
+
+### Available Networks
+
+This template supports Arbitrum networks only. You can test which networks are available and their RPC URLs:
+
+```bash
+yarn test:networks
+```
+
+This will show you all supported networks and their corresponding RPC endpoints.
+
+### Fallback Behavior
+
+If a network name is not supported (only `arbitrum`, `arbitrumSepolia`, `mainnet`, and `testnet` are supported), the system will:
+1. Show a warning message indicating the network isn't supported
+2. Fall back to the `RPC_URL` environment variable (or default to `http://localhost:8547`)
+3. Continue with deployment using the fallback endpoint
+
+### Environment Variables
+
+You can still use the traditional approach with `RPC_URL`:
+
+```bash
+RPC_URL=https://your-custom-rpc.com yarn deploy
+```
+
+Or combine both (network takes precedence):
+
+```bash
+NETWORK=mainnet RPC_URL=https://fallback-rpc.com yarn deploy
+```
+
 ## Calling Your Program
 
 This template includes an example of how to call and transact with your program in Rust using [ethers-rs](https://github.com/gakonst/ethers-rs) under the `examples/counter.rs`. However, your programs are also Ethereum ABI equivalent if using the Stylus SDK. **They can be called and transacted with using any other Ethereum tooling.**

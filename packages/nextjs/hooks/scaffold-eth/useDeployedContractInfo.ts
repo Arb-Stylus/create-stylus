@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useTargetNetwork } from "../scaffold-stylus/useTargetNetwork";
+import { useTargetNetwork } from "./useTargetNetwork";
 import { useIsMounted } from "usehooks-ts";
 import { usePublicClient } from "wagmi";
-import { Contract, ContractCodeStatus, ContractName, contracts } from "~~/utils/scaffold-stylus/contract";
+import { Contract, ContractCodeStatus, ContractName, contracts } from "~~/utils/scaffold-eth/contract";
 
 /**
  * Gets the matching contract info for the provided contract name from the contracts present in deployedContracts.ts

@@ -1,7 +1,7 @@
 import { Chain, Wallet } from "@rainbow-me/rainbowkit";
 import scaffoldConfig from "~~/scaffold.config";
 import { BurnerConnector, burnerWalletId, burnerWalletName } from "~~/services/web3/wagmi-burner/BurnerConnector";
-import { getTargetNetworks } from "~~/utils/scaffold-stylus";
+import { getTargetNetworks } from "~~/utils/scaffold-eth";
 import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 const { onlyLocalBurnerWallet } = scaffoldConfig;

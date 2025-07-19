@@ -4,9 +4,12 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SwitchTheme } from "./SwitchTheme";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
-import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
-import { useOutsideClick } from "~~/hooks/scaffold-stylus";
+import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
+import { useOutsideClick } from "~~/hooks/scaffold-eth";
+import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 type HeaderMenuLink = {
   label: string;
@@ -58,13 +61,15 @@ export const HeaderMenuLinks = () => {
 export const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
+  const { targetNetwork } = useTargetNetwork();
+  const isLocalNetwork = targetNetwork?.id === arbitrumNitro.id;
   useOutsideClick(
     burgerMenuRef,
     useCallback(() => setIsDrawerOpen(false), []),
   );
 
   return (
-    <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
+    <div className="sticky lg:static top-0 navbar min-h-0 flex-shrink-0 justify-between z-20 px-0 sm:px-2">
       <div className="navbar-start w-auto lg:w-1/2">
         <div className="lg:hidden dropdown" ref={burgerMenuRef}>
           <label
@@ -93,7 +98,7 @@ export const Header = () => {
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Create Stylus Dapp</span>
+            <span className="font-bold leading-tight">Scaffold Stylus</span>
             <span className="text-xs">Arbitrum dev stack</span>
           </div>
         </Link>
@@ -101,9 +106,9 @@ export const Header = () => {
           <HeaderMenuLinks />
         </ul>
       </div>
-      <div className="navbar-end flex-grow mr-4">
+      <div className="flex gap-4 navbar-end flex-grow mr-4">
         <RainbowKitCustomConnectButton />
-        <FaucetButton />
+        <SwitchTheme className={`pointer-events-auto ${isLocalNetwork ? "self-end md:self-auto" : ""}`} />
       </div>
     </div>
   );

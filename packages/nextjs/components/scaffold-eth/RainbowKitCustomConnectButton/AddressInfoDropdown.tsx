@@ -4,36 +4,36 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { getAddress } from "viem";
 import { Address, useDisconnect } from "wagmi";
 import {
-  ArrowLeftOnRectangleIcon,
-  ArrowTopRightOnSquareIcon,
+  ArrowLeftEndOnRectangleIcon,
   ArrowsRightLeftIcon,
   CheckCircleIcon,
   ChevronDownIcon,
   DocumentDuplicateIcon,
   QrCodeIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import { BlockieAvatar, isENS } from "~~/components/scaffold-eth";
-import { useOutsideClick } from "~~/hooks/scaffold-stylus";
-import { getTargetNetworks } from "~~/utils/scaffold-stylus";
+import { isENS } from "~~/components/scaffold-eth";
+import { useOutsideClick } from "~~/hooks/scaffold-eth";
+import { getTargetNetworks } from "~~/utils/scaffold-eth";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 const allowedNetworks = getTargetNetworks();
 
 type AddressInfoDropdownProps = {
   address: Address;
-  blockExplorerAddressLink: string | undefined;
   displayName: string;
   ensAvatar?: string;
+  onSwitchAccount: () => void;
 };
 
 export const AddressInfoDropdown = ({
   address,
-  ensAvatar,
+  // ensAvatar,
   displayName,
-  blockExplorerAddressLink,
+  onSwitchAccount,
 }: AddressInfoDropdownProps) => {
   const { disconnect } = useDisconnect();
   const checkSumAddress = getAddress(address);
-
   const [addressCopied, setAddressCopied] = useState(false);
 
   const [selectingNetwork, setSelectingNetwork] = useState(false);
@@ -46,17 +46,20 @@ export const AddressInfoDropdown = ({
 
   return (
     <>
-      <details ref={dropdownRef} className="dropdown dropdown-end leading-3">
-        <summary tabIndex={0} className="btn btn-secondary btn-sm pl-0 pr-2 shadow-md dropdown-toggle gap-0 !h-auto">
-          <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
-          <span className="ml-2 mr-1">
+      <details ref={dropdownRef} className="gradient-border rounded-full inline-block dropdown dropdown-end leading-3">
+        <summary
+          tabIndex={0}
+          className="bg-base-100 rounded-full flex items-center px-4 py-2 shadow-md dropdown-toggle gap-0 !h-auto"
+        >
+          {/* <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} /> */}
+          <span className="ml-2 mr-1 font-bold">
             {isENS(displayName) ? displayName : checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)}
           </span>
           <ChevronDownIcon className="h-6 w-4 ml-2 sm:ml-0" />
         </summary>
         <ul
           tabIndex={0}
-          className="dropdown-content menu z-[2] p-2 mt-2 shadow-center shadow-accent bg-base-200 rounded-box gap-1"
+          className="dropdown-content menu z-[2] p-2 mt-2 shadow-center shadow-accent rounded-box gap-1 gradient-border"
         >
           <NetworkOptions hidden={!selectingNetwork} />
           <li className={selectingNetwork ? "hidden" : ""}>
@@ -94,19 +97,14 @@ export const AddressInfoDropdown = ({
               <span className="whitespace-nowrap">View QR Code</span>
             </label>
           </li>
-          <li className={selectingNetwork ? "hidden" : ""}>
-            <button className="menu-item btn-sm !rounded-xl flex gap-3 py-3" type="button">
-              <ArrowTopRightOnSquareIcon className="h-6 w-4 ml-2 sm:ml-0" />
-              <a
-                target="_blank"
-                href={blockExplorerAddressLink}
-                rel="noopener noreferrer"
-                className="whitespace-nowrap"
-              >
-                View on Block Explorer
-              </a>
-            </button>
-          </li>
+          {allowedNetworks.some(network => network.id === arbitrumNitro.id) && (
+            <li className={selectingNetwork ? "hidden" : ""}>
+              <button className="menu-item btn-sm !rounded-xl flex gap-3 py-3" type="button" onClick={onSwitchAccount}>
+                <UserCircleIcon className="h-6 w-4 ml-2 sm:ml-0" />
+                <span className="whitespace-nowrap">Switch account</span>
+              </button>
+            </li>
+          )}
           {allowedNetworks.length > 1 ? (
             <li className={selectingNetwork ? "hidden" : ""}>
               <button
@@ -122,11 +120,11 @@ export const AddressInfoDropdown = ({
           ) : null}
           <li className={selectingNetwork ? "hidden" : ""}>
             <button
-              className="menu-item text-error btn-sm !rounded-xl flex gap-3 py-3"
+              className="menu-item text-[#E3066E] font-bold btn-sm !rounded-xl flex gap-3 py-3"
               type="button"
               onClick={() => disconnect()}
             >
-              <ArrowLeftOnRectangleIcon className="h-6 w-4 ml-2 sm:ml-0" /> <span>Disconnect</span>
+              <ArrowLeftEndOnRectangleIcon className="h-6 w-4 ml-2 sm:ml-0" /> <span>Disconnect</span>
             </button>
           </li>
         </ul>

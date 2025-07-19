@@ -1,18 +1,18 @@
-# Welcome to create-stylus-dapp Contributing Guide
+# Welcome to Scaffold-Stylus Contributing Guide
 
-Thank you for investing your time in contributing to create-stylus-dapp!
+Thank you for investing your time in contributing to Scaffold-Stylus!
 
 This guide aims to provide an overview of the contribution workflow to help us make the contribution process effective for everyone involved.
 
 ## About the Project
 
-create-stylus-dapp is a minimal and forkable repo providing builders with a starter kit to build decentralized applications on Ethereum.
+Scaffold-Stylus is a minimal and forkable repo providing builders with a starter kit to build decentralized applications on Ethereum.
 
 Read the [README](README.md) to get an overview of the project.
 
 ### Vision
 
-The goal of create-stylus-dapp is to provide the primary building blocks for a decentralized application.
+The goal of Scaffold-Stylus is to provide the primary building blocks for a decentralized application.
 
 The repo can be forked to include integrations and more features, but we want to keep the master branch simple and minimal.
 
@@ -44,7 +44,7 @@ Issues should be used to report problems, request a new feature, or discuss pote
 
 #### Solve an issue
 
-Scan through our [existing issues](https://github.com/Quantum3-Labs/create-stylus/issues) to find one that interests you.
+Scan through our [existing issues](https://github.com/Arb-Stylus/scaffold-stylus/issues) to find one that interests you.
 
 If a contributor is working on the issue, they will be assigned to the individual. If you find an issue to work on, you are welcome to assign it to yourself and open a PR with a fix for it.
 

@@ -10,11 +10,12 @@ import { WrongNetworkDropdown } from "./WrongNetworkDropdown";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Address } from "viem";
 import { useConnect } from "wagmi";
-import { useAutoConnect, useNetworkColor } from "~~/hooks/scaffold-stylus";
-import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
+import { useAutoConnect, useNetworkColor } from "~~/hooks/scaffold-eth";
+import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
+import scaffoldConfig from "~~/scaffold.config";
 import { burnerWalletConfig } from "~~/services/web3/wagmi-burner/burnerWalletConfig";
-import { getBlockExplorerAddressLink } from "~~/utils/scaffold-stylus";
-import { getTargetNetworks } from "~~/utils/scaffold-stylus";
+import { getTargetNetworks } from "~~/utils/scaffold-eth";
+import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 /**
  * Custom Wagmi Connect Button (watch balance + custom design)
@@ -46,9 +47,6 @@ export const RainbowKitCustomConnectButton = () => {
       <ConnectButton.Custom>
         {({ account, chain, openConnectModal, mounted }) => {
           const connected = mounted && account && chain;
-          const blockExplorerAddressLink = account
-            ? getBlockExplorerAddressLink(targetNetwork, account.address)
-            : undefined;
 
           return (
             <>
@@ -56,16 +54,18 @@ export const RainbowKitCustomConnectButton = () => {
                 if (!connected) {
                   return (
                     <div className="flex gap-2">
-                      <button className="btn btn-primary btn-sm" onClick={openConnectModal} type="button">
-                        Connect Wallet
+                      <button className="btn bg-secondary btn-sm" onClick={openConnectModal} type="button">
+                        Connect
                       </button>
-                      <button
-                        className="btn btn-secondary btn-sm"
-                        onClick={() => setIsBurnerModalOpen(true)}
-                        type="button"
-                      >
-                        Burner Wallet
-                      </button>
+                      {scaffoldConfig.targetNetworks[0].id === arbitrumNitro.id && (
+                        <button
+                          className="btn bg-secondary btn-sm"
+                          onClick={() => setIsBurnerModalOpen(true)}
+                          type="button"
+                        >
+                          Burner Wallet
+                        </button>
+                      )}
                     </div>
                   );
                 }
@@ -86,7 +86,7 @@ export const RainbowKitCustomConnectButton = () => {
                       address={account.address as Address}
                       displayName={account.displayName}
                       ensAvatar={account.ensAvatar}
-                      blockExplorerAddressLink={blockExplorerAddressLink}
+                      onSwitchAccount={() => setIsBurnerModalOpen(true)}
                     />
                     <AddressQRCodeModal address={account.address as Address} modalId="qrcode-modal" />
                   </>

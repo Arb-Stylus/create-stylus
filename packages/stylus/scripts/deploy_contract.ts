@@ -21,6 +21,9 @@ export default async function deployStylusContract() {
   console.log(`📋 Generated fallback contract address: ${config.contractAddress}`);
 
   console.log(`📡 Using endpoint: ${config.endpoint}`);
+  if (config.network) {
+    console.log(`🌐 Network specified: ${config.network}`);
+  }
   console.log(`🔑 Using private key: ${config.privateKey.substring(0, 10)}...`);
   console.log(`📄 Contract name: ${config.contractName}`);
   console.log(`📁 Deployment directory: ${config.deploymentDir}`);

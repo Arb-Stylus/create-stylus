@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import { CurrencyDollarIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 //import { HeartIcon } from "@heroicons/react/24/outline";
-import { SwitchTheme } from "~~/components/SwitchTheme";
 //import { BuidlGuidlLogo } from "~~/components/assets/BuidlGuidlLogo";
 import { Faucet } from "~~/components/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-stylus/useTargetNetwork";
+import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { useGlobalState } from "~~/services/store/store";
 import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
@@ -15,17 +15,27 @@ import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 export const Footer = () => {
   const nativeCurrencyPrice = useGlobalState(state => state.nativeCurrencyPrice);
   const { targetNetwork } = useTargetNetwork();
+  const { resolvedTheme } = useTheme();
   const isLocalNetwork = targetNetwork.id === arbitrumNitro.id;
 
+  const isDarkMode = useMemo(() => {
+    return resolvedTheme === "dark";
+  }, [resolvedTheme]);
+
   return (
-    <div className="min-h-0 py-5 px-1 mb-11 lg:mb-0">
+    <div
+      className="min-h-0 py-5 px-1 mb-11 lg:mb-0"
+      style={{
+        backgroundColor: isDarkMode ? "black" : "white",
+      }}
+    >
       <div>
         <div className="fixed flex justify-between items-center w-full z-10 p-4 bottom-0 left-0 pointer-events-none">
           <div className="flex flex-col md:flex-row gap-2 pointer-events-auto">
             {nativeCurrencyPrice > 0 && (
               <div>
-                <div className="btn btn-primary btn-sm font-normal gap-1 cursor-auto">
-                  <CurrencyDollarIcon className="h-4 w-4" />
+                <div className="btn btn-sm font-normal gap-1 cursor-auto border-round-color bg-base-100">
+                  <CurrencyDollarIcon className="h-4 w-4 stroke-[#E3066E]" />
                   <span>{nativeCurrencyPrice}</span>
                 </div>
               </div>
@@ -33,26 +43,24 @@ export const Footer = () => {
             {isLocalNetwork && (
               <>
                 <Faucet />
-                <Link href="/blockexplorer" passHref className="btn btn-primary btn-sm font-normal gap-1">
-                  <MagnifyingGlassIcon className="h-4 w-4" />
+                <Link
+                  href="/blockexplorer"
+                  passHref
+                  className="btn btn-sm font-normal gap-1 border-round-color bg-base-100"
+                >
+                  <MagnifyingGlassIcon className="h-4 w-4 stroke-[#E3066E]" />
                   <span>Block Explorer</span>
                 </Link>
               </>
             )}
           </div>
-          <SwitchTheme className={`pointer-events-auto ${isLocalNetwork ? "self-end md:self-auto" : ""}`} />
         </div>
       </div>
       <div className="w-full">
         <ul className="menu menu-horizontal w-full">
           <div className="flex justify-center items-center gap-2 text-sm w-full">
             <div className="text-center">
-              <a
-                href="https://github.com/Quantum3-Labs/create-stylus"
-                target="_blank"
-                rel="noreferrer"
-                className="link"
-              >
+              <a href="https://github.com/Arb-Stylus/scaffold-stylus" target="_blank" rel="noreferrer" className="link">
                 Fork me
               </a>
             </div>

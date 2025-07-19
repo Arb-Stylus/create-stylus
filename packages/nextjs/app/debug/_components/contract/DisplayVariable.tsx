@@ -7,8 +7,8 @@ import { Abi, AbiFunction } from "abitype";
 import { Address } from "viem";
 import { useContractRead } from "wagmi";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
-import { useAnimationConfig } from "~~/hooks/scaffold-stylus";
-import { notification } from "~~/utils/scaffold-stylus";
+import { useAnimationConfig } from "~~/hooks/scaffold-eth";
+import { notification } from "~~/utils/scaffold-eth";
 
 type DisplayVariableProps = {
   contractAddress: Address;
@@ -57,7 +57,7 @@ export const DisplayVariable = ({
         </button>
         <InheritanceTooltip inheritedFrom={inheritedFrom} />
       </div>
-      <div className="text-gray-500 font-medium flex flex-col items-start">
+      <div className="font-medium flex flex-col items-start">
         <div>
           <div
             className={`break-all block transition bg-transparent ${
