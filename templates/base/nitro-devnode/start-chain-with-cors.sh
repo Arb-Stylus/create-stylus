@@ -29,7 +29,7 @@ done
 if [ ! -d "./nitro-devnode" ]; then
   echo "nitro-devnode directory not found. Initializing nitro-devnode submodule..."
   # Run git submodule from the root directory where .gitmodules is located
-  cd "$(git rev-parse --show-toplevel)" && git submodule update --init packages/stylus/nitro-devnode && cd packages/stylus
+  cd "$(git rev-parse --show-toplevel)" && git submodule update --init nitro-devnode && cd packages/stylus
 fi
 
 if [[ "$STYLUS_MODE" == "true" ]]; then

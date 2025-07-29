@@ -7,9 +7,9 @@ const buildNextEslintCommand = (filenames) =>
 
 const checkTypesNextCommand = () => "yarn next:check-types";
 
-const buildHardhatEslintCommand = (filenames) =>
-  `yarn hardhat:lint-staged --fix ${filenames
-    .map((f) => path.relative(path.join("packages", "hardhat"), f))
+const buildStylusEslintCommand = (filenames) =>
+  `yarn stylus:lint --fix ${filenames
+    .map((f) => path.relative(path.join("packages", "stylus"), f))
     .join(" ")}`;
 
 module.exports = {
@@ -17,5 +17,5 @@ module.exports = {
     buildNextEslintCommand,
     checkTypesNextCommand,
   ],
-  "packages/hardhat/**/*.{ts,tsx}": [buildHardhatEslintCommand],
+  "packages/stylus/**/*.{ts,tsx}": [buildStylusEslintCommand],
 };

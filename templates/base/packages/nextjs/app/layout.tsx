@@ -55,7 +55,7 @@ export const metadata: Metadata = {
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   return (
     <html suppressHydrationWarning>
-      <body className={`${dmSans.variable} font-sans`}>
+      <body className={`${dmSans.variable} font-sans`} suppressHydrationWarning>
         <ThemeProvider>
           <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
         </ThemeProvider>

@@ -9,37 +9,22 @@ import { BurnerWalletModal } from "./BurnerWalletModal";
 import { WrongNetworkDropdown } from "./WrongNetworkDropdown";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Address } from "viem";
-import { useConnect } from "wagmi";
-import { useAutoConnect, useNetworkColor } from "~~/hooks/scaffold-eth";
+import { useNetworkColor } from "~~/hooks/scaffold-eth";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import scaffoldConfig from "~~/scaffold.config";
-import { burnerWalletConfig } from "~~/services/web3/wagmi-burner/burnerWalletConfig";
-import { getTargetNetworks } from "~~/utils/scaffold-eth";
+import { saveBurnerPK } from "~~/utils/scaffold-stylus/burner";
 import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
 
 /**
  * Custom Wagmi Connect Button (watch balance + custom design)
  */
 export const RainbowKitCustomConnectButton = () => {
-  useAutoConnect();
   const networkColor = useNetworkColor();
   const { targetNetwork } = useTargetNetwork();
   const [isBurnerModalOpen, setIsBurnerModalOpen] = useState(false);
-  const { connectAsync } = useConnect();
-  const targetNetworks = getTargetNetworks();
 
   const handleBurnerWalletSelect = async (privateKey: string) => {
-    try {
-      const burnerWallet = burnerWalletConfig({
-        chains: targetNetworks,
-        privateKey: privateKey as `0x${string}`,
-      });
-
-      const connector = burnerWallet.createConnector().connector;
-      await connectAsync({ connector });
-    } catch (error) {
-      console.error("Failed to connect to burner wallet:", error);
-    }
+    saveBurnerPK({ privateKey: privateKey as `0x${string}` });
+    window.location.reload();
   };
 
   return (
@@ -48,25 +33,22 @@ export const RainbowKitCustomConnectButton = () => {
         {({ account, chain, openConnectModal, mounted }) => {
           const connected = mounted && account && chain;
 
+          const handleConnect = () => {
+            if (targetNetwork.id === arbitrumNitro.id) {
+              setIsBurnerModalOpen(true);
+            } else {
+              openConnectModal();
+            }
+          };
+
           return (
             <>
               {(() => {
                 if (!connected) {
                   return (
-                    <div className="flex gap-2">
-                      <button className="btn bg-secondary btn-sm" onClick={openConnectModal} type="button">
-                        Connect
-                      </button>
-                      {scaffoldConfig.targetNetworks[0].id === arbitrumNitro.id && (
-                        <button
-                          className="btn bg-secondary btn-sm"
-                          onClick={() => setIsBurnerModalOpen(true)}
-                          type="button"
-                        >
-                          Burner Wallet
-                        </button>
-                      )}
-                    </div>
+                    <button className="btn bg-secondary btn-sm" onClick={handleConnect} type="button">
+                      Connect
+                    </button>
                   );
                 }
 

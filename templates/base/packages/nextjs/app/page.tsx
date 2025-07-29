@@ -55,7 +55,7 @@ const Home: NextPage = () => {
                   backgroundColor: isDarkMode ? "white" : "#F0F0F0",
                 }}
               >
-                packages/stylus/src
+                packages/stylus/your-contract/src
               </code>
             </p>
           </div>
