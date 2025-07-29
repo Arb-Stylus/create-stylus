@@ -353,6 +353,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/plugin-json@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@rollup/plugin-json@npm:6.1.0"
+  dependencies:
+    "@rollup/pluginutils": ^5.1.0
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: cc018d20c80242a2b8b44fae61a968049cf31bb8406218187cc7cda35747616594e79452dd65722e7da6dd825b392e90d4599d43cd4461a02fefa2865945164e
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-node-resolve@npm:16.0.1":
   version: 16.0.1
   resolution: "@rollup/plugin-node-resolve@npm:16.0.1"
@@ -1087,11 +1101,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-stark@workspace:.":
+"create-stylus@workspace:.":
   version: 0.0.0-use.local
-  resolution: "create-stark@workspace:."
+  resolution: "create-stylus@workspace:."
   dependencies:
     "@changesets/cli": ^2.28.1
+    "@rollup/plugin-json": ^6.1.0
     "@rollup/plugin-node-resolve": 16.0.1
     "@rollup/plugin-typescript": 12.1.2
     "@types/inquirer": 9.0.7
@@ -1112,7 +1127,7 @@ __metadata:
     tslib: 2.8.1
     typescript: 5.8.3
   bin:
-    create-stark: bin/create-dapp-ss2.js
+    create-stylus: bin/create-dapp-ss.js
   languageName: unknown
   linkType: soft
 
