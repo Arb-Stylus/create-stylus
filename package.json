@@ -1,19 +1,19 @@
 {
-  "name": "create-stark",
+  "name": "create-stylus",
   "version": "1.1.0",
   "author": "Q3 Labs",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Scaffold-Stark/create-stark.git"
+    "url": "https://github.com/Arb-Stylus/create-stylusgit"
   },
   "type": "module",
   "main": "dist/cli.js",
-  "bin": "bin/create-dapp-ss2.js",
+  "bin": "bin/create-dapp-ss.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "dev": "rollup -c rollup.config.js --watch",
-    "cli": "node bin/create-dapp-ss2.js",
+    "cli": "node bin/create-dapp-ss.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "changeset:release": "yarn build && changeset publish"
   },
