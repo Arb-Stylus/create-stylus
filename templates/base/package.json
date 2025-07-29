@@ -1,0 +1,43 @@
+{
+  "name": "se-2",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/stylus",
+      "packages/nextjs"
+    ]
+  },
+  "scripts": {
+    "account": "yarn workspace @se-2/stylus account",
+    "chain": "yarn workspace @se-2/stylus chain",
+    "fork": "yarn workspace @se-2/stylus fork",
+    "deploy": "yarn workspace @se-2/stylus deploy",
+    "export-abi": "yarn workspace @se-2/stylus export-abi",
+    "verify": "yarn workspace @se-2/stylus verify",
+    "stylus-verify": "yarn workspace @se-2/stylus stylus-verify",
+    "compile": "yarn workspace @se-2/stylus compile",
+    "generate": "yarn workspace @se-2/stylus generate",
+    "flatten": "yarn workspace @se-2/stylus flatten",
+    "stylus:lint": "yarn workspace @se-2/stylus lint",
+    "stylus:lint-staged": "yarn workspace @se-2/stylus lint-staged",
+    "stylus:format": "yarn workspace @se-2/stylus format",
+    "stylus:test": "yarn workspace @se-2/stylus test",
+    "test": "yarn stylus:test",
+    "format": "yarn next:format",
+    "start": "yarn workspace @se-2/nextjs dev",
+    "next:lint": "yarn workspace @se-2/nextjs lint",
+    "next:format": "yarn workspace @se-2/nextjs format",
+    "next:check-types": "yarn workspace @se-2/nextjs check-types",
+    "next:build": "yarn workspace @se-2/nextjs build",
+    "postinstall": "husky install",
+    "precommit": "lint-staged",
+    "vercel": "yarn workspace @se-2/nextjs vercel",
+    "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo"
+  },
+  "packageManager": "yarn@3.2.3",
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3"
+  }
+}
