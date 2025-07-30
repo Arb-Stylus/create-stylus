@@ -224,7 +224,7 @@ export async function copyTemplateFiles(
 }
 
 async function cleanupTemplateFiles(targetDir: string) {
-  const basePath = path.join(targetDir, "packages");
+  const basePath = targetDir;
   
   // Find all template and args files
   const templateFiles = findFilesRecursiveSync(basePath, (path: string) => isTemplateRegex.test(path));
