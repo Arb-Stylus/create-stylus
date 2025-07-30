@@ -22,52 +22,32 @@ Before you begin, you need to install the following tools:
 
 ## Quickstart
 
-To get started with Scaffold-Stylus, follow the steps below:
+To get started building Create-Stylus, follow the steps below:
 
-1. Install from NPM Registry and follow the CLI instructions.
-
-```
-npx create-stylus@latest
-```
-
-2. Run a local network in the first terminal:
+1. Install dependencies.
 
 ```
-yarn chain
+yarn install
 ```
 
-This command starts a local Arbitrum Nitro network. The network runs on your local machine and can be used for testing and development.
-
-3. On a second terminal, deploy the test contract:
+2. Build Create-Stylus:
 
 ```
-yarn deploy
+yarn build
 ```
 
-This command deploys a test smart contract to the local network. The contract can be modified to suit your needs. Is located in: `packages/stylus/your-contract/src`
-
-The `yarn deploy` command uses a deploy script to deploy the contract to the network. You can customize it. Is located in: `packages/stylus/scripts-ts`
-
-4. On a third terminal, start your NextJS app:
+3. Test Create-Stylus:
 
 ```
-yarn start
+yarn cli [...options]
 ```
-
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
-
-**What's next**:
-
-- Edit your smart contract `YourContract` in `packages/stylus/your-contract/src/lib.rs`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/stylus/scripts-ts`
 
 ## Extensions
 
-Now you can choose from some preset extensions to ship your dApp faster! You can embed the Auco indexer during the Scaffold-Stylus creation by running the following commands:
+Now you can choose from some preset extensions to ship your dApp faster! You can embed the Erc 20 indexer during the Scaffold-Stylus creation by running the following commands:
 
 ```bash
-npx create-stylus@latest --extension auco
+npx create-stylus@latest --extension erc-20
 ```
 
 ## Documentation
