@@ -1,15 +1,15 @@
 > ⚠️ Under active development.
 
-# 🏗 create-stark
+# 🏗 create-stylus
 
-CLI to create decentralized applications (dapps) using Scaffold-Stark.
+CLI to create decentralized applications (dapps) using Scaffold-Stylus.
 
-This is an alternative method of installing Scaffold-Stark. Instead of directly [cloning SS-2](https://github.com/Scaffold-Stark/scaffold-stark-2?tab=readme-ov-file#quickstart), you can use create-stark to create your own custom instance, where you can choose among several configurations and extensions.
+This is an alternative method of installing Scaffold-Stylus. Instead of directly [cloning SS](https://github.com/Arb-Stylus/scaffold-stylus?tab=readme-ov-file#quickstart), you can use create-stylus to create your own custom instance, where you can choose among several configurations and extensions.
 
 <h4 align="center">
-  <a href="https://github.com/Scaffold-Stark/scaffold-stark-2">SS-2 Repo</a> |
-  <a href="https://www.docs.scaffoldstark.com/">SS-2 Docs</a> |
-  <a href="https://www.scaffoldstark.com/">SS-2 Website</a>
+  <a href="https://github.com/Arb-Stylus/scaffold-stylus">SS Repo</a> |
+  <a href="https://arb-stylus.github.io/scaffold-stylus-docs/">SS Docs</a> |
+  <a href="https://www.scaffoldstylus.com/">SS Website</a>
 </h4>
 
 ## Requirements
@@ -22,12 +22,12 @@ Before you begin, you need to install the following tools:
 
 ## Quickstart
 
-To get started with Scaffold-Stark 2, follow the steps below:
+To get started with Scaffold-Stylus, follow the steps below:
 
 1. Install from NPM Registry and follow the CLI instructions.
 
 ```
-npx create-stark@latest
+npx create-stylus@latest
 ```
 
 2. Run a local network in the first terminal:
@@ -36,7 +36,7 @@ npx create-stark@latest
 yarn chain
 ```
 
-This command starts a local Starknet network. The network runs on your local machine and can be used for testing and development.
+This command starts a local Arbitrum Nitro network. The network runs on your local machine and can be used for testing and development.
 
 3. On a second terminal, deploy the test contract:
 
@@ -44,9 +44,9 @@ This command starts a local Starknet network. The network runs on your local mac
 yarn deploy
 ```
 
-This command deploys a test smart contract to the local network. The contract can be modified to suit your needs. Is located in: `packages/snfoundry/contracts/src`
+This command deploys a test smart contract to the local network. The contract can be modified to suit your needs. Is located in: `packages/stylus/your-contract/src`
 
-The `yarn deploy` command uses a deploy script to deploy the contract to the network. You can customize it. Is located in: `packages/snfoundry/scripts-ts`
+The `yarn deploy` command uses a deploy script to deploy the contract to the network. You can customize it. Is located in: `packages/stylus/scripts-ts`
 
 4. On a third terminal, start your NextJS app:
 
@@ -58,29 +58,29 @@ Visit your app on: `http://localhost:3000`. You can interact with your smart con
 
 **What's next**:
 
-- Edit your smart contract `YourContract.cairo` in `packages/snfoundry/contracts/src`
+- Edit your smart contract `YourContract` in `packages/stylus/your-contract/src/lib.rs`
 - Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/snfoundry/scripts-ts`
+- Edit your deployment scripts in `packages/stylus/scripts-ts`
 
 ## Extensions
 
-Now you can choose from some preset extensions to ship your dApp faster! You can embed the Auco indexer during the scaffold-stark creation by running the following commands:
+Now you can choose from some preset extensions to ship your dApp faster! You can embed the Auco indexer during the Scaffold-Stylus creation by running the following commands:
 
 ```bash
-npx create-stark@latest --extension auco
+npx create-stylus@latest --extension auco
 ```
 
 ## Documentation
 
-Visit our [docs](https://www.docs.scaffoldstark.com/) to learn how to start building with Scaffold-Stark 2.
+Visit our [docs](https://arb-stylus.github.io/scaffold-stylus-docs/) to learn how to start building with Scaffold-Stylus.
 
-To know more about its features, check out our [website](https://www.scaffoldstark.com/).
+To know more about its features, check out our [website](https://www.scaffoldstylus.com/).
 
-## Contributing to create-stark
+## Contributing to create-stylus
 
-We welcome contributions to create-stark and Scaffold-Stark 2!
+We welcome contributions to create-stylus and Scaffold-Stylus!
 
 For more information and guidelines for contributing, please see:
 
-- [create-stark CONTRIBUTING.MD](https://github.com/Scaffold-Stark/create-stark/blob/main/CONTRIBUTING.md) if you want to contribute to the CLI.
-- [Scaffold-Stark 2 CONTRIBUTING.MD](https://github.com/Scaffold-Stark/scaffold-stark-2/blob/main/CONTRIBUTING.md) if you want to contribute to SS-2 base code.
+- [create-stylus CONTRIBUTING.MD](https://github.com/Arb-Stylus/create-stylus/blob/main/CONTRIBUTING.md) if you want to contribute to the CLI.
+- [Scaffold-Stylus CONTRIBUTING.MD](https://github.com/Arb-Stylus/scaffold-stylus/blob/main/CONTRIBUTING.md) if you want to contribute to SS base code.

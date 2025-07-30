@@ -1,16 +1,16 @@
-# Contributing to Scaffold-Stark (`create-stark`)
+# Contributing to Scaffold-Stylus (`create-stylus`)
 
-> `create-stark` is part of the Scaffold-Stark toolkit
+> `create-stylus` is part of the Scaffold-Stylus toolkit
 
-Thank you for your interest in contributing to Scaffold-Stark! Your support enhances this Starknet-focused framework that bridges smart contract integration with web applications.
+Thank you for your interest in contributing to Scaffold-Stylus! Your support enhances this Arbitrum-focused framework that bridges smart contract integration with web applications.
 
 ## About the Project
 
-**Scaffold-Stark** provides a full DApp development template, offering seamless integration of Starket smart contracts with web applications. **SpeedrunStark.com** offers interactive challenges that serve to practice your Cairo and Starknet skills, learn how to use the provided hooks, and launch your applications swiftly with potential rewards.
+**Scaffold-Stylus** provides a full DApp development template, offering seamless integration of Stylus smart contracts with web applications. **SpeedrunStylus.com** offers interactive challenges that serve to practice your Rust with Stylus and Arbitrum skills, learn how to use the provided hooks, and launch your applications swiftly with potential rewards.
 
 ## Project Vision
 
-Our goal is to simplify the DApp development and learning process, enabling developers to launch applications efficiently while understanding the intricacies of Starknet.
+Our goal is to simplify the DApp development and learning process, enabling developers to launch applications efficiently while understanding the intricacies of Arbitrum.
 
 ## How to Get Involved
 
@@ -35,7 +35,7 @@ Our goal is to simplify the DApp development and learning process, enabling deve
 
 ## Documentation
 
-If your changes involve updates to how users interact with Scaffold-Stark or SpeedrunStark, update the relevant sections of the documentation to reflect these changes.
+If your changes involve updates to how users interact with Scaffold-Stylus or SpeedrunStylus, update the relevant sections of the documentation to reflect these changes.
 
 ## Need Help?
 

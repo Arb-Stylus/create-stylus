@@ -53,7 +53,7 @@ const copyBaseFiles = async (
     },
   });
 
-  ["snfoundry", "nextjs"].forEach(packageName => {
+  ["stylus", "nextjs"].forEach(packageName => {
     const envExamplePath = path.join(basePath, "packages", packageName, ".env.example");
     const envPath = path.join(targetDir, "packages", packageName, ".env");
     if (fs.existsSync(envExamplePath)) {

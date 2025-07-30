@@ -30,7 +30,7 @@ export async function createProject(options: Options) {
       task: () => createProjectDirectory(options.directory),
     },
     {
-      title: `🚀 Creating a new Scaffold-Stark 2 app in ${chalk.green.bold(
+      title: `🚀 Creating a new Scaffold-Stylus app in ${chalk.green.bold(
         options.directory,
       )}`,
       task: () =>

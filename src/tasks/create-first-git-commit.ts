@@ -19,15 +19,13 @@ async function checkoutLatestTag(submodulePath: string): Promise<void> {
   }
 }
 
-export async function createFirstGitCommit(
-  targetDir: string
-) {
+export async function createFirstGitCommit(targetDir: string) {
   try {
     await execa("git", ["add", "-A"], { cwd: targetDir });
     await execa(
       "git",
-      ["commit", "-m", "Initial commit with 🏗️ Scaffold-Stark 2", "--no-verify"],
-      { cwd: targetDir }
+      ["commit", "-m", "Initial commit with 🏗️ Scaffold-Stylus", "--no-verify"],
+      { cwd: targetDir },
     );
   } catch (e: any) {
     throw new Error("Failed to initialize git repository", {

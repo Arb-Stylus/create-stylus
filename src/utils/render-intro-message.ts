@@ -2,7 +2,7 @@ import chalk from "chalk";
 
 export const TITLE_TEXT = `
  ${chalk.bold.blue("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")}
- ${chalk.bold.blue("| Create Scaffold-Stark 2 app |")}
+ ${chalk.bold.blue("| Create Scaffold-Stylus app  |")}
  ${chalk.bold.blue("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")}
 `;
 

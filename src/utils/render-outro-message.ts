@@ -27,7 +27,7 @@ export async function renderOutroMessage(options: Options) {
   `;
 
   message += `
-  ${chalk.bold.green("Thanks for using Scaffold-Stark 2 🙏, Happy Building!")}
+  ${chalk.bold.green("Thanks for using Scaffold-Stylus 🙏, Happy Building!")}
   `;
 
   console.log(message);
