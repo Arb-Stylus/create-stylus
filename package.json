@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Arb-Stylus/create-stylusgit"
+    "url": "https://github.com/Arb-Stylus/create-stylus"
   },
   "type": "module",
   "main": "dist/cli.js",
