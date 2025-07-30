@@ -1,0 +1,112 @@
+import { arbitrum, arbitrumSepolia } from "viem/chains";
+import { Chain } from "viem";
+import { arbitrumNitro } from "../../../nextjs/utils/scaffold-stylus/chain";
+import * as path from "path";
+import * as fs from "fs";
+import { config as dotenvConfig } from "dotenv";
+import { SupportedNetworkMinimal } from "./type";
+
+const envPath = path.resolve(__dirname, "../../.env");
+if (fs.existsSync(envPath)) {
+  dotenvConfig({ path: envPath });
+}
+
+export const SUPPORTED_NETWORKS: Record<string, Chain> = {
+  arbitrum,
+  arbitrumSepolia,
+  arbitrumNitro: arbitrumNitro as Chain,
+};
+
+export const ALIASES: Record<string, string> = {
+  mainnet: "arbitrum",
+  sepolia: "arbitrumSepolia",
+  devnet: "arbitrumNitro",
+};
+
+export function getChain(networkName: string): SupportedNetworkMinimal | null {
+  try {
+    // Normalize network name to lowercase for case-insensitive lookup
+    const actualNetworkName = ALIASES[networkName.toLowerCase()] || networkName;
+
+    // Find the chain in SUPPORTED_NETWORKS (case-insensitive)
+    const chainEntry = Object.entries(SUPPORTED_NETWORKS).find(
+      ([key]) => key.toLowerCase() === actualNetworkName.toLowerCase(),
+    );
+
+    if (chainEntry) {
+      return {
+        name: chainEntry[0],
+        alias: getAliasFromNetworkName(chainEntry[0]),
+        id: chainEntry[1].id.toString(),
+        rpcUrl: getRpcUrlFromChain(chainEntry[1]),
+      };
+    }
+
+    // If not found, show warning with all supported networks
+    const supportedNetworks = Object.keys(SUPPORTED_NETWORKS);
+    console.warn(
+      `⚠️  Network '${networkName}' is not supported. Supported networks: ${supportedNetworks.join(", ")}`,
+    );
+    return null;
+  } catch (error) {
+    console.error(`Error getting chain for network ${networkName}:`, error);
+    return null;
+  }
+}
+
+export function getPrivateKey(networkName: string): string {
+  const actualNetworkName = ALIASES[networkName.toLowerCase()] || networkName;
+
+  switch (actualNetworkName.toLowerCase()) {
+    case "arbitrum":
+      return process.env["PRIVATE_KEY_MAINNET"] || "";
+    case "arbitrumsepolia":
+      return process.env["PRIVATE_KEY_SEPOLIA"] || "";
+    default:
+      return (
+        process.env["PRIVATE_KEY"] ||
+        "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659"
+      );
+  }
+}
+
+function getRpcUrlFromChain(chain: Chain): string {
+  //Prefer user rpc url from env
+  switch (chain.id) {
+    case arbitrum.id:
+      if (process.env["RPC_URL_MAINNET"]) {
+        return process.env["RPC_URL_MAINNET"];
+      }
+      break;
+    case arbitrumSepolia.id:
+      if (process.env["RPC_URL_SEPOLIA"]) {
+        return process.env["RPC_URL_SEPOLIA"];
+      }
+      break;
+    default:
+      if (process.env["RPC_URL"]) {
+        return process.env["RPC_URL"];
+      }
+  }
+
+  if (chain.rpcUrls?.default?.http && chain.rpcUrls.default.http.length > 0) {
+    return chain.rpcUrls.default.http[0]!;
+  }
+
+  if (
+    "public" in chain.rpcUrls &&
+    chain.rpcUrls.public?.http &&
+    chain.rpcUrls.public.http.length > 0
+  ) {
+    return chain.rpcUrls.public.http[0]!;
+  }
+
+  throw new Error(`No RPC URL found for chain ${chain.name}`);
+}
+
+function getAliasFromNetworkName(networkName: string): string {
+  return (
+    Object.entries(ALIASES).find(([, alias]) => alias === networkName)?.[0] ||
+    networkName
+  );
+}

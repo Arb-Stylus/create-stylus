@@ -1,0 +1,43 @@
+{
+  "name": "ss",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/stylus",
+      "packages/nextjs"
+    ]
+  },
+  "scripts": {
+    "account": "yarn workspace @ss/stylus account",
+    "chain": "./nitro-devnode/start-chain-with-cors.sh",
+    "fork": "yarn workspace @ss/stylus fork",
+    "deploy": "yarn workspace @ss/stylus deploy",
+    "export-abi": "yarn workspace @ss/stylus export-abi",
+    "verify": "yarn workspace @ss/stylus verify",
+    "stylus-verify": "yarn workspace @ss/stylus stylus-verify",
+    "compile": "yarn workspace @ss/stylus compile",
+    "generate": "yarn workspace @ss/stylus generate",
+    "flatten": "yarn workspace @ss/stylus flatten",
+    "stylus:lint": "yarn workspace @ss/stylus lint",
+    "stylus:format": "yarn workspace @ss/stylus format",
+    "stylus:test": "yarn workspace @ss/stylus test",
+    "test": "yarn stylus:test",
+    "format": "yarn next:format",
+    "start": "yarn workspace @ss/nextjs dev",
+    "next:lint": "yarn workspace @ss/nextjs lint",
+    "next:format": "yarn workspace @ss/nextjs format",
+    "next:check-types": "yarn workspace @ss/nextjs check-types",
+    "next:build": "yarn workspace @ss/nextjs build",
+    "postinstall": "husky install",
+    "precommit": "lint-staged",
+    "vercel": "yarn workspace @ss/nextjs vercel",
+    "vercel:yolo": "yarn workspace @ss/nextjs vercel:yolo",
+    "new-module": "yarn workspace @ss/stylus new-module"
+  },
+  "packageManager": "yarn@3.2.3",
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3"
+  }
+}

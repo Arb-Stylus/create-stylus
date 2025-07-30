@@ -1,0 +1,7 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "./packages/stylus/your-contract/Cargo.toml"
+  ],
+  "rust-analyzer.cargo.buildScripts.enable": true,
+  "rust-analyzer.cargo.features": "all"
+}
