@@ -3,8 +3,9 @@ import * as fs from "fs";
 import { ethers } from "ethers";
 import toml from "toml";
 import prettier from "prettier";
-import { ExportConfig } from "./type";
+import { DeploymentData, ExportConfig } from "./type";
 import { getContractDataFromDeployments } from "./deployment";
+import { Address } from "viem";
 
 export const generatedContractComment = `
 /**
@@ -42,6 +43,7 @@ export function getContractNameFromCargoToml(contractFolder: string): string {
 export function getExportConfig(
   contractFolder?: string,
   contractName?: string,
+  chainId?: string,
 ): ExportConfig {
   if (!contractFolder) {
     throw new Error("Contract folder is required");
@@ -53,10 +55,11 @@ export function getExportConfig(
   const deploymentData = getContractDataFromDeployments(
     deploymentDir,
     contractName,
+    chainId,
   );
   if (!deploymentData) {
     throw new Error(
-      `❌ Contract address for '${contractName}' not found in ${deploymentDir}/addresses.json. Please deploy the contract first.`,
+      `❌ Contract address for '${contractName}' not found in any chain-specific deployment files in ${deploymentDir}. Please deploy the contract first.`,
     );
   }
 
@@ -64,7 +67,8 @@ export function getExportConfig(
     contractFolder,
     contractName,
     deploymentDir,
-    contractAddress: deploymentData.address,
+    contractAddress: deploymentData.address as Address,
+    txHash: deploymentData.txHash,
     chainId: deploymentData.chainId,
   };
 }
@@ -86,19 +90,28 @@ export function generateContractAddress(): string {
   return wallet.address;
 }
 
-export function extractDeployedAddress(output: string): string | null {
-  // Look for the line containing "deployed code at address:"
+export function extractDeploymentInfo(output: string): DeploymentData | null {
+  let result: DeploymentData | null = null;
   const lines = output.split("\n");
   for (const line of lines) {
     if (line.includes("deployed code at address:")) {
-      // Simple approach: just extract the hex address directly
+      // Extract the hex address directly
       const hexMatch = line.match(/(0x[a-fA-F0-9]{40})/);
       if (hexMatch && hexMatch[1]) {
-        return hexMatch[1];
+        result = { address: hexMatch[1] as Address, txHash: "" };
+      }
+    }
+    if (line.includes("deployment tx hash:")) {
+      const txHashMatch = line.match(/(0x[a-fA-F0-9]{64})/);
+      if (txHashMatch && txHashMatch[1]) {
+        result = {
+          address: result?.address as Address,
+          txHash: txHashMatch[1],
+        };
       }
     }
   }
-  return null;
+  return result;
 }
 
 export function extractGasPriceFromOutput(output: string): string | null {
@@ -109,7 +122,6 @@ export function extractGasPriceFromOutput(output: string): string | null {
       // eslint-disable-next-line no-control-regex
       const cleanLine = line.replace(/\x1b\[[0-9;]*m/g, "");
 
-      // Extract the value inside quotes after 'gas price:'
       const match = cleanLine.match(/gas price:\s*"([^"]+)"/);
       if (match && match[1]) {
         return match[1];
@@ -123,6 +135,7 @@ export async function generateTsAbi(
   abiFilePath: string,
   contractName: string,
   contractAddress: string,
+  txHash: string,
   chainId: string,
 ) {
   const TARGET_DIR = "../nextjs/contracts/";
@@ -134,9 +147,9 @@ export async function generateTsAbi(
   const extractedAbi = lines.slice(3).join("\n");
   const abiJson = JSON.parse(extractedAbi);
 
-  // Helper to generate the contract entry
   const newContractEntry = {
     address: contractAddress,
+    txHash: txHash,
     abi: abiJson,
   };
 
@@ -146,7 +159,6 @@ export async function generateTsAbi(
     'import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";\n\n';
 
   if (fs.existsSync(TARGET_FILE)) {
-    // Read and parse the existing file
     const fileContent = fs.readFileSync(TARGET_FILE, "utf8");
     // Extract the deployedContracts object using regex
     const match = fileContent.match(
@@ -158,14 +170,11 @@ export async function generateTsAbi(
     }
   }
 
-  // Ensure the chainId exists
   if (!deployedContractsObj[chainId]) {
     deployedContractsObj[chainId] = {};
   }
-  // Update or insert the contract entry
   deployedContractsObj[chainId][contractName] = newContractEntry;
 
-  // Stringify the object for TypeScript output
   const contractsString = JSON.stringify(deployedContractsObj, null, 2);
 
   const output = `${fileHeader}const deployedContracts = ${contractsString} as const;\n\nexport default deployedContracts satisfies GenericContractsDeclaration;\n`;
