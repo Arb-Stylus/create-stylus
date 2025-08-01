@@ -1,4 +1,22 @@
-"use client";
+import { withDefaults, stringify, deepMerge } from "../../../../utils.js";
+
+const defaultMenuLinks = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Debug Contracts",
+    href: "/debug",
+    icon: '$$<BugAntIcon className="h-4 w-4" />$$',
+  },
+];
+
+const contents = ({ preContent, extraMenuLinksObjects, logoTitle, logoSubtitle }) => {
+  // make sure debug contracts is the last item
+  const menuLinks = [defaultMenuLinks[0], ...(extraMenuLinksObjects[0] || []), defaultMenuLinks[1]];
+
+  return `"use client";
 
 import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
@@ -9,6 +27,7 @@ import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
 import { arbitrumNitro } from "~~/utils/scaffold-stylus/chain";
+${preContent[0] || ""}
 
 type HeaderMenuLink = {
   label: string;
@@ -16,17 +35,7 @@ type HeaderMenuLink = {
   icon?: React.ReactNode;
 };
 
-export const menuLinks: HeaderMenuLink[] = [
-  {
-    label: "Home",
-    href: "/",
-  },
-  {
-    label: "Debug Contracts",
-    href: "/debug",
-    icon: <BugAntIcon className="h-4 w-4" />,
-  },
-];
+export const menuLinks: HeaderMenuLink[] = ${stringify(menuLinks)};
 
 export const HeaderMenuLinks = () => {
   const pathname = usePathname();
@@ -40,9 +49,9 @@ export const HeaderMenuLinks = () => {
             <Link
               href={href}
               passHref
-              className={`${
+              className={\`\${
                 isActive ? "bg-secondary shadow-md" : ""
-              } hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col`}
+              } hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col\`}
             >
               {icon}
               <span>{label}</span>
@@ -73,7 +82,7 @@ export const Header = () => {
         <div className="lg:hidden dropdown" ref={burgerMenuRef}>
           <label
             tabIndex={0}
-            className={`ml-1 btn btn-ghost ${isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"}`}
+            className={\`ml-1 btn btn-ghost \${isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"}\`}
             onClick={() => {
               setIsDrawerOpen(prevIsOpenState => !prevIsOpenState);
             }}
@@ -97,8 +106,8 @@ export const Header = () => {
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Scaffold Stylus</span>
-            <span className="text-xs">Arbitrum dev stack</span>
+            <span className="font-bold leading-tight">${logoTitle}</span>
+            <span className="text-xs">${logoSubtitle}</span>
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
@@ -107,8 +116,16 @@ export const Header = () => {
       </div>
       <div className="flex gap-4 navbar-end flex-grow mr-4">
         <RainbowKitCustomConnectButton />
-        <SwitchTheme className={`pointer-events-auto ${isLocalNetwork ? "self-end md:self-auto" : ""}`} />
+        <SwitchTheme className={\`pointer-events-auto \${isLocalNetwork ? "self-end md:self-auto" : ""}\`} />
       </div>
     </div>
   );
+};`;
 };
+
+export default withDefaults(contents, {
+  preContent: "",
+  extraMenuLinksObjects: [],
+  logoTitle: "Scaffold Stylus",
+  logoSubtitle: "Arbitrum dev stack",
+});
