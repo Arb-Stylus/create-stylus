@@ -1,3 +1,5 @@
+import { Address } from "viem";
+
 interface BaseCommandOptions {
   _: (string | number)[];
   $0: string;
@@ -6,29 +8,29 @@ interface BaseCommandOptions {
 
 export interface DeployCommandOptions
   extends BaseCommandOptions,
-    DeployOptions {
-  all?: boolean;
-}
-
-export interface AdditionalOptions {
-  isSingleCommand?: boolean;
-  shouldClearDeploymentDir?: boolean;
-}
+    DeployOptions {}
 
 export interface DeployOptions {
   contract?: string;
   name?: string;
+  constructorArgs?: string[];
   network?: string;
   estimateGas?: boolean;
   maxFee?: string;
+  verify?: boolean;
+}
+
+export interface DeploymentData {
+  address: Address;
+  txHash: string;
 }
 
 export interface DeploymentConfig {
+  deployerAddress: Address | undefined;
   privateKey: string;
   contractFolder: string;
   contractName: string;
   deploymentDir: string;
-  contractAddress?: string;
   chain?: SupportedNetworkMinimal;
 }
 
@@ -36,7 +38,8 @@ export interface ExportConfig {
   contractFolder: string;
   contractName: string;
   deploymentDir: string;
-  contractAddress: string | undefined;
+  contractAddress: Address;
+  txHash: string;
   chainId: string;
 }
 

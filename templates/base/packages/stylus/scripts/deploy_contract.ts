@@ -2,17 +2,12 @@ import {
   getDeploymentConfig,
   ensureDeploymentDirectory,
   executeCommand,
-  generateContractAddress,
-  extractDeployedAddress,
-  saveDeployedAddress,
-  clearDeploymentDir,
+  extractDeploymentInfo,
+  saveDeployment,
   // estimateGasPrice,
 } from "./utils/";
 import { exportStylusAbi } from "./export_abi";
-import {
-  DeployOptions,
-  AdditionalOptions,
-} from "./utils/type";
+import { DeployOptions } from "./utils/type";
 import { buildDeployCommand } from "./utils/command";
 
 /**
@@ -23,33 +18,13 @@ import { buildDeployCommand } from "./utils/command";
  */
 export default async function deployStylusContract(
   deployOptions: DeployOptions,
-  additionalOptions: AdditionalOptions = {
-    isSingleCommand: true,
-    shouldClearDeploymentDir: false,
-  },
 ) {
   console.log(`\n🚀 Deploying contract in: ${deployOptions.contract}`);
 
   const config = getDeploymentConfig(deployOptions);
-  if (additionalOptions.shouldClearDeploymentDir) {
-    clearDeploymentDir();
-    ensureDeploymentDirectory(config.deploymentDir);
-  }
+  ensureDeploymentDirectory(config.deploymentDir);
 
   console.log(`📄 Contract name: ${config.contractName}`);
-
-  config.contractAddress = generateContractAddress();
-
-  if (additionalOptions.isSingleCommand) {
-    console.log(`📡 Using endpoint: ${config.chain?.rpcUrl}`);
-    if (config.chain) {
-      console.log(`🌐 Network specified: ${config.chain?.name}`);
-    }
-    console.log(
-      `🔑 Using private key: ${config.privateKey.substring(0, 10)}...`,
-    );
-    console.log(`📁 Deployment directory: ${config.deploymentDir}`);
-  }
 
   try {
     // Step 1: Deploy the contract using cargo stylus with contract address
@@ -63,28 +38,44 @@ export default async function deployStylusContract(
 
     if (deployOptions.estimateGas) {
       console.log(deployOutput);
-      process.exit(0);
+      return;
     }
 
     // Extract the actual deployed address from the output
-    const deployedAddress = extractDeployedAddress(deployOutput);
-    if (deployedAddress) {
-      config.contractAddress = deployedAddress;
-      console.log(`📋 Contract deployed at address: ${config.contractAddress}`);
+    const deploymentInfo = extractDeploymentInfo(deployOutput);
+    if (deploymentInfo) {
+      console.log(`📋 Contract deployed at address: ${deploymentInfo.address}`);
+      console.log("Transaction hash: ", deploymentInfo.txHash);
     } else {
-      console.log(`📋 Using fallback address: ${config.contractAddress}`);
+      throw new Error("Failed to extract deployed address");
     }
 
-    // Save the deployed address to addresses.json
-    saveDeployedAddress(config);
+    // Save the deployed address to chain-specific deployment file
+    saveDeployment(config, deploymentInfo);
 
     // Step 2: Export ABI using the shared function
-    await exportStylusAbi(config.contractFolder, config.contractName, false);
+    await exportStylusAbi(
+      config.contractFolder,
+      config.contractName,
+      false,
+      config.chain?.id,
+    );
 
-    console.log(`✅ Successfully deployed contract in: ${deployOptions.contract}`);
-    if (additionalOptions.isSingleCommand) {
-      console.log(`📋 Contract deployed at address: ${config.contractAddress}`);
-      console.log(`📋 Chain ID: ${config.chain?.id}`);
+    // Step 3: Verify the contract
+    if (deployOptions.verify) {
+      try {
+        const output = await executeCommand(
+          `cargo stylus verify --endpoint=${config.chain?.rpcUrl} --deployment-tx=${deploymentInfo.txHash}`,
+          deployOptions.contract!,
+          "Verifying contract with cargo stylus",
+        );
+        console.log(output);
+      } catch (error) {
+        console.error(
+          `❌ Verification failed in: ${deployOptions.contract}`,
+          error,
+        );
+      }
     }
   } catch (error) {
     console.error(`❌ Deployment failed in: ${deployOptions.contract}`, error);

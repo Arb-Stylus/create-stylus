@@ -25,13 +25,25 @@ use stylus_sdk::{
     stylus_core::log,
 };
 
-/// Helper macro for require-like assertions
-macro_rules! require {
-    ($condition:expr, $message:expr) => {
-        if !$condition {
-            panic!($message);
+/// Import OpenZeppelin Ownable functionality
+use openzeppelin_stylus::access::ownable::{self, Ownable, IOwnable};
+
+/// Error types for the contract
+#[derive(SolidityError, Debug)]
+pub enum Error {
+    UnauthorizedAccount(ownable::OwnableUnauthorizedAccount),
+    InvalidOwner(ownable::OwnableInvalidOwner),
+}
+
+impl From<ownable::Error> for Error {
+    fn from(value: ownable::Error) -> Self {
+        match value {
+            ownable::Error::UnauthorizedAccount(e) => {
+                Error::UnauthorizedAccount(e)
+            }
+            ownable::Error::InvalidOwner(e) => Error::InvalidOwner(e),
         }
-    };
+    }
 }
 
 // Define the GreetingChange event
@@ -44,7 +56,7 @@ sol! {
 sol_storage! {
     #[entrypoint]
     pub struct YourContract {
-        address owner;
+        Ownable ownable;
         string greeting;
         bool premium;
         uint256 total_counter;
@@ -54,18 +66,16 @@ sol_storage! {
 
 /// Declare that `YourContract` is a contract with the following external methods.
 #[public]
+#[implements(IOwnable<Error = Error>)]
 impl YourContract {
-    /// Constructor equivalent - initializes the contract
-    pub fn init(&mut self, owner: Address) {
-        self.owner.set(owner);
+    #[constructor]
+    pub fn constructor(&mut self, initial_owner: Address) -> Result<(), Error> {
+        // Initialize Ownable with the initial owner using OpenZeppelin pattern
+        self.ownable.constructor(initial_owner)?;
         self.greeting.set_str("Building Unstoppable Apps!!!");
         self.premium.set(false);
         self.total_counter.set(U256::ZERO);
-    }
-
-    /// Gets the owner address
-    pub fn owner(&self) -> Address {
-        self.owner.get()
+        Ok(())
     }
 
     /// Gets the current greeting
@@ -119,15 +129,14 @@ impl YourContract {
 
     /// Function that allows the owner to withdraw all the Ether in the contract
     /// The function can only be called by the owner of the contract
-    pub fn withdraw(&mut self) -> Result<(), Vec<u8>> {
-        // Check if caller is owner
-        let sender: Address = self.vm().msg_sender() ;
-        let owner: Address = self.owner.get();
-        require!(sender == owner, "Not the Owner");
+    pub fn withdraw(&mut self) -> Result<(), Error> {
+        // Check if caller is owner using OpenZeppelin's only_owner
+        self.ownable.only_owner()?;
 
         // Get contract balance and transfer to owner using transfer_eth
-        let balance = self.vm().balance(sender);
+        let balance = self.vm().balance(self.vm().contract_address());
         if balance > U256::ZERO {
+            let owner = self.ownable.owner();
             let _ = self.vm().transfer_eth(owner, balance);
         }
         
@@ -139,6 +148,27 @@ impl YourContract {
     pub fn receive_ether(&self) {
         // This function allows the contract to receive ETH
         // The #[payable] attribute allows it to accept value
+    }
+}
+
+/// Implementation of the IOwnable interface
+#[public]
+impl IOwnable for YourContract {
+    type Error = Error;
+
+    fn owner(&self) -> Address {
+        self.ownable.owner()
+    }
+
+    fn transfer_ownership(
+        &mut self,
+        new_owner: Address,
+    ) -> Result<(), Self::Error> {
+        Ok(self.ownable.transfer_ownership(new_owner)?)
+    }
+
+    fn renounce_ownership(&mut self) -> Result<(), Self::Error> {
+        Ok(self.ownable.renounce_ownership()?)
     }
 }
 

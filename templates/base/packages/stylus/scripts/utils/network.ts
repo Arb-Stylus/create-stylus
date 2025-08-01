@@ -1,5 +1,5 @@
 import { arbitrum, arbitrumSepolia } from "viem/chains";
-import { Chain } from "viem";
+import { Address, Chain } from "viem";
 import { arbitrumNitro } from "../../../nextjs/utils/scaffold-stylus/chain";
 import * as path from "path";
 import * as fs from "fs";
@@ -25,10 +25,8 @@ export const ALIASES: Record<string, string> = {
 
 export function getChain(networkName: string): SupportedNetworkMinimal | null {
   try {
-    // Normalize network name to lowercase for case-insensitive lookup
     const actualNetworkName = ALIASES[networkName.toLowerCase()] || networkName;
 
-    // Find the chain in SUPPORTED_NETWORKS (case-insensitive)
     const chainEntry = Object.entries(SUPPORTED_NETWORKS).find(
       ([key]) => key.toLowerCase() === actualNetworkName.toLowerCase(),
     );
@@ -42,7 +40,6 @@ export function getChain(networkName: string): SupportedNetworkMinimal | null {
       };
     }
 
-    // If not found, show warning with all supported networks
     const supportedNetworks = Object.keys(SUPPORTED_NETWORKS);
     console.warn(
       `⚠️  Network '${networkName}' is not supported. Supported networks: ${supportedNetworks.join(", ")}`,
@@ -59,9 +56,17 @@ export function getPrivateKey(networkName: string): string {
 
   switch (actualNetworkName.toLowerCase()) {
     case "arbitrum":
-      return process.env["PRIVATE_KEY_MAINNET"] || "";
+      if (process.env["PRIVATE_KEY_MAINNET"]) {
+        return process.env["PRIVATE_KEY_MAINNET"];
+      } else {
+        throw new Error("PRIVATE_KEY_MAINNET is not set");
+      }
     case "arbitrumsepolia":
-      return process.env["PRIVATE_KEY_SEPOLIA"] || "";
+      if (process.env["PRIVATE_KEY_SEPOLIA"]) {
+        return process.env["PRIVATE_KEY_SEPOLIA"];
+      } else {
+        throw new Error("PRIVATE_KEY_SEPOLIA is not set");
+      }
     default:
       return (
         process.env["PRIVATE_KEY"] ||
@@ -69,6 +74,21 @@ export function getPrivateKey(networkName: string): string {
       );
   }
 }
+
+export const getAccountAddress = (networkName: string): Address | undefined => {
+  const actualNetworkName = ALIASES[networkName.toLowerCase()] || networkName;
+  switch (actualNetworkName.toLowerCase()) {
+    case "arbitrum":
+      return process.env["ACCOUNT_ADDRESS_MAINNET"] as Address;
+    case "arbitrumsepolia":
+      return process.env["ACCOUNT_ADDRESS_SEPOLIA"] as Address;
+    default:
+      return (
+        (process.env["ACCOUNT_ADDRESS"] as Address) ||
+        "0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E"
+      );
+  }
+};
 
 function getRpcUrlFromChain(chain: Chain): string {
   //Prefer user rpc url from env

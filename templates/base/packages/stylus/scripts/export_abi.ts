@@ -11,21 +11,21 @@ import {
 export async function exportStylusAbi(
   contractFolder: string,
   contractName: string,
-  isSingleCommand: boolean = true,
+  isScript: boolean = true,
+  chainId?: string,
 ) {
   console.log("📄 Starting Stylus ABI export...");
 
-  const config = getExportConfig(contractFolder, contractName);
+  const config = getExportConfig(contractFolder, contractName, chainId);
 
-  // If contractAddress is not set, error and exit
   if (!config.contractAddress) {
     console.error(
-      `❌ Contract address not found. Please deploy the contract first or ensure it is saved in ${path.resolve(config.deploymentDir, "addresses.json")}`,
+      `❌ Contract address not found. Please deploy the contract first or ensure it is saved in a chain-specific deployment file in ${config.deploymentDir}`,
     );
     process.exit(1);
   }
 
-  if (isSingleCommand) {
+  if (isScript) {
     console.log(`📄 Contract name: ${config.contractName}`);
     console.log(`📁 Deployment directory: ${config.deploymentDir}`);
     console.log(`📍 Contract address: ${config.contractAddress}`);
@@ -33,7 +33,6 @@ export async function exportStylusAbi(
   }
 
   try {
-    // Ensure deployment directory exists
     ensureDeploymentDirectory(config.deploymentDir);
 
     // Export ABI
@@ -44,7 +43,6 @@ export async function exportStylusAbi(
       `📄 ABI file location: ${config.deploymentDir}/${config.contractFolder}`,
     );
 
-    // Verify the ABI file was created
     const abiFilePath = path.resolve(
       config.deploymentDir,
       `${config.contractFolder}`,
@@ -58,11 +56,12 @@ export async function exportStylusAbi(
     }
 
     // do not Generate TypeScript ABI when called from yarn script
-    if (!isSingleCommand) {
+    if (!isScript) {
       await generateTsAbi(
         abiFilePath,
         config.contractName,
         config.contractAddress,
+        config.txHash,
         config.chainId,
       );
     }
@@ -72,7 +71,6 @@ export async function exportStylusAbi(
   }
 }
 
-// Allow running this file directly
 if (require.main === module) {
   // Get contract folder from command line args, default to 'your-contract'
   const contractFolder = process.argv[2] || "your-contract";
@@ -80,8 +78,10 @@ if (require.main === module) {
     console.error(`❌ Contract folder does not exist: ${contractFolder}`);
     process.exit(1);
   }
-  exportStylusAbi(contractFolder, contractFolder).catch((error) => {
-    console.error("Fatal error:", error);
-    process.exit(1);
-  });
+  exportStylusAbi(contractFolder, contractFolder).catch(
+    (error) => {
+      console.error("Fatal error:", error);
+      process.exit(1);
+    },
+  );
 }

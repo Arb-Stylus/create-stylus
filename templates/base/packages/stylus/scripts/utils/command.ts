@@ -6,24 +6,38 @@ export async function buildDeployCommand(
   config: DeploymentConfig,
   deployOptions: DeployOptions,
 ) {
-  const baseCommand = `cargo stylus deploy --endpoint='${config.chain?.rpcUrl}' --private-key='${config.privateKey}' --no-verify`;
+  let baseCommand = `cargo stylus deploy --endpoint='${config.chain?.rpcUrl}' --private-key='${config.privateKey}'`;
+
+  if (
+    deployOptions.constructorArgs &&
+    deployOptions.constructorArgs.length > 0
+  ) {
+    baseCommand += ` --constructor-args='${deployOptions.constructorArgs.join(" ")}'`;
+  }
 
   if (deployOptions.estimateGas) {
     return `${baseCommand} --estimate-gas`;
   }
 
-  if (deployOptions.maxFee) {
-    return `${baseCommand} --max-fee-per-gas-gwei=${deployOptions.maxFee}`;
+  if (!deployOptions.verify) {
+    baseCommand += ` --no-verify`;
   }
 
-  // const gasPrice = await estimateGasPrice(config);
+  if (deployOptions.maxFee) {
+    baseCommand += ` --max-fee-per-gas-gwei=${deployOptions.maxFee}`;
+  }
+
   return baseCommand;
 }
 
 export async function estimateGasPrice(
   config: DeploymentConfig,
+  deployOptions: DeployOptions,
 ): Promise<string> {
-  const deployCommand = `cargo stylus deploy --endpoint='${config.chain?.rpcUrl}' --private-key='${config.privateKey}' --no-verify --estimate-gas`;
+  let deployCommand = `cargo stylus deploy --endpoint='${config.chain?.rpcUrl}' --private-key='${config.privateKey}' --no-verify --estimate-gas `;
+  if (deployOptions.constructorArgs) {
+    deployCommand += ` --constructor-args='${deployOptions.constructorArgs.join(" ")}'`;
+  }
   const deployOutput = await executeCommand(
     deployCommand,
     config.contractName,
@@ -88,33 +102,6 @@ export function executeCommand(
     childProcess.on("close", (code: number | null) => {
       if (code === 0) {
         console.log(`\n✅ ${description} completed successfully!`);
-        // Print output starting from "project metadata hash computed on deployment" or error patterns, or all logs if not found
-        // if (outputLines.length > 0) {
-        //   const metadataIndex = outputLines.findIndex((line) =>
-        //     line.includes("project metadata hash computed on deployment"),
-        //   );
-        //   const errorIndex = outputLines.findIndex((line) =>
-        //     line.includes("error["),
-        //   );
-
-        //   let startIndex = -1;
-        //   if (metadataIndex >= 0) {
-        //     startIndex = metadataIndex;
-        //   } else if (errorIndex >= 0) {
-        //     startIndex = errorIndex;
-        //   }
-
-        //   if (startIndex >= 0) {
-        //     const linesToPrint = outputLines.slice(startIndex);
-        //     linesToPrint.forEach((line) => {
-        //       if (line.trim()) console.log(line);
-        //     });
-        //   } else {
-        //     outputLines.forEach((line) => {
-        //       if (line.trim()) console.log(line);
-        //     });
-        //   }
-        // }
         resolve(output);
       } else {
         console.error(`\n❌ ${description} failed with exit code ${code}`);
