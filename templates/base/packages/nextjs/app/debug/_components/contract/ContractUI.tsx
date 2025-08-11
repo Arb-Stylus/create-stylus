@@ -1,7 +1,7 @@
 "use client";
 
 // @refresh reset
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { ContractReadMethods } from "./ContractReadMethods";
 import { ContractVariables } from "./ContractVariables";
 import { ContractWriteMethods } from "./ContractWriteMethods";
@@ -19,10 +19,16 @@ type ContractUIProps = {
  * UI component to interface with deployed contracts.
  **/
 export const ContractUI = ({ contractName, className = "" }: ContractUIProps) => {
+  const [activeTab, setActiveTab] = useState("write");
   const [refreshDisplayVariables, triggerRefreshDisplayVariables] = useReducer(value => !value, false);
   const { targetNetwork } = useTargetNetwork();
   const { data: deployedContractData, isLoading: deployedContractLoading } = useDeployedContractInfo({ contractName });
   const networkColor = useNetworkColor();
+
+  const tabs = [
+    { id: "write", label: "Write" },
+    { id: "read", label: "Read" },
+  ];
 
   if (deployedContractLoading) {
     return (
@@ -70,91 +76,35 @@ export const ContractUI = ({ contractName, className = "" }: ContractUIProps) =>
           </div>
         </div>
         <div className="col-span-1 lg:col-span-2 flex flex-col gap-6">
-          <div className="z-10">
-            <div
-              className="flex flex-col gap-4"
-              //className="relative mt-10"
-            >
-              {/* Read Tab */}
-              {/*<div className="absolute -top-8 left-0 flex items-center z-20">*/}
-              <div className="relative inline-block w-[23%]">
-                {/* Botón con clip-path */}
-                <div
-                  className="text-white px-8 py-2 text-xl font-medium border-2 relative z-10"
-                  style={{
-                    backgroundColor: "#630c3a",
-                    borderColor: "#E3066E",
-                    clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%)",
-                  }}
-                >
-                  Read
-                </div>
-
-                {/* Línea diagonal del corte */}
-                <div
-                  className="absolute z-20"
-                  style={{
-                    top: "20px", // deja espacio para el border superior
-                    right: "-1px", // deja espacio para el border derecho
-                    width: "28.28px", // 20 * sqrt(2)
-                    height: "2px", // igual al grosor del borde
-                    backgroundColor: "#E3066E",
-                    transform: "rotate(45deg)",
-                    transformOrigin: "top right",
-                  }}
-                />
-              </div>
-
-              {/*</div> */}
-              {/* Gradient Container */}
-              <div className="rounded-lg gradient-border min-h-[80px] flex items-center px-4 py-8 shadow-xl">
-                <ContractReadMethods deployedContractData={deployedContractData} />
-              </div>
-            </div>
+          <div className="tabs tabs-boxed gradient-border rounded-[5px] bg-transparent">
+            {tabs.map(tab => (
+              <a
+                key={tab.id}
+                className={`tab h-10 ${
+                  activeTab === tab.id ? "tab-active !bg-[#E3066E] !rounded-[5px] !text-white" : ""
+                }`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.label}
+              </a>
+            ))}
           </div>
           <div className="z-10">
-            <div
-              className="flex flex-col gap-4"
-              //className="relative mt-10"
-            >
-              {/* Read Tab */}
-              {/*<div className="absolute -top-8 left-0 flex items-center z-20">*/}
-              <div className="relative inline-block w-[23%]">
-                {/* Botón con clip-path */}
-                <div
-                  className="text-white px-8 py-2 text-xl font-medium border-2 relative z-10"
-                  style={{
-                    backgroundColor: "#630c3a",
-                    borderColor: "#E3066E",
-                    clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%)",
-                  }}
-                >
-                  Write
+            <div className="gradient-border rounded-[5px] flex flex-col relative bg-component">
+              <div className="p-5 divide-y divide-secondary">
+                {activeTab === "read" && <ContractReadMethods deployedContractData={deployedContractData} />}
+                {activeTab === "write" && (
+                  <ContractWriteMethods
+                    deployedContractData={deployedContractData}
+                    onChange={triggerRefreshDisplayVariables}
+                  />
+                )}
+              </div>
+              {deployedContractLoading && (
+                <div className="absolute inset-0 rounded-[5px] bg-white/20 z-10">
+                  <div className="animate-spin h-4 w-4 border-2 border-[#E3066E] border-t-transparent rounded-full absolute top-4 right-4" />
                 </div>
-
-                {/* Línea diagonal del corte */}
-                <div
-                  className="absolute z-20"
-                  style={{
-                    top: "20px", // deja espacio para el border superior
-                    right: "-1px", // deja espacio para el border derecho
-                    width: "28.28px", // 20 * sqrt(2)
-                    height: "2px", // igual al grosor del borde
-                    backgroundColor: "#E3066E",
-                    transform: "rotate(45deg)",
-                    transformOrigin: "top right",
-                  }}
-                />
-              </div>
-
-              {/*</div> */}
-              {/* Gradient Container */}
-              <div className="gradient-border rounded-lg min-h-[80px] flex flex-col px-6 py-6 shadow-xl">
-                <ContractWriteMethods
-                  deployedContractData={deployedContractData}
-                  onChange={triggerRefreshDisplayVariables}
-                />
-              </div>
+              )}
             </div>
           </div>
         </div>

@@ -8,13 +8,6 @@ export async function buildDeployCommand(
 ) {
   let baseCommand = `cargo stylus deploy --endpoint='${config.chain?.rpcUrl}' --private-key='${config.privateKey}'`;
 
-  if (
-    deployOptions.constructorArgs &&
-    deployOptions.constructorArgs.length > 0
-  ) {
-    baseCommand += ` --constructor-args='${deployOptions.constructorArgs.join(" ")}'`;
-  }
-
   if (deployOptions.estimateGas) {
     return `${baseCommand} --estimate-gas`;
   }
@@ -25,6 +18,13 @@ export async function buildDeployCommand(
 
   if (deployOptions.maxFee) {
     baseCommand += ` --max-fee-per-gas-gwei=${deployOptions.maxFee}`;
+  }
+
+  if (
+    deployOptions.constructorArgs &&
+    deployOptions.constructorArgs.length > 0
+  ) {
+    baseCommand += ` --constructor-args ${deployOptions.constructorArgs.map((arg) => `"${arg}"`).join(" ")} `;
   }
 
   return baseCommand;
