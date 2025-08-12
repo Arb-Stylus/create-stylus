@@ -8,9 +8,11 @@ import {
 import type { Options } from "./types";
 import { renderOutroMessage } from "./utils/render-outro-message";
 import chalk from "chalk";
-import Listr from "listr";
+import { Listr, ListrContext } from "listr2";
 import path from "path";
 import { fileURLToPath } from "url";
+
+type CreateStylusListrContext = Options & ListrContext;
 
 export async function createProject(options: Options) {
   console.log(`\n`);
@@ -24,43 +26,55 @@ export async function createProject(options: Options) {
 
   const targetDirectory = path.resolve(process.cwd(), options.directory);
 
-  const tasks = new Listr([
-    {
-      title: `📁 Create project directory ${targetDirectory}`,
-      task: () => createProjectDirectory(options.directory),
-    },
-    {
-      title: `🚀 Creating a new Scaffold-Stylus 2 app${
-        options.extension
-          ? ` with ${chalk.green.bold(options.extension)} extension`
-          : ""
-      } in ${chalk.green.bold(options.directory)}`,
-      task: () =>
-        copyTemplateFiles(options, templateDirectory, targetDirectory),
-    },
-    {
-      title: `📦 Installing dependencies with yarn, this could take a while`,
-      task: () => installPackages(targetDirectory, options),
-      skip: () => {
-        if (!options.install) {
-          return "Manually skipped";
-        }
+  const tasks = new Listr<CreateStylusListrContext>(
+    [
+      {
+        title: `📁 Create project directory ${targetDirectory}`,
+        task: async () => await createProjectDirectory(options.directory),
       },
-    },
-    {
-      title: "🪄 Formatting Next.js files with prettier",
-      task: () => prettierFormat(targetDirectory),
-      skip: () => {
-        if (!options.install) {
-          return "Skipping because prettier install was skipped";
-        }
+      {
+        title: `🚀 Creating a new Scaffold-Stylus 2 app in ${chalk.green.bold(
+          options.directory,
+        )}`,
+        task: async (ctx, task) => {
+          if (ctx.options.extension) {
+            task.title = `🚀 Creating a new Scaffold-Stylus 2 app${
+              ctx.options.extension
+                ? ` with ${chalk.green.bold(ctx.options.extension)} extension`
+                : ""
+            } in ${chalk.green.bold(ctx.options.directory)}`;
+          }
+
+          await copyTemplateFiles(options, templateDirectory, targetDirectory);
+        },
       },
-    },
-    {
-      title: `📡 Initializing Git repository`,
-      task: () => createFirstGitCommit(targetDirectory),
-    },
-  ]);
+      {
+        title: `📦 Installing dependencies with yarn, this could take a while`,
+        task: async (ctx, task) => {
+          if (!!ctx.options.install) {
+            await installPackages(targetDirectory, options);
+          } else {
+            task.skip("Manually skipped");
+          }
+        },
+      },
+      {
+        title: "🪄 Formatting Next.js files with prettier",
+        task: async (ctx, task) => {
+          if (!!ctx.options.install) {
+            await prettierFormat(targetDirectory);
+          } else {
+            task.skip("Skipping because prettier install was skipped");
+          }
+        },
+      },
+      {
+        title: `📡 Initializing Git repository`,
+        task: async () => await createFirstGitCommit(targetDirectory),
+      },
+    ],
+    { ctx: { options } as CreateStylusListrContext },
+  );
 
   try {
     await tasks.run();
