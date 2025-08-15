@@ -10,5 +10,11 @@
     "description": "Adds support for ERC-721 NFT contracts, including supply, balance, listing, and transfer features.",
     "repository": "https://github.com/Arb-Stylus/create-stylus-extensions",
     "branch": "erc-721"
+  },
+  {
+    "extensionFlagValue": "chainlink-data-feed",
+    "description": "Adds support for Chainlink Data Feeds, including price and other data feeds.",
+    "repository": "https://github.com/Arb-Stylus/create-stylus-extensions",
+    "branch": "chainlink-data-feed"
   }
 ]
