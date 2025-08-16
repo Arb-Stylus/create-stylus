@@ -12,12 +12,15 @@ export async function buildDeployCommand(
     return `${baseCommand} --estimate-gas`;
   }
 
-  if (!deployOptions.verify) {
-    baseCommand += ` --no-verify`;
-  }
-
   if (deployOptions.maxFee) {
     baseCommand += ` --max-fee-per-gas-gwei=${deployOptions.maxFee}`;
+  }
+
+  if (!deployOptions.verify) {
+    baseCommand += ` --no-verify`;
+  } else {
+    console.log("Skipping constructor args as verify is true");
+    return baseCommand;
   }
 
   if (

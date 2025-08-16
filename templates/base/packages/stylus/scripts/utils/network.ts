@@ -24,7 +24,7 @@ export const SUPPORTED_NETWORKS: Record<string, Chain> = {
   arbitrumNova: arbitrumNova as Chain,
   eduChainTestnet: eduChainTestnet as unknown as Chain,
   eduChain: eduChain as unknown as Chain,
-  superposition: superposition as Chain,
+  superposition: superposition as unknown as Chain,
   superpositionTestnet: superpositionTestnet as Chain,
 };
 
@@ -43,7 +43,7 @@ export const ALIASES: Record<string, string> = {
 export const ORBIT_CHAINS: Chain[] = [
   eduChain as unknown as Chain,
   eduChainTestnet as unknown as Chain,
-  superposition as Chain,
+  superposition as unknown as Chain,
   superpositionTestnet as Chain,
 ];
 
@@ -61,6 +61,7 @@ export function getChain(networkName: string): SupportedNetworkMinimal | null {
         alias: getAliasFromNetworkName(chainEntry[0]),
         id: chainEntry[1].id.toString(),
         rpcUrl: getRpcUrlFromChain(chainEntry[1]),
+        blockExplorerUrl: chainEntry[1].blockExplorers?.default?.url,
       };
     }
 

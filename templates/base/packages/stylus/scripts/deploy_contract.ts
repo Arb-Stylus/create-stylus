@@ -50,8 +50,19 @@ export default async function deployStylusContract(
     // Extract the actual deployed address from the output
     const deploymentInfo = extractDeploymentInfo(deployOutput);
     if (deploymentInfo) {
-      console.log(`📋 Contract deployed at address: ${deploymentInfo.address}`);
-      console.log("Transaction hash: ", deploymentInfo.txHash);
+      if (config.chain?.blockExplorerUrl) {
+        console.log(
+          `📋 Contract deployed: ${config.chain?.blockExplorerUrl}/address/${deploymentInfo.address}`,
+        );
+        console.log(
+          `Transaction hash: ${config.chain?.blockExplorerUrl}/tx/${deploymentInfo.txHash}`,
+        );
+      } else {
+        console.log(
+          `📋 Contract deployed at address: ${deploymentInfo.address}`,
+        );
+        console.log("Transaction hash: ", deploymentInfo.txHash);
+      }
     } else {
       throw new Error("Failed to extract deployed address");
     }

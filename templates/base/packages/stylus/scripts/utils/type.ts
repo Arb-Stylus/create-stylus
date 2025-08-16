@@ -49,4 +49,5 @@ export interface SupportedNetworkMinimal {
   alias: string;
   id: string;
   rpcUrl: string;
+  blockExplorerUrl?: string | undefined;
 }
