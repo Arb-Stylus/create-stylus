@@ -194,7 +194,7 @@ yarn info:networks
 
 This will show you all supported networks and their corresponding RPC endpoints.
 
-### Deploy to Other Network
+### Deploy to Other Network (Non-Orbit Chains)
 
 Once configured, deploy to your target network:
 
@@ -207,6 +207,14 @@ yarn deploy --network <network>
 - The values in `.env.example` provide a template for required environment variables
 - **Always keep your private key secure and never commit it to version control**
 - Consider using environment variable management tools for production deployments
+
+### Deploy to Orbit Chains
+
+Before deploying, you would have to ensure that your `deployStylusContract` function on your `deploy.ts` function has the `isOrbit` value set to `true` (example provided in `deploy.ts`).
+
+Your contract must have an `initialize()` function as the replacement for the constructor, since not all orbit chains support the constructor feature. Please leave it blank if you don't have any constructor.
+
+> Make sure you handle initialization properly in your contract, meaning it should only be called once and functions should not run if contract is not initialized.
 
 ## Verify your contract (Highly Experimental)
 

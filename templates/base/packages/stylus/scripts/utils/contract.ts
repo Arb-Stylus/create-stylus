@@ -154,9 +154,7 @@ export async function generateTsAbi(
   };
 
   let deployedContractsObj: any = {};
-  const fileHeader =
-    generatedContractComment +
-    'import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";\n\n';
+  const fileHeader = generatedContractComment + "\n\n";
 
   if (fs.existsSync(TARGET_FILE)) {
     const fileContent = fs.readFileSync(TARGET_FILE, "utf8");
@@ -177,7 +175,7 @@ export async function generateTsAbi(
 
   const contractsString = JSON.stringify(deployedContractsObj, null, 2);
 
-  const output = `${fileHeader}const deployedContracts = ${contractsString} as const;\n\nexport default deployedContracts satisfies GenericContractsDeclaration;\n`;
+  const output = `${fileHeader}const deployedContracts = ${contractsString} as const;\n\nexport default deployedContracts;\n`;
 
   if (!fs.existsSync(TARGET_DIR)) {
     fs.mkdirSync(TARGET_DIR);

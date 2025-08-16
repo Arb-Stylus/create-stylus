@@ -4,11 +4,17 @@ import {
   executeCommand,
   extractDeploymentInfo,
   saveDeployment,
+  ORBIT_CHAINS,
   // estimateGasPrice,
 } from "./utils/";
 import { exportStylusAbi } from "./export_abi";
 import { DeployOptions } from "./utils/type";
 import { buildDeployCommand } from "./utils/command";
+import { Chain, createPublicClient, createWalletClient, http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+
+import { arbitrumNitro } from "../../nextjs/utils/scaffold-stylus/supportedChains";
+import deployedContracts from "../../nextjs/contracts/deployedContracts";
 
 /**
  * Deploy a single contract using cargo stylus
@@ -60,6 +66,48 @@ export default async function deployStylusContract(
       false,
       config.chain?.id,
     );
+
+    // Call the initialize function if orbit deployment
+    if (
+      !!deployOptions.isOrbit &&
+      config.chain?.id !== arbitrumNitro?.id.toString()
+    ) {
+      const orbitChain = ORBIT_CHAINS.find(
+        (chain) => chain.id.toString() === config.chain?.id,
+      );
+
+      if (!orbitChain) {
+        throw new Error(
+          `Chain ${config.chain?.id} is not supported for orbit deployment`,
+        );
+      }
+
+      const publicClient = createPublicClient({
+        chain: orbitChain as unknown as Chain,
+        transport: http(),
+      });
+
+      // need wallet client to sign the transaction
+      const walletClient = createWalletClient({
+        chain: orbitChain as unknown as Chain,
+        transport: http(),
+      });
+
+      const account = privateKeyToAccount(config.privateKey as `0x${string}`);
+
+      const { request } = await publicClient.simulateContract({
+        account,
+        address: deploymentInfo.address,
+        // @ts-expect-error deployed contract is empty at the beginning
+        abi: deployedContracts[config.chain.id][config.contractName].abi,
+        functionName: "initialize",
+        args: deployOptions.constructorArgs,
+      });
+
+      const initTxHash = await walletClient.writeContract(request);
+
+      console.log("Initialize transaction hash: ", initTxHash);
+    }
 
     // Step 3: Verify the contract
     if (deployOptions.verify) {

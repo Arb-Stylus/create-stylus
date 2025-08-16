@@ -18,6 +18,7 @@ export interface DeployOptions {
   estimateGas?: boolean;
   maxFee?: string;
   verify?: boolean;
+  isOrbit?: boolean;
 }
 
 export interface DeploymentData {

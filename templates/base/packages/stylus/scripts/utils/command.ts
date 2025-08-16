@@ -22,7 +22,8 @@ export async function buildDeployCommand(
 
   if (
     deployOptions.constructorArgs &&
-    deployOptions.constructorArgs.length > 0
+    deployOptions.constructorArgs.length > 0 &&
+    !deployOptions.isOrbit
   ) {
     baseCommand += ` --constructor-args ${deployOptions.constructorArgs.map((arg) => `"${arg}"`).join(" ")} `;
   }
