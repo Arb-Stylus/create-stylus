@@ -1,4 +1,5 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+const contents = () => 
+`# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
@@ -36,4 +37,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-ipfs-upload.config.json
+ipfs-upload.config.json`
+
+export default contents;
