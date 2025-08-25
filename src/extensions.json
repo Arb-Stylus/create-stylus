@@ -16,5 +16,11 @@
     "description": "Adds support for Chainlink Data Feeds, including price and other data feeds.",
     "repository": "https://github.com/Arb-Stylus/create-stylus-extensions",
     "branch": "chainlink-data-feed"
+  },
+  {
+    "extensionFlagValue": "chainlink-vrf",
+    "description": "Adds support for Chainlink VRF, including random number generation and randomness.",
+    "repository": "https://github.com/Arb-Stylus/create-stylus-extensions",
+    "branch": "chainlink-vrf"
   }
 ]
