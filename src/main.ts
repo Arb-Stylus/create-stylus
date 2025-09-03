@@ -4,6 +4,7 @@ import {
   installPackages,
   createFirstGitCommit,
   prettierFormat,
+  modifyScaffoldConfig,
 } from "./tasks";
 import type { Options } from "./types";
 import { renderOutroMessage } from "./utils/render-outro-message";
@@ -46,6 +47,16 @@ export async function createProject(options: Options) {
           }
 
           await copyTemplateFiles(options, templateDirectory, targetDirectory);
+        },
+      },
+      {
+        title: `⚙️ Configuring scaffold for ${chalk.green.bold(options.extension || "default")} extension`,
+        task: async (ctx, task) => {
+          if (ctx.options.extension) {
+            await modifyScaffoldConfig(ctx.options.extension, targetDirectory);
+          } else {
+            task.skip("No extension specified");
+          }
         },
       },
       {
