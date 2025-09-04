@@ -186,6 +186,35 @@ function addPackageToWorkspaces(packageJsonPath: string, packageName: string) {
   }
 }
 
+function mergeDeployTsFile(extensionDeployPath: string, baseDeployPath: string) {
+  try {
+    const baseContent = fs.readFileSync(baseDeployPath, 'utf8');
+    const extensionContent = fs.readFileSync(extensionDeployPath, 'utf8');
+    
+    // Split the base content into lines
+    const baseLines = baseContent.split('\n');
+    
+    // Find the start and end of the section to replace (lines 32-53, 0-indexed: 31-52)
+    const startReplaceIndex = 31; // Line 32 (0-indexed)
+    const endReplaceIndex = 52;   // Line 53 (0-indexed)
+    
+    // Create the new content by:
+    // 1. Taking lines 0-31 from base (lines 1-32)
+    // 2. Adding the extension content
+    // 3. Taking lines 53+ from base (lines 54+)
+    const newContent = [
+      ...baseLines.slice(0, startReplaceIndex),
+      extensionContent.trim(),
+      ...baseLines.slice(endReplaceIndex + 1)
+    ].join('\n');
+    
+    fs.writeFileSync(baseDeployPath, newContent);
+  } catch (error) {
+    // If merging fails, fall back to copying the extension file
+    fs.copyFileSync(extensionDeployPath, baseDeployPath);
+  }
+}
+
 function copyDirectoryRecursive(source: string, destination: string) {
   fs.mkdirSync(destination, { recursive: true });
   
@@ -221,7 +250,12 @@ function mergeDirectoryRecursive(source: string, destination: string) {
     if (stat.isDirectory()) {
       mergeDirectoryRecursive(sourcePath, destPath);
     } else {
-      fs.copyFileSync(sourcePath, destPath);
+      // Special handling for deploy.ts files
+      if (file === "deploy.ts" && fs.existsSync(destPath)) {
+        mergeDeployTsFile(sourcePath, destPath);
+      } else {
+        fs.copyFileSync(sourcePath, destPath);
+      }
     }
   }
 }
