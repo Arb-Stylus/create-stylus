@@ -8,7 +8,7 @@
   {
     "extensionFlagValue": "erc-721",
     "description": "Adds support for ERC-721 NFT contracts, including supply, balance, listing, and transfer features.",
-    "repository": "https://github.com/Arb-Stylus/create-stylus-extensions",
+    "repository": "https://github.com/jhintux/create-stylus-extensions",
     "branch": "erc-721"
   },
   {
@@ -20,7 +20,7 @@
   {
     "extensionFlagValue": "chainlink-vrf",
     "description": "Adds support for Chainlink VRF, including random number generation and randomness.",
-    "repository": "https://github.com/Arb-Stylus/create-stylus-extensions",
+    "repository": "https://github.com/jhintux/create-stylus-extensions",
     "branch": "chainlink-vrf"
   }
 ]

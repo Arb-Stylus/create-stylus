@@ -1,15 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-export async function modifyScaffoldConfig(extensionName: string, targetDirectory: string) {
-  if (!extensionName || extensionName.trim() === "") {
-    return;
-  }
-
-  // Only modify for chainlink extensions
-  if (extensionName !== "chainlink-vrf" && extensionName !== "chainlink-data-feed") {
-    return;
-  }
+export async function setConfigNetworkToSepolia(targetDirectory: string) {
 
   const scaffoldConfigPath = path.join(targetDirectory, "packages", "nextjs", "scaffold.config.ts");
   
