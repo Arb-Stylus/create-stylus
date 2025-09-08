@@ -4,6 +4,7 @@ import {
   installPackages,
   createFirstGitCommit,
   prettierFormat,
+  setConfigNetworkToSepolia,
 } from "./tasks";
 import type { Options } from "./types";
 import { renderOutroMessage } from "./utils/render-outro-message";
@@ -46,6 +47,16 @@ export async function createProject(options: Options) {
           }
 
           await copyTemplateFiles(options, templateDirectory, targetDirectory);
+        },
+      },
+      {
+        title: `⚙️ Configuring scaffold for ${chalk.green.bold(options.extension || "default")} extension`,
+        task: async (ctx, task) => {
+          if (ctx.options.extension && (ctx.options.extension === "chainlink-vrf" || ctx.options.extension === "chainlink-data-feed")) {
+            await setConfigNetworkToSepolia(targetDirectory);
+          } else {
+            task.skip("No chainlink extension specified");
+          }
         },
       },
       {
