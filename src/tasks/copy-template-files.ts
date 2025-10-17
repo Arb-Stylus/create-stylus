@@ -29,10 +29,10 @@ const excludePatterns = [
 ];
 
 const copyBaseFiles = async (
-    { dev: isDev }: Options,
-    basePath: string,
+  { dev: isDev, extension }: Options,
+  basePath: string,
     targetDir: string
-  ) => {
+) => {
   await copyOrLink(basePath, targetDir, {
     clobber: false,
     filter: (fileName) => {  // NOTE: filter IN
@@ -41,13 +41,16 @@ const copyBaseFiles = async (
       const isYarnLock = isYarnLockRegex.test(fileName);
       const isNextGenerated = isNextGeneratedRegex.test(fileName);
       const isGitKeep = isGitKeepRegex.test(fileName);
+      const isYourContract = /packages\/stylus\/your-contract/.test(fileName);
 
       // Check if file matches any exclude pattern
       const isExcluded = excludePatterns.some(pattern => pattern.test(fileName));
 
       const skipAlways = isPackageJson || isGitKeep || isExcluded;
       const skipDevOnly = isYarnLock || isNextGenerated;
-      const shouldSkip = skipAlways || (isDev && skipDevOnly);
+      const skipWhenExtension = extension && isYourContract;
+      const shouldSkip =
+        skipAlways || (isDev && skipDevOnly) || skipWhenExtension;
 
       return !shouldSkip;
     },
