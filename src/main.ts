@@ -34,12 +34,12 @@ export async function createProject(options: Options) {
         task: async () => await createProjectDirectory(options.directory),
       },
       {
-        title: `🚀 Creating a new Scaffold-Stylus 2 app in ${chalk.green.bold(
+        title: `🚀 Creating a new Scaffold-Stylus app in ${chalk.green.bold(
           options.directory,
         )}`,
         task: async (ctx, task) => {
           if (ctx.options.extension) {
-            task.title = `🚀 Creating a new Scaffold-Stylus 2 app${
+            task.title = `🚀 Creating a new Scaffold-Stylus app${
               ctx.options.extension
                 ? ` with ${chalk.green.bold(ctx.options.extension)} extension`
                 : ""
@@ -54,8 +54,6 @@ export async function createProject(options: Options) {
         task: async (ctx, task) => {
           if (ctx.options.extension && (ctx.options.extension === "chainlink-vrf" || ctx.options.extension === "chainlink-data-feed")) {
             await setConfigNetworkToSepolia(targetDirectory);
-          } else {
-            task.skip("No chainlink extension specified");
           }
         },
       },

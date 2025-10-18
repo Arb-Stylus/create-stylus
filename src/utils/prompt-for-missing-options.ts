@@ -28,7 +28,7 @@ export async function promptForMissingOptions(
       type: "input",
       name: "directory",
       message:
-        "Where do you want to install the new files? Choose ./ (root folder) or provide a new folder name.",
+        "Where do you want to save this new project? Choose ./ (root folder) or provide a new folder name.",
       default: defaultOptions.directory,
       validate: (value: string) => value.length > 0,
     },
