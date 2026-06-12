@@ -4,3 +4,4 @@ export * from "./install-packages";
 export * from "./create-first-git-commit";
 export * from "./prettier-format";
 export * from "./config-to-sepolia";
+export * from "./refresh-cargo-lock";
