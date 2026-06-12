@@ -34,13 +34,10 @@ export async function refreshCargoLocks(targetDir: string) {
   if (!fs.existsSync(stylusDir)) return;
 
   const contractDirs = findContractDirs(stylusDir);
-  const missing = contractDirs.filter(
-    (d) => !fs.existsSync(path.join(d, "Cargo.lock"))
-  );
 
-  if (missing.length === 0) return;
+  if (contractDirs.length === 0) return;
 
-  for (const contractDir of missing) {
+  for (const contractDir of contractDirs) {
     try {
       try {
         await execa(

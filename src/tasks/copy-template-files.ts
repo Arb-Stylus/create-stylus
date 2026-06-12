@@ -41,7 +41,7 @@ const copyBaseFiles = async (
       const isYarnLock = isYarnLockRegex.test(fileName);
       const isNextGenerated = isNextGeneratedRegex.test(fileName);
       const isGitKeep = isGitKeepRegex.test(fileName);
-      const isYourContract = /packages\/stylus\/your-contract/.test(fileName);
+      const isYourContract = /packages\/stylus\/contracts\/your-contract/.test(fileName);
 
       // Check if file matches any exclude pattern
       const isExcluded = excludePatterns.some(pattern => pattern.test(fileName));
