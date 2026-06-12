@@ -5,6 +5,7 @@ import {
   createFirstGitCommit,
   prettierFormat,
   setConfigNetworkToSepolia,
+  refreshCargoLocks,
 } from "./tasks";
 import type { Options } from "./types";
 import { renderOutroMessage } from "./utils/render-outro-message";
@@ -56,6 +57,10 @@ export async function createProject(options: Options) {
             await setConfigNetworkToSepolia(targetDirectory);
           }
         },
+      },
+      {
+        title: `🔒 Refreshing Cargo.lock for contracts`,
+        task: async () => await refreshCargoLocks(targetDirectory),
       },
       {
         title: `📦 Installing dependencies with yarn, this could take a while`,
