@@ -1,4 +1,5 @@
-node_modules
+const contents = () => 
+`node_modules
 
 # dependencies, yarn, etc
 # yarn / eslint
@@ -13,4 +14,6 @@ node_modules
 .vscode/*
 !.vscode/settings.json
 .idea
-.vercel
+.vercel`
+
+export default contents;
