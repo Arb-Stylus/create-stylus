@@ -1,0 +1,30 @@
+node_modules
+
+# dependencies, yarn, etc
+# yarn / eslint
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.eslintcache
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+.idea
+.vercel
+
+# Agent tooling and artifacts
+.claude/*
+!.claude/workflows/
+!.claude/skills/
+.worktrees/
+
+# smoke-test skill run state (PIDs/ports for detached processes) -- never
+# tracked, always specific to one still-running or last-crashed run
+.claude/skills/smoke-test/.smoke-state.json
+
+# cdp-with-wallet skill run state (Chrome PIDs/ports/disabled-extension
+# records for detached processes) -- machine-local, never committed
+.claude/skills/cdp-with-wallet/.cdp-wallet-state.json
