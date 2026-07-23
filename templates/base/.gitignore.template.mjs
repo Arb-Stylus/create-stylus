@@ -1,4 +1,5 @@
-node_modules
+const contents = () => 
+`node_modules
 
 # dependencies, yarn, etc
 # yarn / eslint
@@ -27,4 +28,6 @@ node_modules
 
 # cdp-with-wallet skill run state (Chrome PIDs/ports/disabled-extension
 # records for detached processes) -- machine-local, never committed
-.claude/skills/cdp-with-wallet/.cdp-wallet-state.json
+.claude/skills/cdp-with-wallet/.cdp-wallet-state.json`
+
+export default contents;
