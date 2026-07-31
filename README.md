@@ -9,7 +9,7 @@ This is an alternative method of installing Scaffold-Stylus. Instead of directly
 <h4 align="center">
   <a href="https://github.com/Arb-Stylus/scaffold-stylus">SS Repo</a> |
   <a href="https://arb-stylus.github.io/scaffold-stylus-docs/">SS Docs</a> |
-  <a href="https://www.scaffoldstylus.com/">SS Website</a>
+  <a href="https://scaffoldstylus.quantum3labs.com/">SS Website</a>
 </h4>
 
 ## Requirements
@@ -54,7 +54,7 @@ npx create-stylus@latest --extension erc-20
 
 Visit our [docs](https://arb-stylus.github.io/scaffold-stylus-docs/) to learn how to start building with Scaffold-Stylus.
 
-To know more about its features, check out our [website](https://www.scaffoldstylus.com/).
+To know more about its features, check out our [website](https://scaffoldstylus.quantum3labs.com/).
 
 ## Contributing to create-stylus
 
